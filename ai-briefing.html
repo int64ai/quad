@@ -36,17 +36,17 @@ body { font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans
 .warn-box .warn-title { font-size:.78rem; font-weight:700; color:#d97706; margin-bottom:4px; }
 .warn-box p { font-size:.88rem; color:#333; }
 
-/* Timeline */
-.htl-break { margin:24px -24px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:0 24px; }
-.htl-track { display:flex; min-width:1200px; position:relative; padding:120px 20px; }
+/* Timeline — full bleed */
+.htl-break { margin:24px 0; margin-left:calc(-50vw + 50%); margin-right:calc(-50vw + 50%); width:100vw; overflow:hidden; padding:0 40px; }
+.htl-track { display:flex; position:relative; padding:130px 0; }
 .htl-track::before { content:''; position:absolute; top:50%; left:0; right:0; height:2px; background:#e0e0e8; }
-.htl-item { flex:1; position:relative; text-align:center; min-width:100px; }
+.htl-item { flex:1; position:relative; text-align:center; }
 .htl-dot { width:12px; height:12px; border-radius:50%; position:absolute; left:50%; transform:translateX(-50%); top:calc(50% - 6px); z-index:2; border:2px solid #fff; box-shadow:0 0 0 1px #ddd; }
-.htl-txt { font-size:.75rem; color:#555; line-height:1.4; padding:0 6px; position:absolute; left:0; right:0; }
-.htl-txt strong { color:#111; display:block; font-size:.8rem; margin-bottom:2px; }
+.htl-txt { font-size:.78rem; color:#555; line-height:1.4; padding:0 6px; position:absolute; left:0; right:0; }
+.htl-txt strong { color:#111; display:block; font-size:.85rem; margin-bottom:2px; }
 .htl-item.above .htl-txt { bottom:calc(50% + 18px); }
 .htl-item.below .htl-txt { top:calc(50% + 18px); }
-.htl-date { font-size:.68rem; color:#aaa; position:absolute; left:50%; transform:translateX(-50%); white-space:nowrap; }
+.htl-date { font-size:.7rem; color:#aaa; position:absolute; left:50%; transform:translateX(-50%); white-space:nowrap; }
 .htl-item.above .htl-date { top:calc(50% + 12px); }
 .htl-item.below .htl-date { bottom:calc(50% + 12px); }
 
@@ -88,9 +88,10 @@ body { font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans
   .summary-grid { grid-template-columns:1fr; }
   .nav { display:none; }
   .slide { padding:36px 18px; min-height:auto; }
-  .htl-track { min-width:900px; padding:100px 10px; }
-  .htl-txt { font-size:.65rem; }
-  .htl-txt strong { font-size:.7rem; }
+  .htl-break { padding:0 12px; }
+  .htl-track { padding:100px 0; flex-wrap:wrap; gap:0; }
+  .htl-txt { font-size:.6rem; }
+  .htl-txt strong { font-size:.65rem; }
 }
 </style>
 </head>
