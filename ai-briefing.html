@@ -37,15 +37,18 @@ body { font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans
 .warn-box p { font-size:.88rem; color:#333; }
 
 /* Timeline */
-.htl { position:relative; margin:30px 0; padding:0 10px; overflow-x:auto; }
-.htl-track { position:relative; min-width:800px; height:auto; padding-bottom:20px; }
-.htl-line { position:absolute; top:38px; left:0; right:0; height:2px; background:#e0e0e8; }
-.htl-labels { display:flex; justify-content:space-between; font-size:.7rem; color:#bbb; margin-bottom:6px; }
-.htl-item { position:absolute; top:0; transform:translateX(-50%); text-align:center; width:100px; }
-.htl-dot { width:10px; height:10px; border-radius:50%; margin:0 auto 4px; position:relative; top:34px; z-index:2; }
-.htl-txt { font-size:.6rem; color:#555; line-height:1.3; margin-top:18px; word-break:keep-all; }
-.htl-txt strong { color:#111; display:block; font-size:.65rem; }
-.htl-month { position:absolute; top:46px; font-size:.65rem; color:#aaa; transform:translateX(-50%); }
+.htl { margin:24px 0; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.htl-track { display:flex; min-width:900px; position:relative; padding:100px 0; }
+.htl-track::before { content:''; position:absolute; top:50%; left:0; right:0; height:2px; background:#e0e0e8; }
+.htl-item { flex:1; position:relative; text-align:center; min-width:80px; }
+.htl-dot { width:10px; height:10px; border-radius:50%; margin:0 auto; position:absolute; left:50%; transform:translateX(-50%); top:calc(50% - 5px); z-index:2; border:2px solid #fff; box-shadow:0 0 0 1px #ddd; }
+.htl-txt { font-size:.68rem; color:#555; line-height:1.35; padding:0 4px; position:absolute; left:0; right:0; }
+.htl-txt strong { color:#111; display:block; font-size:.72rem; margin-bottom:1px; }
+.htl-item.above .htl-txt { bottom:calc(50% + 14px); }
+.htl-item.below .htl-txt { top:calc(50% + 14px); }
+.htl-date { font-size:.6rem; color:#aaa; position:absolute; left:50%; transform:translateX(-50%); }
+.htl-item.above .htl-date { top:calc(50% + 10px); }
+.htl-item.below .htl-date { bottom:calc(50% + 10px); }
 
 /* Cycle arrows */
 .cycle { display:flex; align-items:center; gap:6px; margin:12px 0; flex-wrap:wrap; }
@@ -122,27 +125,62 @@ body { font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans
     <div class="topic-body"><p>그리고 이 사이클이 <strong>점점 빨라지고 있다</strong>:</p></div>
 
     <div class="htl">
-      <div class="htl-track" style="height:140px">
-        <div class="htl-line"></div>
-        <!-- month markers -->
-        <div class="htl-month" style="left:0%">2024.09</div>
-        <div class="htl-month" style="left:18%">2025.01</div>
-        <div class="htl-month" style="left:35%">2025.05</div>
-        <div class="htl-month" style="left:53%">2025.08</div>
-        <div class="htl-month" style="left:71%">2025.11</div>
-        <div class="htl-month" style="left:88%">2026.02</div>
-
-        <div class="htl-item" style="left:0%"><div class="htl-dot" style="background:#d97706"></div><div class="htl-txt"><strong>o1 추론 모델</strong>"크게 만드는 것"의 한계를 "생각하게 하는 것"으로 돌파</div></div>
-        <div class="htl-item" style="left:12%"><div class="htl-dot" style="background:#d97706"></div><div class="htl-txt"><strong>DeepSeek V3</strong>$6M으로 GPT-4급. "AI는 돈 게임" 상식 붕괴</div></div>
-        <div class="htl-item" style="left:20%"><div class="htl-dot" style="background:#dc2626"></div><div class="htl-txt"><strong>DeepSeek R1</strong>Nvidia $560B 증발. "스푸트니크 모먼트"</div></div>
-        <div class="htl-item" style="left:28%"><div class="htl-dot" style="background:#2563eb"></div><div class="htl-txt"><strong>Claude Code</strong>최초의 실용적 에이전트. "대화→행동"</div></div>
-        <div class="htl-item" style="left:35%"><div class="htl-dot" style="background:#2563eb"></div><div class="htl-txt"><strong>Veo 3</strong>AI 영상에 소리가 붙다. 무성영화→유성영화</div></div>
-        <div class="htl-item" style="left:43%"><div class="htl-dot" style="background:#16a34a"></div><div class="htl-txt"><strong>중국 오픈소스</strong>Qwen3/Kimi K2가 GPT-4.1 추월</div></div>
-        <div class="htl-item" style="left:53%"><div class="htl-dot" style="background:#7c3aed"></div><div class="htl-txt"><strong>GPT-5 통합</strong>모델 선택 고민 종료. 라우터가 알아서</div></div>
-        <div class="htl-item" style="left:62%"><div class="htl-dot" style="background:#d97706"></div><div class="htl-txt"><strong>바이브 코딩 숙취</strong>보안 2.7배↑, 코드 품질 논쟁</div></div>
-        <div class="htl-item" style="left:71%"><div class="htl-dot" style="background:#2563eb"></div><div class="htl-txt"><strong>Gemini 3</strong>Antigravity. 에이전트에게 "할 일"을 보내다</div></div>
-        <div class="htl-item" style="left:80%"><div class="htl-dot" style="background:#16a34a"></div><div class="htl-txt"><strong>Opus 4.6</strong>에이전트 팀. AI가 AI를 고용</div></div>
-        <div class="htl-item" style="left:88%"><div class="htl-dot" style="background:#7c3aed"></div><div class="htl-txt"><strong>Cursor 멀티에이전트</strong>1,000 commits/hr. 자율주행 코드베이스</div></div>
+      <div class="htl-track">
+        <div class="htl-item above">
+          <div class="htl-dot" style="background:#d97706"></div>
+          <div class="htl-txt"><strong>o1 추론 모델</strong>"크게 만드는 것"의 한계를 "생각하게 하는 것"으로 돌파</div>
+          <div class="htl-date">2024.09</div>
+        </div>
+        <div class="htl-item below">
+          <div class="htl-dot" style="background:#d97706"></div>
+          <div class="htl-txt"><strong>DeepSeek V3</strong>$6M으로 GPT-4급. "AI는 돈 게임" 상식 붕괴</div>
+          <div class="htl-date">2024.12</div>
+        </div>
+        <div class="htl-item above">
+          <div class="htl-dot" style="background:#dc2626"></div>
+          <div class="htl-txt"><strong>DeepSeek R1</strong>Nvidia $560B 증발. "스푸트니크 모먼트"</div>
+          <div class="htl-date">2025.01</div>
+        </div>
+        <div class="htl-item below">
+          <div class="htl-dot" style="background:#2563eb"></div>
+          <div class="htl-txt"><strong>Claude Code</strong>최초의 실용적 에이전트. "대화→행동" 전환</div>
+          <div class="htl-date">2025.02</div>
+        </div>
+        <div class="htl-item above">
+          <div class="htl-dot" style="background:#2563eb"></div>
+          <div class="htl-txt"><strong>Veo 3</strong>AI 영상에 소리가 붙다. 무성영화 시대의 끝</div>
+          <div class="htl-date">2025.05</div>
+        </div>
+        <div class="htl-item below">
+          <div class="htl-dot" style="background:#16a34a"></div>
+          <div class="htl-txt"><strong>중국 오픈소스 삼국지</strong>Qwen3 / Kimi K2가 GPT-4.1 추월</div>
+          <div class="htl-date">2025.07</div>
+        </div>
+        <div class="htl-item above">
+          <div class="htl-dot" style="background:#7c3aed"></div>
+          <div class="htl-txt"><strong>GPT-5 통합 라우터</strong>모델 선택의 시대 끝. 시스템이 알아서</div>
+          <div class="htl-date">2025.08</div>
+        </div>
+        <div class="htl-item below">
+          <div class="htl-dot" style="background:#d97706"></div>
+          <div class="htl-txt"><strong>바이브 코딩 숙취</strong>보안 취약점 2.7배↑. 코드 품질 논쟁</div>
+          <div class="htl-date">2025.09</div>
+        </div>
+        <div class="htl-item above">
+          <div class="htl-dot" style="background:#2563eb"></div>
+          <div class="htl-txt"><strong>Gemini 3 + Antigravity</strong>에이전트에게 "할 일"을 보내는 시대</div>
+          <div class="htl-date">2025.11</div>
+        </div>
+        <div class="htl-item below">
+          <div class="htl-dot" style="background:#16a34a"></div>
+          <div class="htl-txt"><strong>Opus 4.6 + 에이전트 팀</strong>AI가 AI를 팀원으로 고용</div>
+          <div class="htl-date">2026.02</div>
+        </div>
+        <div class="htl-item above">
+          <div class="htl-dot" style="background:#7c3aed"></div>
+          <div class="htl-txt"><strong>Cursor 멀티에이전트</strong>1,000 commits/hr. 자율주행 코드베이스</div>
+          <div class="htl-date">2026.02</div>
+        </div>
       </div>
     </div>
 
