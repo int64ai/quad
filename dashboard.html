@@ -7,41 +7,41 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0d1117;color:#e6edf3;font-family:-apple-system,'Segoe UI',sans-serif;padding:20px;line-height:1.5;max-width:1400px;margin:0 auto}
+body{background:#f6f8fa;color:#1f2328;font-family:-apple-system,'Segoe UI',sans-serif;padding:20px;line-height:1.5;max-width:1400px;margin:0 auto}
 
 /* Header */
 .hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px}
 .hdr h1{font-size:1.4rem;font-weight:700}
-.hdr .ts{color:#8b949e;font-size:0.8rem}
+.hdr .ts{color:#656d76;font-size:0.8rem}
 
 /* Section titles */
-.sec-title{font-size:1.15rem;font-weight:700;margin:28px 0 14px;padding-bottom:8px;border-bottom:1px solid #30363d;display:flex;align-items:center;gap:8px}
+.sec-title{font-size:1.15rem;font-weight:700;margin:28px 0 14px;padding-bottom:8px;border-bottom:1px solid #d0d7de;display:flex;align-items:center;gap:8px}
 
 /* Index cards */
 .idx-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:8px}
 @media(max-width:700px){.idx-row{grid-template-columns:repeat(2,1fr)}}
-.idx-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px 14px}
-.idx-label{color:#8b949e;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.idx-card{background:#ffffff;border:1px solid #d0d7de;border-radius:8px;padding:12px 14px}
+.idx-label{color:#656d76;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
 .idx-price{font-size:1.4rem;font-weight:800;margin:2px 0}
 .idx-change{font-size:0.85rem;font-weight:700}
 .idx-spark{margin-top:6px}
 
 /* Tabs & period buttons */
 .tabs{display:flex;gap:6px;margin-bottom:10px}
-.tab{padding:5px 14px;border-radius:6px;background:#161b22;border:1px solid #30363d;color:#8b949e;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all 0.15s}
+.tab{padding:5px 14px;border-radius:6px;background:#ffffff;border:1px solid #d0d7de;color:#656d76;cursor:pointer;font-size:0.82rem;font-weight:600;transition:all 0.15s}
 .tab:hover{border-color:#58a6ff}
-.tab.active{background:#1f6feb;color:#fff;border-color:#1f6feb}
+.tab.active{background:#0969da;color:#fff;border-color:#1f6feb}
 .period-row{display:flex;gap:5px;margin-bottom:14px}
-.pbtn{padding:4px 12px;border-radius:4px;background:#161b22;border:1px solid #30363d;color:#8b949e;cursor:pointer;font-size:0.78rem;font-weight:600;transition:all 0.15s}
+.pbtn{padding:4px 12px;border-radius:4px;background:#ffffff;border:1px solid #d0d7de;color:#656d76;cursor:pointer;font-size:0.78rem;font-weight:600;transition:all 0.15s}
 .pbtn:hover{border-color:#58a6ff}
-.pbtn.active{background:#30363d;color:#e6edf3;border-color:#58a6ff}
+.pbtn.active{background:#d0d7de;color:#1f2328;border-color:#58a6ff}
 
 /* Sector bar chart */
 .bar-wrap{margin-bottom:8px}
 .bar-r{display:flex;align-items:center;margin-bottom:6px}
 .bar-nm{width:130px;font-size:0.82rem;font-weight:600;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bar-tk{flex:1;height:22px;background:#21262d;border-radius:3px;position:relative;overflow:visible}
-.bar-center{position:absolute;top:0;left:50%;width:1px;height:100%;background:#8b949e44}
+.bar-tk{flex:1;height:22px;background:#e6edf3;border-radius:3px;position:relative;overflow:visible}
+.bar-center{position:absolute;top:0;left:50%;width:1px;height:100%;background:#656d7644}
 .bar-fl{height:100%;border-radius:3px;position:absolute;top:0;transition:all 0.3s}
 .bar-vl{width:70px;text-align:right;font-size:0.82rem;font-weight:700;flex-shrink:0;padding-left:8px}
 
@@ -49,21 +49,21 @@ body{background:#0d1117;color:#e6edf3;font-family:-apple-system,'Segoe UI',sans-
 .rsi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:6px}
 .rsi-row{display:flex;align-items:center;gap:6px;font-size:0.8rem;padding:3px 0}
 .rsi-name{width:110px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
-.rsi-track{flex:1;height:14px;background:#21262d;border-radius:7px;position:relative;overflow:hidden}
+.rsi-track{flex:1;height:14px;background:#e6edf3;border-radius:7px;position:relative;overflow:hidden}
 .rsi-fill{height:100%;border-radius:7px;transition:width 0.3s}
-.rsi-mark{position:absolute;top:0;width:1px;height:100%;background:#8b949e55}
+.rsi-mark{position:absolute;top:0;width:1px;height:100%;background:#656d7655}
 .rsi-val{width:38px;text-align:right;font-weight:700;flex-shrink:0}
 
 /* Chart container */
-.chart-box{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:16px;position:relative;height:350px}
+.chart-box{background:#ffffff;border:1px solid #d0d7de;border-radius:8px;padding:16px;margin-bottom:16px;position:relative;height:350px}
 
 /* Sector group tables */
-.sector-group{margin-bottom:16px;background:#161b22;border:1px solid #30363d;border-radius:8px;overflow:hidden}
-.sector-header{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;background:#161b2299}
+.sector-group{margin-bottom:16px;background:#ffffff;border:1px solid #d0d7de;border-radius:8px;overflow:hidden}
+.sector-header{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;background:#ffffff99}
 .sector-name{font-size:0.95rem;font-weight:700}
 .sector-badges{display:flex;gap:12px;font-size:0.78rem;font-weight:700}
 table{width:100%;border-collapse:collapse;font-size:0.8rem}
-th{text-align:left;padding:7px 10px;border-bottom:1px solid #30363d;color:#8b949e;font-weight:600;white-space:nowrap}
+th{text-align:left;padding:7px 10px;border-bottom:1px solid #d0d7de;color:#656d76;font-weight:600;white-space:nowrap}
 td{padding:6px 10px;border-bottom:1px solid #21262d;white-space:nowrap}
 .t-name{font-weight:600}
 td:nth-child(2),th:nth-child(2){text-align:right}
@@ -120,7 +120,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
 <div id="sectorBars" class="bar-wrap"></div>
 
 <!-- RSI -->
-<div class="sec-title">🎯 RSI 오버뷰 <span style="font-size:0.7rem;color:#8b949e;font-weight:400">(과매수 &gt;70 / 과매도 &lt;30)</span></div>
+<div class="sec-title">🎯 RSI 오버뷰 <span style="font-size:0.7rem;color:#656d76;font-weight:400">(과매수 &gt;70 / 과매도 &lt;30)</span></div>
 <div class="tabs" id="rsiTabs">
   <div class="tab active" data-v="kr">🇰🇷 한국</div>
   <div class="tab" data-v="us">🇺🇸 미국</div>
@@ -133,42 +133,42 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
 <div class="rsi-row">
       <span class="rsi-name">SK하이닉스</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:67.68%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">67.7</span>
+      <span class="rsi-val" style="color:#656d76">67.7</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">LG에너지솔루션</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:51.02%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">51.0</span>
+      <span class="rsi-val" style="color:#656d76">51.0</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">삼성SDI</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:62.77%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">62.8</span>
+      <span class="rsi-val" style="color:#656d76">62.8</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">에코프로비엠</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:58.6%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">58.6</span>
+      <span class="rsi-val" style="color:#656d76">58.6</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">삼성바이오로직스</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:46.39%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">46.4</span>
+      <span class="rsi-val" style="color:#656d76">46.4</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">셀트리온</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:69.67%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">69.7</span>
+      <span class="rsi-val" style="color:#656d76">69.7</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">현대차</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:61.54%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">61.5</span>
+      <span class="rsi-val" style="color:#656d76">61.5</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">기아</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:68.14%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">68.1</span>
+      <span class="rsi-val" style="color:#656d76">68.1</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">KB금융</span>
@@ -183,102 +183,102 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
 <div class="rsi-row">
       <span class="rsi-name">NAVER</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:48.08%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">48.1</span>
+      <span class="rsi-val" style="color:#656d76">48.1</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">카카오</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:46.28%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">46.3</span>
+      <span class="rsi-val" style="color:#656d76">46.3</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">하이브</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:66.19%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">66.2</span>
+      <span class="rsi-val" style="color:#656d76">66.2</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">JYP Ent.</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:50.11%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">50.1</span>
+      <span class="rsi-val" style="color:#656d76">50.1</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">POSCO홀딩스</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:65.64%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">65.6</span>
+      <span class="rsi-val" style="color:#656d76">65.6</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">LG화학</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:52.99%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">53.0</span>
+      <span class="rsi-val" style="color:#656d76">53.0</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">SK텔레콤</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:65.3%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">65.3</span>
+      <span class="rsi-val" style="color:#656d76">65.3</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">한화에어로스페이스</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:56.19%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">56.2</span>
+      <span class="rsi-val" style="color:#656d76">56.2</span>
     </div></div>
 <div id="rsiUS" class="rsi-grid" style="display:none"><div class="rsi-row">
       <span class="rsi-name">Apple</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:45.58%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">45.6</span>
+      <span class="rsi-val" style="color:#656d76">45.6</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Microsoft</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:32.75%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">32.8</span>
+      <span class="rsi-val" style="color:#656d76">32.8</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Alphabet</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:32.01%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">32.0</span>
+      <span class="rsi-val" style="color:#656d76">32.0</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Amazon</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:32.42%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">32.4</span>
+      <span class="rsi-val" style="color:#656d76">32.4</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">NVIDIA</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:52.94%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">52.9</span>
+      <span class="rsi-val" style="color:#656d76">52.9</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Meta</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:45.36%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">45.4</span>
+      <span class="rsi-val" style="color:#656d76">45.4</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Tesla</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:43.39%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">43.4</span>
+      <span class="rsi-val" style="color:#656d76">43.4</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">AMD</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:41.17%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">41.2</span>
+      <span class="rsi-val" style="color:#656d76">41.2</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Broadcom</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:50.25%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">50.3</span>
+      <span class="rsi-val" style="color:#656d76">50.3</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Palantir</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:37.61%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">37.6</span>
+      <span class="rsi-val" style="color:#656d76">37.6</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Tech ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:45.28%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">45.3</span>
+      <span class="rsi-val" style="color:#656d76">45.3</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Financial ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:41.09%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">41.1</span>
+      <span class="rsi-val" style="color:#656d76">41.1</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Energy ETF</span>
@@ -288,17 +288,17 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
 <div class="rsi-row">
       <span class="rsi-name">Healthcare ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:53.74%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">53.7</span>
+      <span class="rsi-val" style="color:#656d76">53.7</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Cons.Disc ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:38.12%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">38.1</span>
+      <span class="rsi-val" style="color:#656d76">38.1</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Cons.Staples ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:65.56%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">65.6</span>
+      <span class="rsi-val" style="color:#656d76">65.6</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Industrial ETF</span>
@@ -308,31 +308,31 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
 <div class="rsi-row">
       <span class="rsi-name">Materials ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:64.95%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">65.0</span>
+      <span class="rsi-val" style="color:#656d76">65.0</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Real Estate ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:63.62%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">63.6</span>
+      <span class="rsi-val" style="color:#656d76">63.6</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Comm.Svc ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:44.86%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">44.9</span>
+      <span class="rsi-val" style="color:#656d76">44.9</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Utilities ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:68.57%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">68.6</span>
+      <span class="rsi-val" style="color:#656d76">68.6</span>
     </div>
 <div class="rsi-row">
       <span class="rsi-name">Semicon ETF</span>
       <div class="rsi-track"><div class="rsi-fill" style="width:57.88%;background:#8b949e"></div><div class="rsi-mark" style="left:30%"></div><div class="rsi-mark" style="left:70%"></div></div>
-      <span class="rsi-val" style="color:#8b949e">57.9</span>
+      <span class="rsi-val" style="color:#656d76">57.9</span>
     </div></div>
 
 <!-- Sector Trend Chart -->
-<div class="sec-title">📉 섹터별 3개월 추이 <span style="font-size:0.7rem;color:#8b949e;font-weight:400">(기준일=100)</span></div>
+<div class="sec-title">📉 섹터별 3개월 추이 <span style="font-size:0.7rem;color:#656d76;font-weight:400">(기준일=100)</span></div>
 <div class="tabs" id="chartTabs">
   <div class="tab active" data-v="kr">🇰🇷 한국</div>
   <div class="tab" data-v="us">🇺🇸 미국</div>
@@ -369,7 +369,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+8.33%</td>
         <td style="color:#ff4444">+24.21%</td>
         <td style="color:#ff4444">+66.20%</td>
-        <td style="color:#8b949e">67.7</td>
+        <td style="color:#656d76">67.7</td>
       </tr>
       </table>
     </div>
@@ -392,7 +392,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+2.82%</td>
         <td style="color:#ff4444">+0.75%</td>
         <td style="color:#4488ff">-8.96%</td>
-        <td style="color:#8b949e">51.0</td>
+        <td style="color:#656d76">51.0</td>
       </tr>
 <tr>
         <td class="t-name">삼성SDI</td>
@@ -401,16 +401,16 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+5.51%</td>
         <td style="color:#ff4444">+28.03%</td>
         <td style="color:#ff4444">+33.11%</td>
-        <td style="color:#8b949e">62.8</td>
+        <td style="color:#656d76">62.8</td>
       </tr>
 <tr>
         <td class="t-name">에코프로비엠</td>
         <td class="t-price">₩214,000</td>
-        <td style="color:#8b949e">+0.00%</td>
+        <td style="color:#656d76">+0.00%</td>
         <td style="color:#ff4444">+5.94%</td>
         <td style="color:#ff4444">+38.78%</td>
         <td style="color:#ff4444">+47.38%</td>
-        <td style="color:#8b949e">58.6</td>
+        <td style="color:#656d76">58.6</td>
       </tr>
       </table>
     </div>
@@ -433,7 +433,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+1.52%</td>
         <td style="color:#4488ff">-9.63%</td>
         <td style="color:#4488ff">-7.53%</td>
-        <td style="color:#8b949e">46.4</td>
+        <td style="color:#656d76">46.4</td>
       </tr>
 <tr>
         <td class="t-name">셀트리온</td>
@@ -442,7 +442,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+6.37%</td>
         <td style="color:#ff4444">+17.19%</td>
         <td style="color:#ff4444">+29.55%</td>
-        <td style="color:#8b949e">69.7</td>
+        <td style="color:#656d76">69.7</td>
       </tr>
       </table>
     </div>
@@ -465,7 +465,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+5.93%</td>
         <td style="color:#ff4444">+6.04%</td>
         <td style="color:#ff4444">+94.27%</td>
-        <td style="color:#8b949e">61.5</td>
+        <td style="color:#656d76">61.5</td>
       </tr>
 <tr>
         <td class="t-name">기아</td>
@@ -474,7 +474,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+11.05%</td>
         <td style="color:#ff4444">+1.36%</td>
         <td style="color:#ff4444">+51.50%</td>
-        <td style="color:#8b949e">68.1</td>
+        <td style="color:#656d76">68.1</td>
       </tr>
       </table>
     </div>
@@ -529,7 +529,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+0.20%</td>
         <td style="color:#ff4444">+6.93%</td>
         <td style="color:#4488ff">-0.97%</td>
-        <td style="color:#8b949e">48.1</td>
+        <td style="color:#656d76">48.1</td>
       </tr>
 <tr>
         <td class="t-name">카카오</td>
@@ -538,7 +538,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#4488ff">-0.69%</td>
         <td style="color:#ff4444">+2.30%</td>
         <td style="color:#4488ff">-2.03%</td>
-        <td style="color:#8b949e">46.3</td>
+        <td style="color:#656d76">46.3</td>
       </tr>
       </table>
     </div>
@@ -561,7 +561,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+5.70%</td>
         <td style="color:#ff4444">+8.73%</td>
         <td style="color:#ff4444">+34.63%</td>
-        <td style="color:#8b949e">66.2</td>
+        <td style="color:#656d76">66.2</td>
       </tr>
 <tr>
         <td class="t-name">JYP Ent.</td>
@@ -570,7 +570,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#4488ff">-0.56%</td>
         <td style="color:#ff4444">+1.58%</td>
         <td style="color:#ff4444">+4.42%</td>
-        <td style="color:#8b949e">50.1</td>
+        <td style="color:#656d76">50.1</td>
       </tr>
       </table>
     </div>
@@ -593,7 +593,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+6.20%</td>
         <td style="color:#ff4444">+13.38%</td>
         <td style="color:#ff4444">+22.55%</td>
-        <td style="color:#8b949e">65.6</td>
+        <td style="color:#656d76">65.6</td>
       </tr>
 <tr>
         <td class="t-name">LG화학</td>
@@ -602,7 +602,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+4.98%</td>
         <td style="color:#4488ff">-0.15%</td>
         <td style="color:#4488ff">-13.26%</td>
-        <td style="color:#8b949e">53.0</td>
+        <td style="color:#656d76">53.0</td>
       </tr>
       </table>
     </div>
@@ -625,7 +625,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+9.63%</td>
         <td style="color:#ff4444">+36.49%</td>
         <td style="color:#ff4444">+51.31%</td>
-        <td style="color:#8b949e">65.3</td>
+        <td style="color:#656d76">65.3</td>
       </tr>
 <tr>
         <td class="t-name">한화에어로스페이스</td>
@@ -634,7 +634,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#ff4444">+8.38%</td>
         <td style="color:#4488ff">-6.62%</td>
         <td style="color:#ff4444">+35.59%</td>
-        <td style="color:#8b949e">56.2</td>
+        <td style="color:#656d76">56.2</td>
       </tr>
       </table>
     </div>
@@ -659,7 +659,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-5.42%</td>
         <td style="color:#3fb950">+5.63%</td>
         <td style="color:#f85149">-2.13%</td>
-        <td style="color:#8b949e">45.6</td>
+        <td style="color:#656d76">45.6</td>
       </tr>
 <tr>
         <td class="t-name">Microsoft</td>
@@ -668,7 +668,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-1.46%</td>
         <td style="color:#f85149">-12.33%</td>
         <td style="color:#f85149">-16.72%</td>
-        <td style="color:#8b949e">32.8</td>
+        <td style="color:#656d76">32.8</td>
       </tr>
 <tr>
         <td class="t-name">Alphabet</td>
@@ -677,7 +677,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-2.61%</td>
         <td style="color:#f85149">-5.95%</td>
         <td style="color:#3fb950">+4.63%</td>
-        <td style="color:#8b949e">32.0</td>
+        <td style="color:#656d76">32.0</td>
       </tr>
 <tr>
         <td class="t-name">Amazon</td>
@@ -686,7 +686,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#3fb950">+0.38%</td>
         <td style="color:#f85149">-11.32%</td>
         <td style="color:#f85149">-5.66%</td>
-        <td style="color:#8b949e">32.4</td>
+        <td style="color:#656d76">32.4</td>
       </tr>
 <tr>
         <td class="t-name">Meta</td>
@@ -695,7 +695,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-3.58%</td>
         <td style="color:#3fb950">+6.73%</td>
         <td style="color:#3fb950">+9.44%</td>
-        <td style="color:#8b949e">45.4</td>
+        <td style="color:#656d76">45.4</td>
       </tr>
       </table>
     </div>
@@ -718,7 +718,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-1.13%</td>
         <td style="color:#3fb950">+5.52%</td>
         <td style="color:#3fb950">+4.02%</td>
-        <td style="color:#8b949e">52.9</td>
+        <td style="color:#656d76">52.9</td>
       </tr>
 <tr>
         <td class="t-name">AMD</td>
@@ -727,7 +727,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-4.78%</td>
         <td style="color:#f85149">-12.31%</td>
         <td style="color:#f85149">-1.29%</td>
-        <td style="color:#8b949e">41.2</td>
+        <td style="color:#656d76">41.2</td>
       </tr>
 <tr>
         <td class="t-name">Broadcom</td>
@@ -736,7 +736,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-2.56%</td>
         <td style="color:#3fb950">+0.42%</td>
         <td style="color:#f85149">-3.70%</td>
-        <td style="color:#8b949e">50.3</td>
+        <td style="color:#656d76">50.3</td>
       </tr>
 <tr>
         <td class="t-name">Palantir</td>
@@ -745,7 +745,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-0.58%</td>
         <td style="color:#f85149">-19.96%</td>
         <td style="color:#f85149">-13.39%</td>
-        <td style="color:#8b949e">37.6</td>
+        <td style="color:#656d76">37.6</td>
       </tr>
       </table>
     </div>
@@ -768,7 +768,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-3.87%</td>
         <td style="color:#f85149">-1.80%</td>
         <td style="color:#3fb950">+4.17%</td>
-        <td style="color:#8b949e">43.4</td>
+        <td style="color:#656d76">43.4</td>
       </tr>
       </table>
     </div>
@@ -791,7 +791,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-1.93%</td>
         <td style="color:#f85149">-1.15%</td>
         <td style="color:#3fb950">+3.04%</td>
-        <td style="color:#8b949e">45.3</td>
+        <td style="color:#656d76">45.3</td>
       </tr>
       </table>
     </div>
@@ -814,7 +814,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-1.12%</td>
         <td style="color:#f85149">-1.97%</td>
         <td style="color:#3fb950">+2.03%</td>
-        <td style="color:#8b949e">41.1</td>
+        <td style="color:#656d76">41.1</td>
       </tr>
       </table>
     </div>
@@ -860,7 +860,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#3fb950">+0.65%</td>
         <td style="color:#3fb950">+1.20%</td>
         <td style="color:#3fb950">+3.86%</td>
-        <td style="color:#8b949e">53.7</td>
+        <td style="color:#656d76">53.7</td>
       </tr>
       </table>
     </div>
@@ -883,7 +883,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-1.29%</td>
         <td style="color:#f85149">-2.42%</td>
         <td style="color:#3fb950">+5.12%</td>
-        <td style="color:#8b949e">38.1</td>
+        <td style="color:#656d76">38.1</td>
       </tr>
       </table>
     </div>
@@ -906,7 +906,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-0.83%</td>
         <td style="color:#3fb950">+6.45%</td>
         <td style="color:#3fb950">+13.77%</td>
-        <td style="color:#8b949e">65.6</td>
+        <td style="color:#656d76">65.6</td>
       </tr>
       </table>
     </div>
@@ -952,7 +952,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-1.47%</td>
         <td style="color:#3fb950">+9.63%</td>
         <td style="color:#3fb950">+25.10%</td>
-        <td style="color:#8b949e">65.0</td>
+        <td style="color:#656d76">65.0</td>
       </tr>
       </table>
     </div>
@@ -975,7 +975,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#3fb950">+0.93%</td>
         <td style="color:#3fb950">+4.35%</td>
         <td style="color:#3fb950">+7.01%</td>
-        <td style="color:#8b949e">63.6</td>
+        <td style="color:#656d76">63.6</td>
       </tr>
       </table>
     </div>
@@ -998,7 +998,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-1.37%</td>
         <td style="color:#3fb950">+1.47%</td>
         <td style="color:#3fb950">+4.70%</td>
-        <td style="color:#8b949e">44.9</td>
+        <td style="color:#656d76">44.9</td>
       </tr>
       </table>
     </div>
@@ -1021,7 +1021,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#3fb950">+3.41%</td>
         <td style="color:#3fb950">+7.33%</td>
         <td style="color:#3fb950">+4.77%</td>
-        <td style="color:#8b949e">68.6</td>
+        <td style="color:#656d76">68.6</td>
       </tr>
       </table>
     </div>
@@ -1044,7 +1044,7 @@ td:nth-child(1){width:130px}td:nth-child(2){width:100px}td:nth-child(n+3){width:
         <td style="color:#f85149">-1.10%</td>
         <td style="color:#3fb950">+5.07%</td>
         <td style="color:#3fb950">+26.18%</td>
-        <td style="color:#8b949e">57.9</td>
+        <td style="color:#656d76">57.9</td>
       </tr>
       </table>
     </div>

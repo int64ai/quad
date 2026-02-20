@@ -9,28 +9,28 @@
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #0a0a0f;
-    color: #e0e0e0;
+    background: #f5f5fa;
+    color: #aaa;
     min-height: 100vh;
   }
 
   .header {
     text-align: center;
     padding: 60px 20px 40px;
-    background: linear-gradient(180deg, #12121a 0%, #0a0a0f 100%);
+    background: linear-gradient(180deg, #f0f0f5 0%, #f5f5fa 100%);
   }
 
   .header h1 {
     font-size: 2.4rem;
     font-weight: 300;
     letter-spacing: 0.15em;
-    color: #fff;
+    color: #111;
     margin-bottom: 8px;
   }
 
   .header .subtitle {
     font-size: 0.95rem;
-    color: #666;
+    color: #777;
     letter-spacing: 0.05em;
   }
 
@@ -44,8 +44,8 @@
   }
 
   .card {
-    background: #14141e;
-    border: 1px solid #1e1e2e;
+    background: #ffffff;
+    border: 1px solid #e0e0e8;
     border-radius: 12px;
     overflow: hidden;
     transition: all 0.25s ease;
@@ -56,9 +56,9 @@
   }
 
   .card:hover {
-    border-color: #3a3a5a;
+    border-color: #bbb;
     transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
   }
 
   .card-banner {
@@ -80,19 +80,19 @@
     font-size: 1.15rem;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #fff;
+    color: #111;
   }
 
   .card-body p {
     font-size: 0.85rem;
-    color: #888;
+    color: #777;
     line-height: 1.5;
     flex: 1;
   }
 
   .card-meta {
     padding: 12px 20px;
-    border-top: 1px solid #1e1e2e;
+    border-top: 1px solid #e0e0e8;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -102,24 +102,24 @@
     font-size: 0.7rem;
     padding: 3px 8px;
     border-radius: 4px;
-    background: #1e1e2e;
-    color: #aaa;
+    background: #e0e0e8;
+    color: #888;
     letter-spacing: 0.03em;
   }
 
-  .tag.live { background: #0a2a1a; color: #4ade80; }
-  .tag.research { background: #1a1a2e; color: #818cf8; }
-  .tag.data { background: #2a1a0a; color: #fbbf24; }
+  .tag.live { background: #e8f5e9; color: #16a34a; }
+  .tag.research { background: #e8eaf6; color: #6366f1; }
+  .tag.data { background: #fff8e1; color: #d97706; }
 
   .size {
     font-size: 0.7rem;
-    color: #555;
+    color: #888;
   }
 
   .footer {
     text-align: center;
     padding: 40px 20px;
-    color: #333;
+    color: #aaa;
     font-size: 0.8rem;
   }
 
@@ -149,7 +149,7 @@ const pages = [
     desc: "LLM, 코딩 AI, 이미지/비디오 생성, 에이전트/자동화 — 전체 AI 산업 인터랙티브 맵. 7개 분야 50+ 기업 분석.",
     url: "ai-landscape.html",
     emoji: "🗺️",
-    bg: "linear-gradient(135deg, #1a1a2e, #16213e)",
+    bg: "linear-gradient(135deg, #e8eaf6, #e3f2fd)",
     tag: "research",
     tagLabel: "리서치",
     size: "255KB"
@@ -159,7 +159,7 @@ const pages = [
     desc: "AI 기업 시가총액, 주가 변동, 섹터별 비교. 30분마다 자동 갱신.",
     url: "dashboard.html",
     emoji: "📊",
-    bg: "linear-gradient(135deg, #0a2a1a, #1a2e1a)",
+    bg: "linear-gradient(135deg, #e8f5e9, #f0f4e8)",
     tag: "live",
     tagLabel: "LIVE",
     size: "69KB"
@@ -169,7 +169,7 @@ const pages = [
     desc: "블루오션 분석, 버티컬 AI, 경쟁 환경. 4라운드 검증 완료.",
     url: "ai-services.html",
     emoji: "🔍",
-    bg: "linear-gradient(135deg, #2a1a0a, #2e2a1a)",
+    bg: "linear-gradient(135deg, #fff3e0, #fff8e1)",
     tag: "research",
     tagLabel: "리서치",
     size: "63KB"
@@ -179,7 +179,7 @@ const pages = [
     desc: "86개 제품을 증거 기반으로 분류. 개인이 만든다 / 대기업이 쓴다 / 기다린다 / AI에게 어렵다.",
     url: "evidence-matrix.html",
     emoji: "🎯",
-    bg: "linear-gradient(135deg, #0a2a1a, #1a1a2e)",
+    bg: "linear-gradient(135deg, #e8f5e9, #e8eaf6)",
     tag: "data",
     tagLabel: "증거 기반",
     size: "86개 제품"

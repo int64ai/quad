@@ -6,72 +6,70 @@
 <title>AI 제품 4칸 매트릭스 — 증거 기반</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#08080d; color:#d0d0d0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f8f8fb; color:#aaa; }
 
-.top-bar { padding:12px 20px; border-bottom:1px solid #1a1a2a; display:flex; justify-content:space-between; align-items:center; }
-.top-bar a { color:#555; text-decoration:none; font-size:.85rem; }
-.top-bar a:hover { color:#888; }
-.top-bar .date { color:#444; font-size:.75rem; }
+.top-bar { padding:12px 20px; border-bottom:1px solid #e0e0e8; display:flex; justify-content:space-between; align-items:center; }
+.top-bar a { color:#888; text-decoration:none; font-size:.85rem; }
+.top-bar a:hover { color:#777; }
+.top-bar .date { color:#999; font-size:.75rem; }
 
 .hero { text-align:center; padding:40px 20px 20px; }
-.hero h1 { font-size:1.8rem; font-weight:300; color:#fff; letter-spacing:.08em; }
-.hero p { color:#555; font-size:.9rem; margin-top:6px; }
+.hero h1 { font-size:1.8rem; font-weight:300; color:#111; letter-spacing:.08em; }
+.hero p { color:#888; font-size:.9rem; margin-top:6px; }
 
 .stats-row { display:flex; justify-content:center; gap:30px; padding:15px 20px 30px; flex-wrap:wrap; }
 .stat { text-align:center; }
 .stat .num { font-size:1.6rem; font-weight:700; }
-.stat .label { font-size:.7rem; color:#555; text-transform:uppercase; letter-spacing:.08em; }
+.stat .label { font-size:.7rem; color:#888; text-transform:uppercase; letter-spacing:.08em; }
 
 .meta-insights { max-width:900px; margin:0 auto 30px; padding:0 20px; }
-.meta-insights h2 { font-size:1rem; color:#888; margin-bottom:12px; font-weight:400; }
+.meta-insights h2 { font-size:1rem; color:#777; margin-bottom:12px; font-weight:400; }
 .insight-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
-.insight { background:#0f0f18; border:1px solid #1a1a2a; border-radius:8px; padding:14px; font-size:.82rem; line-height:1.5; color:#aaa; }
-.insight strong { color:#fff; }
+.insight { background:#ffffff; border:1px solid #e0e0e8; border-radius:8px; padding:14px; font-size:.82rem; line-height:1.5; color:#888; }
+.insight strong { color:#111; }
 .insight .tag { display:inline-block; font-size:.65rem; padding:2px 6px; border-radius:3px; margin-bottom:6px; }
 
 .matrix { max-width:1200px; margin:0 auto; padding:0 20px 40px; }
 
-.zone { margin-bottom:30px; border-radius:12px; overflow:hidden; border:1px solid #1a1a2a; }
+.zone { margin-bottom:30px; border-radius:12px; overflow:hidden; border:1px solid #e0e0e8; }
 .zone-header { padding:16px 20px; display:flex; align-items:center; gap:12px; cursor:pointer; user-select:none; }
 .zone-header h2 { font-size:1.1rem; font-weight:600; }
-.zone-header .count { font-size:.75rem; color:#666; background:#1a1a2a; padding:2px 8px; border-radius:10px; }
-.zone-header .chevron { color:#444; transition:transform .2s; font-size:.8rem; margin-left:auto; }
+.zone-header .count { font-size:.75rem; color:#777; background:#e0e0e8; padding:2px 8px; border-radius:10px; }
+.zone-header .chevron { color:#999; transition:transform .2s; font-size:.8rem; margin-left:auto; }
 .zone-header.open .chevron { transform:rotate(90deg); }
 .zone-body { padding:0 16px 16px; display:none; }
 .zone-body.open { display:block; }
 
 .sub-zone { margin-top:14px; }
-.sub-zone h3 { font-size:.85rem; color:#888; margin-bottom:8px; padding-bottom:4px; border-bottom:1px solid #141420; }
-.sub-desc { font-size:.78rem; color:#555; margin-bottom:10px; line-height:1.5; }
+.sub-zone h3 { font-size:.85rem; color:#777; margin-bottom:8px; padding-bottom:4px; border-bottom:1px solid #eee; }
+.sub-desc { font-size:.78rem; color:#888; margin-bottom:10px; line-height:1.5; }
 
 .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
-.card { background:#0c0c14; border:1px solid #18182a; border-radius:8px; padding:14px; transition:border-color .2s; }
-.card:hover { border-color:#2a2a4a; }
-.card .name { font-size:.95rem; font-weight:600; color:#fff; margin-bottom:4px; }
-.card .desc { font-size:.78rem; color:#777; margin-bottom:8px; line-height:1.4; }
+.card { background:#ffffff; border:1px solid #e0e0e8; border-radius:8px; padding:14px; transition:border-color .2s; }
+.card:hover { border-color:#ccc; }
+.card .name { font-size:.95rem; font-weight:600; color:#111; margin-bottom:4px; }
+.card .desc { font-size:.78rem; color:#888; margin-bottom:8px; line-height:1.4; }
 .card .metrics { display:flex; flex-wrap:wrap; gap:6px; }
-.card .metric { font-size:.7rem; padding:3px 7px; border-radius:4px; background:#14141e; }
-.card .metric.revenue { color:#4ade80; background:#0a1a10; }
-.card .metric.users { color:#60a5fa; background:#0a1020; }
-.card .metric.valuation { color:#c084fc; background:#140a20; }
-.card .metric.risk { color:#f87171; background:#1a0a0a; }
-.card .metric.time { color:#fbbf24; background:#1a1a0a; }
-.card .metric.team { color:#94a3b8; background:#0f0f18; }
-.card .metric.save { color:#a78bfa; background:#140a20; }
-.card .metric.cost { color:#94a3b8; background:#0f0f18; }
+.card .metric { font-size:.7rem; padding:3px 7px; border-radius:4px; background:#ffffff; }
+.card .metric.revenue { color:#4ade80; background:#e8f5e9; }
+.card .metric.users { color:#60a5fa; background:#e3f2fd; }
+.card .metric.valuation { color:#c084fc; background:#f3e8fd; }
+.card .metric.risk { color:#f87171; background:#fde8e8; }
+.card .metric.time { color:#fbbf24; background:#fff8e1; }
+.card .metric.team { color:#94a3b8; background:#ffffff; }
+.card .metric.save { color:#a78bfa; background:#f3e8fd; }
+.card .metric.cost { color:#94a3b8; background:#ffffff; }
 
-.z1 .zone-header { background:linear-gradient(90deg,#0a1a10,#0f0f18); }
+.z1 .zone-header { background:linear-gradient(90deg,#e8f5e9,#ffffff); }
 .z1 .zone-header h2 { color:#4ade80; }
-.z1b .zone-header { background:linear-gradient(90deg,#140a20,#0f0f18); }
-.z1b .zone-header h2 { color:#a78bfa; }
-.z2 .zone-header { background:linear-gradient(90deg,#0a1020,#0f0f18); }
+.z2 .zone-header { background:linear-gradient(90deg,#e3f2fd,#ffffff); }
 .z2 .zone-header h2 { color:#60a5fa; }
-.z3 .zone-header { background:linear-gradient(90deg,#14100a,#0f0f18); }
+.z3 .zone-header { background:linear-gradient(90deg,#fff3e0,#ffffff); }
 .z3 .zone-header h2 { color:#fb923c; }
-.z4 .zone-header { background:linear-gradient(90deg,#1a0a0a,#0f0f18); }
+.z4 .zone-header { background:linear-gradient(90deg,#fde8e8,#ffffff); }
 .z4 .zone-header h2 { color:#f87171; }
 
-.footer { text-align:center; padding:30px; color:#333; font-size:.75rem; }
+.footer { text-align:center; padding:30px; color:#aaa; font-size:.75rem; }
 
 @media(max-width:600px) {
   .hero h1 { font-size:1.3rem; }
@@ -90,13 +88,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 
 <div class="hero">
   <h1>AI 제품 4칸 매트릭스</h1>
-  <p>개인이 만든다 · 내 삶을 효율화한다 · 대기업이 만든다 · 기다린다 · AI에게 어렵다</p>
+  <p>개인이 만든다 · 대기업이 만든다 · 기다린다 · AI에게 어렵다</p>
 </div>
 
 <div class="stats-row">
-  <div class="stat"><div class="num" style="color:#4ade80">14</div><div class="label">개인이 만든다</div></div>
-  <div class="stat"><div class="num" style="color:#a78bfa">10</div><div class="label">내 삶을 효율화</div></div>
-  <div class="stat"><div class="num" style="color:#60a5fa">11</div><div class="label">대기업이 만든다</div></div>
+  <div class="stat"><div class="num" style="color:#4ade80">14</div><div class="label">개인이 만든다</div></div>  <div class="stat"><div class="num" style="color:#60a5fa">11</div><div class="label">대기업이 만든다</div></div>
   <div class="stat"><div class="num" style="color:#fb923c">6</div><div class="label">기다린다</div></div>
   <div class="stat"><div class="num" style="color:#f87171">5</div><div class="label">AI에게 어렵다</div></div>
 </div>
@@ -104,10 +100,10 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 <div class="meta-insights">
   <h2>핵심 발견</h2>
   <div class="insight-grid">
-    <div class="insight"><span class="tag" style="background:#0a1a10;color:#4ade80">핵심</span><br><strong>"만들 수 있다" ≠ "성공할 수 있다"</strong><br>기술적으론 YES, 시장 성공률은 8-10%. API 래퍼 90%가 18개월 내 폐업.</div>
-    <div class="insight"><span class="tag" style="background:#0a1020;color:#60a5fa">핵심</span><br><strong>해자 = 분배력</strong><br>자체 모델(Stability 파산) < 분배력+가격결정권(FormulaBot 생존).</div>
-    <div class="insight"><span class="tag" style="background:#1a1a0a;color:#fbbf24">핵심</span><br><strong>3번 대기실, 평균 18-24개월</strong><br>이미지→코딩→비디오 순서로 실용화. 감정/규제/물리는 대기실이 아닌 벽.</div>
-    <div class="insight"><span class="tag" style="background:#140a20;color:#c084fc">핵심</span><br><strong>추론 비용 280배 붕괴</strong><br>$20→$0.07/M tokens, 2년. 개인 창업 영역이 매달 확장 중.</div>
+    <div class="insight"><span class="tag" style="background:#e8f5e9;color:#4ade80">핵심</span><br><strong>"만들 수 있다" ≠ "성공할 수 있다"</strong><br>기술적으론 YES, 시장 성공률은 8-10%. API 래퍼 90%가 18개월 내 폐업.</div>
+    <div class="insight"><span class="tag" style="background:#e3f2fd;color:#60a5fa">핵심</span><br><strong>해자 = 분배력</strong><br>자체 모델(Stability 파산) < 분배력+가격결정권(FormulaBot 생존).</div>
+    <div class="insight"><span class="tag" style="background:#fff8e1;color:#fbbf24">핵심</span><br><strong>3번 대기실, 평균 18-24개월</strong><br>이미지→코딩→비디오 순서로 실용화. 감정/규제/물리는 대기실이 아닌 벽.</div>
+    <div class="insight"><span class="tag" style="background:#f3e8fd;color:#c084fc">핵심</span><br><strong>추론 비용 280배 붕괴</strong><br>$20→$0.07/M tokens, 2년. 개인 창업 영역이 매달 확장 중.</div>
   </div>
 </div>
 
@@ -156,47 +152,7 @@ const data = {
           ]
         },
       ]
-    },
-    {
-      id:'z1b', title:'1b — 내 삶을 효율화한다', count:10,
-      subs: [
-        {
-          title:'코딩/개발',
-          desc:'비개발자도 앱을 만들 수 있는 시대. 개발자는 속도 2-3배.',
-          cards:[
-            {name:'Cursor',desc:'AI 코딩 IDE. 복잡 태스크 35-45% 가속.',metrics:[{t:'$20/월',c:'cost'},{t:'생산성 2-3x',c:'save'}]},
-            {name:'GitHub Copilot',desc:'코드 자동완성. 1,500만 유저.',metrics:[{t:'$10-19/월',c:'cost'},{t:'생산성 20-30%↑',c:'save'},{t:'1500만 유저',c:'users'}]},
-          ]
-        },
-        {
-          title:'리서치/학습',
-          desc:'논문, 문서, 뉴스를 AI가 정리하고 대화형으로 이해.',
-          cards:[
-            {name:'Perplexity',desc:'AI 검색. 출처 포함 답변.',metrics:[{t:'무료~$20/월',c:'cost'},{t:'리서치 30% 시간↓',c:'save'},{t:'정확도 95%',c:'save'}]},
-            {name:'NotebookLM',desc:'문서 업로드→대화형 분석. AI 팟캐스트.',metrics:[{t:'무료',c:'cost'},{t:'10x 이해 가속',c:'save'}]},
-          ]
-        },
-        {
-          title:'글쓰기/커뮤니케이션',
-          desc:'',
-          cards:[
-            {name:'ChatGPT',desc:'범용 AI. 개인 유저 83%가 업무/일상 효율화 목적.',metrics:[{t:'무료~$20/월',c:'cost'},{t:'주 3-5시간 절약',c:'save'},{t:'1.9억 DAU',c:'users'}]},
-            {name:'Claude',desc:'긴 문서 분석, 글쓰기. 92% 만족도.',metrics:[{t:'무료~$20/월',c:'cost'},{t:'92% 만족도',c:'save'}]},
-            {name:'Grammarly',desc:'AI 문법/톤 교정. 학술 연구: 오류 20% 감소.',metrics:[{t:'무료~$12/월',c:'cost'},{t:'오류 20%↓',c:'save'}]},
-          ]
-        },
-        {
-          title:'자동화/워크플로',
-          desc:'반복 작업을 연결하고 AI가 대신 처리.',
-          cards:[
-            {name:'Zapier',desc:'7,000+ 앱 연동 자동화.',metrics:[{t:'$0-49/월',c:'cost'},{t:'주 6시간 절약',c:'save'},{t:'7000+ 앱',c:'users'}]},
-            {name:'n8n',desc:'셀프호스팅 자동화. 오픈소스.',metrics:[{t:'무료(셀프)',c:'cost'},{t:'GitHub 14K⭐',c:'users'}]},
-            {name:'Make.com',desc:'비주얼 자동화 빌더.',metrics:[{t:'무료~$9/월',c:'cost'},{t:'주 12시간 절약',c:'save'}]},
-          ]
-        },
-      ]
-    },
-    {
+    }{
       id:'z2', title:'2 — 대기업이 만들고 개인은 쓴다', count:11,
       subs: [
         {
