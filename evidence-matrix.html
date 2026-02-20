@@ -45,8 +45,8 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 .dot-wrap:hover { z-index:100; }
 .dot { width:12px; height:12px; border-radius:50%; margin:0 auto; border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,.15); transition:transform .15s, box-shadow .15s; }
 .dot-wrap:hover .dot { transform:scale(1.6); box-shadow:0 2px 8px rgba(0,0,0,.25); }
-.dot-name { font-size:.6rem; color:#888; margin-top:2px; white-space:nowrap; max-width:80px; overflow:hidden; text-overflow:ellipsis; }
-.dot-wrap:hover .dot-name { color:#333; font-weight:600; overflow:visible; max-width:none; }
+.dot-name { font-size:.65rem; color:#666; margin-top:2px; white-space:nowrap; }
+.dot-wrap:hover .dot-name { color:#111; font-weight:600; }
 
 .tooltip { display:none; position:absolute; bottom:calc(100% + 12px); left:50%; transform:translateX(-50%); background:#fff; border:1px solid #e0e0e8; border-radius:8px; padding:12px; width:260px; box-shadow:0 4px 20px rgba(0,0,0,.12); pointer-events:none; text-align:left; z-index:200; }
 .dot-wrap:hover .tooltip { display:block; }
@@ -74,8 +74,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 @media(max-width:700px) {
   .chart-container { aspect-ratio:1/1; }
   .tooltip { width:200px; }
-  .dot-name { display:none; }
-  .dot-wrap:hover .dot-name { display:block; }
+  .dot-name { font-size:.55rem; }
 }
 </style>
 </head>
