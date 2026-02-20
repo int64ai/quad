@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 제품 4칸 매트릭스 — 증거 기반</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#08080d; color:#d0d0d0; }
+
+.top-bar { padding:12px 20px; border-bottom:1px solid #1a1a2a; display:flex; justify-content:space-between; align-items:center; }
+.top-bar a { color:#555; text-decoration:none; font-size:.85rem; }
+.top-bar a:hover { color:#888; }
+.top-bar .date { color:#444; font-size:.75rem; }
+
+.hero { text-align:center; padding:40px 20px 20px; }
+.hero h1 { font-size:1.8rem; font-weight:300; color:#fff; letter-spacing:.08em; }
+.hero p { color:#555; font-size:.9rem; margin-top:6px; }
+
+.stats-row { display:flex; justify-content:center; gap:30px; padding:15px 20px 30px; flex-wrap:wrap; }
+.stat { text-align:center; }
+.stat .num { font-size:1.6rem; font-weight:700; }
+.stat .label { font-size:.7rem; color:#555; text-transform:uppercase; letter-spacing:.08em; }
+
+.meta-insights { max-width:900px; margin:0 auto 30px; padding:0 20px; }
+.meta-insights h2 { font-size:1rem; color:#888; margin-bottom:12px; font-weight:400; }
+.insight-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
+.insight { background:#0f0f18; border:1px solid #1a1a2a; border-radius:8px; padding:14px; font-size:.82rem; line-height:1.5; color:#aaa; }
+.insight strong { color:#fff; }
+.insight .tag { display:inline-block; font-size:.65rem; padding:2px 6px; border-radius:3px; margin-bottom:6px; }
+
+.matrix { max-width:1200px; margin:0 auto; padding:0 20px 40px; }
+
+.zone { margin-bottom:30px; border-radius:12px; overflow:hidden; border:1px solid #1a1a2a; }
+.zone-header { padding:16px 20px; display:flex; align-items:center; gap:12px; cursor:pointer; user-select:none; }
+.zone-header h2 { font-size:1.1rem; font-weight:600; }
+.zone-header .count { font-size:.75rem; color:#666; background:#1a1a2a; padding:2px 8px; border-radius:10px; }
+.zone-header .chevron { color:#444; transition:transform .2s; font-size:.8rem; margin-left:auto; }
+.zone-header.open .chevron { transform:rotate(90deg); }
+.zone-body { padding:0 16px 16px; display:none; }
+.zone-body.open { display:block; }
+
+.sub-zone { margin-top:14px; }
+.sub-zone h3 { font-size:.85rem; color:#888; margin-bottom:8px; padding-bottom:4px; border-bottom:1px solid #141420; }
+
+.cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
+.card { background:#0c0c14; border:1px solid #18182a; border-radius:8px; padding:14px; transition:border-color .2s; }
+.card:hover { border-color:#2a2a4a; }
+.card .name { font-size:.95rem; font-weight:600; color:#fff; margin-bottom:4px; }
+.card .desc { font-size:.78rem; color:#777; margin-bottom:8px; line-height:1.4; }
+.card .metrics { display:flex; flex-wrap:wrap; gap:6px; }
+.card .metric { font-size:.7rem; padding:3px 7px; border-radius:4px; background:#14141e; }
+.card .metric.revenue { color:#4ade80; background:#0a1a10; }
+.card .metric.users { color:#60a5fa; background:#0a1020; }
+.card .metric.valuation { color:#c084fc; background:#140a20; }
+.card .metric.risk { color:#f87171; background:#1a0a0a; }
+.card .metric.time { color:#fbbf24; background:#1a1a0a; }
+.card .metric.team { color:#94a3b8; background:#0f0f18; }
+
+.z1 .zone-header { background:linear-gradient(90deg,#0a1a10,#0f0f18); }
+.z1 .zone-header h2 { color:#4ade80; }
+.z15 .zone-header { background:linear-gradient(90deg,#1a1a0a,#0f0f18); }
+.z15 .zone-header h2 { color:#fbbf24; }
+.z2 .zone-header { background:linear-gradient(90deg,#0a1020,#0f0f18); }
+.z2 .zone-header h2 { color:#60a5fa; }
+.z3 .zone-header { background:linear-gradient(90deg,#14100a,#0f0f18); }
+.z3 .zone-header h2 { color:#fb923c; }
+.z4 .zone-header { background:linear-gradient(90deg,#1a0a0a,#0f0f18); }
+.z4 .zone-header h2 { color:#f87171; }
+
+.footer { text-align:center; padding:30px; color:#333; font-size:.75rem; }
+
+@media(max-width:600px) {
+  .hero h1 { font-size:1.3rem; }
+  .stats-row { gap:15px; }
+  .cards { grid-template-columns:1fr; }
+  .insight-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html">← Hub</a>
+  <span class="date">2026년 2월 기준 · 86개 제품 · 130+ 수치</span>
+</div>
+
+<div class="hero">
+  <h1>AI 제품 4칸 매트릭스</h1>
+  <p>증거 기반 분류 — 5라운드 배틀 + 117KB 증거에서 추출</p>
+</div>
+
+<div class="stats-row">
+  <div class="stat"><div class="num" style="color:#4ade80">21</div><div class="label">개인이 만든다</div></div>
+  <div class="stat"><div class="num" style="color:#60a5fa">12</div><div class="label">대기업이 만든다</div></div>
+  <div class="stat"><div class="num" style="color:#fb923c">8</div><div class="label">기다린다</div></div>
+  <div class="stat"><div class="num" style="color:#f87171">6</div><div class="label">AI에게 어렵다</div></div>
+</div>
+
+<div class="meta-insights">
+  <h2>5라운드 메타 발견</h2>
+  <div class="insight-grid">
+    <div class="insight"><span class="tag" style="background:#0a1a10;color:#4ade80">핵심</span><br><strong>"만들 수 있다" ≠ "성공할 수 있다"</strong><br>기술적으론 YES, 시장 성공률은 8-10%. API 래퍼 90%가 18개월 내 폐업.</div>
+    <div class="insight"><span class="tag" style="background:#0a1020;color:#60a5fa">핵심</span><br><strong>해자 = 분배력</strong><br>자체 모델(Stability 파산) < 분배력+가격결정권(FormulaBot 생존). 기술력이 아니라 도달력.</div>
+    <div class="insight"><span class="tag" style="background:#1a1a0a;color:#fbbf24">핵심</span><br><strong>3번 대기실, 평균 체류 18-24개월</strong><br>이미지 18개월, 코딩 18개월, 비디오 22개월, 음성 36개월. 단, 감정/규제/물리는 벽.</div>
+    <div class="insight"><span class="tag" style="background:#140a20;color:#c084fc">핵심</span><br><strong>1a 최적 = 라이프스타일 비즈니스</strong><br>연 $1-4M, 1인, VC 거부가 오히려 생존 전략. $5K/mo면 삶이 된다.</div>
+    <div class="insight"><span class="tag" style="background:#1a0a0a;color:#f87171">핵심</span><br><strong>빅테크 흡수는 구조적</strong><br>1a-졸업의 과반이 역인수합병으로 종료. Windsurf→Google, Inflection→MS, Adept→Amazon.</div>
+    <div class="insight"><span class="tag" style="background:#0f0f18;color:#94a3b8">핵심</span><br><strong>1b는 "만들기"가 아닌 "조합하기"</strong><br>2번 도구를 엮는 능력이 핵심. n8n+Ollama, Zapier+GPT, Cursor+Claude 파이프라인.</div>
+    <div class="insight"><span class="tag" style="background:#14100a;color:#fb923c">핵심</span><br><strong>추론 비용 280배 붕괴</strong><br>$20→$0.07/M tokens, 2년. 1번 영역이 매달 확장 중. 12,000개 경쟁자도 동시 확장.</div>
+  </div>
+</div>
+
+<div class="matrix" id="matrix"></div>
+
+<div class="footer">
+  증거 기반 · 5라운드 배틀 · Tavily 검색 · 117KB 원본 데이터<br>
+  Built by Arcana — 2026.02.20
+</div>
+
+<script>
+const data = {
+  zones: [
+    {
+      id:'z1', title:'1번 — 개인이 만든다', count:21,
+      subs: [
+        {
+          title:'1a-엑싯형 · 빠르게 만들고 빠르게 팔기',
+          desc:'1-3인, API 래퍼, 투자 $0, 6개월 내 견인력→매각. 성공률 8-10%.',
+          cards:[
+            {name:'Base44',desc:'노코드 앱 빌더. 1인→$80M 매각 (6개월)',metrics:[{t:'$80M 매각',c:'revenue'},{t:'6개월',c:'time'},{t:'1인',c:'team'},{t:'성공률 8-10%',c:'risk'}]},
+          ]
+        },
+        {
+          title:'1a-라이프스타일형 · 1인 연 $1-4M 유지',
+          desc:'특화+워크플로통합+저토큰+SEO. VC 불필요. $100M 스케일 불가.',
+          cards:[
+            {name:'FormulaBot',desc:'스프레드시트 수식 AI. API 래퍼.',metrics:[{t:'$226K MRR',c:'revenue'},{t:'마진 87%',c:'revenue'},{t:'1인',c:'team'}]},
+            {name:'Photo AI',desc:'AI 사진 생성. Pieter Levels.',metrics:[{t:'$138K MRR',c:'revenue'},{t:'마진 87%',c:'revenue'},{t:'1인',c:'team'}]},
+            {name:'HeadshotPro',desc:'AI 프로필 사진. Danny Postma.',metrics:[{t:'$300K MRR',c:'revenue'},{t:'1인',c:'team'}]},
+            {name:'PDF.ai',desc:'PDF 질의응답 AI.',metrics:[{t:'~$100K MRR',c:'revenue'},{t:'1인',c:'team'}]},
+            {name:'SiteGPT',desc:'웹사이트용 AI 챗봇. 24세 개발자.',metrics:[{t:'~$95K MRR',c:'revenue'},{t:'1인',c:'team'}]},
+            {name:'Postiz',desc:'소셜미디어 자동화. 오픈소스.',metrics:[{t:'$21.5K MRR',c:'revenue'},{t:'1인',c:'team'}]},
+          ]
+        },
+        {
+          title:'1a-졸업형 · 개인→VC→스케일 or 인수',
+          desc:'1a에서 시작해 대기업 규모로 성장하거나 빅테크에 흡수.',
+          cards:[
+            {name:'Cursor',desc:'AI 코딩 IDE. 4인 시작.',metrics:[{t:'$1B ARR',c:'revenue'},{t:'$29.3B 밸류',c:'valuation'},{t:'24개월',c:'time'}]},
+            {name:'ElevenLabs',desc:'AI 음성. 2인 시작.',metrics:[{t:'$330M ARR',c:'revenue'},{t:'$11B 밸류',c:'valuation'},{t:'2인→성장',c:'team'}]},
+            {name:'Lovable',desc:'AI 앱 빌더.',metrics:[{t:'$200M ARR',c:'revenue'},{t:'$6.6B 밸류',c:'valuation'},{t:'15명',c:'team'},{t:'12개월',c:'time'}]},
+            {name:'Bolt.new',desc:'브라우저 AI 코딩.',metrics:[{t:'$40M ARR',c:'revenue'},{t:'5개월',c:'time'},{t:'15-20명',c:'team'}]},
+            {name:'Windsurf',desc:'AI 코딩→Google 해체 인수.',metrics:[{t:'인수/해체',c:'risk'},{t:'→Google+Cognition',c:'risk'}]},
+            {name:'Inflection',desc:'Pi.ai→MS 역인수합병.',metrics:[{t:'인수/해체',c:'risk'},{t:'→Microsoft',c:'risk'}]},
+          ]
+        },
+        {
+          title:'1b · 본인 라이프 효율화 (조합하기)',
+          desc:'"만드는 것"이 아닌 "조합하는 것". 2번 도구들을 파이프라인으로 엮기.',
+          cards:[
+            {name:'n8n + Ollama',desc:'셀프호스팅 자동화+로컬 AI.',metrics:[{t:'무료',c:'revenue'},{t:'주 6시간 절약',c:'time'}]},
+            {name:'Cursor + Claude',desc:'코딩 파이프라인.',metrics:[{t:'$20/월',c:'revenue'},{t:'72시간→CRM 완성',c:'time'}]},
+            {name:'NotebookLM + Perplexity',desc:'리서치 파이프라인.',metrics:[{t:'무료~$20/월',c:'revenue'},{t:'10x 이해 가속',c:'time'}]},
+            {name:'Zapier + GPT',desc:'업무 자동화.',metrics:[{t:'$0-49/월',c:'revenue'},{t:'주 6시간 절약',c:'time'},{t:'7000+ 앱',c:'users'}]},
+          ]
+        },
+      ]
+    },
+    {
+      id:'z15', title:'1.5번 — 경계선 (유니콘 이상치)', count:1,
+      subs: [
+        {
+          title:'소규모+자체모델+부트스트랩 — 복제 불가능',
+          desc:'자체 모델, VC $0, 커뮤니티 분배력. 단 하나의 사례.',
+          cards:[
+            {name:'Midjourney',desc:'AI 이미지 생성. David Holz (NASA JPL 출신). Discord 배포.',metrics:[{t:'$500M 연매출',c:'revenue'},{t:'VC $0',c:'revenue'},{t:'<50명',c:'team'},{t:'직원당 $10M+',c:'revenue'}]},
+          ]
+        }
+      ]
+    },
+    {
+      id:'z2', title:'2번 — 대기업이 만들고 개인은 쓴다', count:12,
+      subs: [
+        {
+          title:'기반 모델 + 플랫폼',
+          desc:'대규모 인프라+팀+분배력 필수. 경계 기준: 분배력+가격결정권.',
+          cards:[
+            {name:'ChatGPT / OpenAI',desc:'범용 AI. 가장 큰 시장.',metrics:[{t:'$20B ARR',c:'revenue'},{t:'1.9억 DAU',c:'users'},{t:'WAU 800M',c:'users'}]},
+            {name:'Claude / Anthropic',desc:'안전 중심 AI.',metrics:[{t:'$14B 밸류',c:'valuation'},{t:'MAU 3천만',c:'users'},{t:'$1→$14B 14개월',c:'revenue'}]},
+            {name:'Perplexity',desc:'AI 검색.',metrics:[{t:'$200M ARR',c:'revenue'},{t:'리텐션 85%',c:'users'},{t:'$14B 밸류',c:'valuation'}]},
+            {name:'DeepSeek',desc:'중국 오픈소스. $5.6M 훈련비로 프론티어급.',metrics:[{t:'앱스토어 1위',c:'users'},{t:'$5.6M 훈련',c:'revenue'},{t:'파생 700+',c:'users'}]},
+            {name:'Google Gemini',desc:'멀티모달 AI + NotebookLM.',metrics:[{t:'MAU 3.5억',c:'users'},{t:'AI 팟캐스트 킬러',c:'users'}]},
+            {name:'Replit',desc:'AI 코딩 플랫폼.',metrics:[{t:'$240M ARR',c:'revenue'},{t:'40M 유저',c:'users'}]},
+            {name:'Vercel / v0',desc:'AI 프론트엔드 생성.',metrics:[{t:'$200M ARR',c:'revenue'},{t:'3.5M 유저',c:'users'}]},
+            {name:'HeyGen',desc:'AI 비디오 아바타.',metrics:[{t:'$100M ARR',c:'revenue'}]},
+            {name:'Kling AI',desc:'중국 AI 비디오.',metrics:[{t:'800만+ 영상 생성',c:'users'}]},
+            {name:'Doubao (豆包)',desc:'ByteDance AI 챗봇. 중국 1위.',metrics:[{t:'MAU 6천만+',c:'users'}]},
+          ]
+        },
+        {
+          title:'반례: 자체 모델 有, 분배력 無 = 실패',
+          desc:'모델이 있어도 분배력 없으면 2번 자격 부족.',
+          cards:[
+            {name:'Stability AI',desc:'Stable Diffusion. GPU $99M vs 매출 $11M.',metrics:[{t:'파산 위기',c:'risk'},{t:'GPU $99M',c:'risk'},{t:'매출 $11M',c:'risk'}]},
+          ]
+        }
+      ]
+    },
+    {
+      id:'z3', title:'3번 — 기다린다', count:8,
+      subs: [
+        {
+          title:'3-빠름 · 18-24개월 내 2번 이동',
+          desc:'출력물이 객관적으로 검증 가능한 영역. 이미지 18개월, 코딩 18개월, 비디오 22개월.',
+          cards:[
+            {name:'범용 에이전트',desc:'Manus GAIA L1 86.5%. Meta 인수.',metrics:[{t:'18-24개월',c:'time'},{t:'GAIA L1 86.5%',c:'users'}]},
+            {name:'장편 AI 비디오',desc:'Kling 3.0 멀티숏+네이티브 오디오.',metrics:[{t:'22개월 주기',c:'time'},{t:'$0.07/초',c:'revenue'}]},
+            {name:'AI 음악 생성',desc:'품질 급상승 중.',metrics:[{t:'36개월 주기',c:'time'}]},
+            {name:'AI 인과추론',desc:'TTC: AIME 15.6%→71.0%.',metrics:[{t:'AIME 4.5x 향상',c:'users'}]},
+          ]
+        },
+        {
+          title:'3-느림 · 하이브리드로 수렴',
+          desc:'인간 판단/감정이 개입. 완전 자동화 불가, AI+인간 하이브리드가 종착지.',
+          cards:[
+            {name:'AI 완전 고객서비스',desc:'Klarna: 700명 대체→만족도 하락→재채용.',metrics:[{t:'하이브리드 수렴',c:'risk'},{t:'Klarna 역전',c:'risk'}]},
+            {name:'AI 튜터',desc:'MIT 파일럿 95% 실패.',metrics:[{t:'95% 실패',c:'risk'}]},
+            {name:'AI 심리상담',desc:'규제+안전 이중 벽.',metrics:[{t:'규제 벽',c:'risk'}]},
+            {name:'엔터프라이즈 전면 도입',desc:'Noogata $28M→폐업. 파일럿→본계약 전환 실패.',metrics:[{t:'파일럿 함정',c:'risk'},{t:'$28M→폐업',c:'risk'}]},
+          ]
+        }
+      ]
+    },
+    {
+      id:'z4', title:'4번 — AI에게 어렵다', count:6,
+      subs: [
+        {
+          title:'4-감정 · 인간 취약성 (기술 무관)',
+          desc:'AI 성능과 무관. GPT-10으로도 해결 불가. 인간 본성의 문제.',
+          cards:[
+            {name:'AI 감정적 유대',desc:'Character.AI 14세 자살. 법원: "챗봇은 언론자유 보호 대상 아님".',metrics:[{t:'인간 본성',c:'risk'},{t:'법적 판결',c:'risk'}]},
+          ]
+        },
+        {
+          title:'4-규제 · 법이 AI 자율성을 구조적으로 제한',
+          desc:'FDA, HIPAA, XAI 요구. 블랙박스 AI 원천 배제. 돌파 조건: 법 개정.',
+          cards:[
+            {name:'AI 보험',desc:'InsurStaq 16개월 폐업.',metrics:[{t:'16개월→폐업',c:'risk'}]},
+            {name:'AI 의료',desc:'Olive AI $848M→폐업. 900+ 병원.',metrics:[{t:'$848M→폐업',c:'risk'},{t:'FDA 벽',c:'risk'}]},
+          ]
+        },
+        {
+          title:'4-물리 · 하드웨어+소프트웨어 통합',
+          desc:'소프트웨어 AI만으로 불충분. 물리적 구현 필요. 5-10년+.',
+          cards:[
+            {name:'Figure AI',desc:'휴머노이드 로봇.',metrics:[{t:'$39B 밸류',c:'valuation'},{t:'양산 미달',c:'risk'}]},
+            {name:'자율주행 L5',desc:'Waymo L4까지만.',metrics:[{t:'5-10년+',c:'time'}]},
+            {name:'Humane AI Pin',desc:'$241M→$116M 헐값 매각.',metrics:[{t:'95% 이탈',c:'risk'},{t:'스마트폰 대체 불가',c:'risk'}]},
+          ]
+        }
+      ]
+    },
+  ]
+};
+
+const matrix = document.getElementById('matrix');
+
+data.zones.forEach(zone => {
+  const z = document.createElement('div');
+  z.className = `zone ${zone.id}`;
+
+  const totalCards = zone.subs.reduce((a,s) => a + s.cards.length, 0);
+
+  z.innerHTML = `
+    <div class="zone-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+      <h2>${zone.title}</h2>
+      <span class="count">${totalCards}개 제품</span>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="zone-body">
+      ${zone.subs.map(sub => `
+        <div class="sub-zone">
+          <h3>${sub.title}</h3>
+          <p style="font-size:.78rem;color:#555;margin-bottom:10px">${sub.desc}</p>
+          <div class="cards">
+            ${sub.cards.map(card => `
+              <div class="card">
+                <div class="name">${card.name}</div>
+                <div class="desc">${card.desc}</div>
+                <div class="metrics">
+                  ${card.metrics.map(m => `<span class="metric ${m.c}">${m.t}</span>`).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  matrix.appendChild(z);
+});
+
+// Auto-open first zone
+document.querySelector('.zone-header').classList.add('open');
+document.querySelector('.zone-body').classList.add('open');
+</script>
+</body>
+</html>
