@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw 설치 가이드</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.section {
+  min-height: auto;
+  padding: 48px 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* 네비게이션 */
+.toc {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #eee;
+  z-index: 100;
+  padding: 12px 24px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.toc-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.toc a {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  text-decoration: none;
+  background: #f5f5f5;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.toc a:hover { background: #e8e8e8; color: #1a1a1a; }
+
+/* 타이포그래피 */
+h1 {
+  font-size: 2.4em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin-bottom: 8px;
+}
+h2 {
+  font-size: 1.6em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #111;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #111;
+  display: inline-block;
+}
+h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #222;
+  margin: 28px 0 12px;
+}
+p { margin-bottom: 14px; color: #333; }
+strong { color: #111; }
+
+.subtitle {
+  font-size: 1.15em;
+  color: #666;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+.date {
+  font-size: 0.85em;
+  color: #999;
+  margin-top: 8px;
+}
+.hero-emoji {
+  font-size: 3em;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* 코드 블록 */
+pre {
+  background: #f6f8fa;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 16px 20px;
+  overflow-x: auto;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+code {
+  font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.9em;
+}
+pre code { font-size: 13.5px; }
+p code, li code, td code {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: #c7254e;
+}
+
+/* 스텝 카드 */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 0;
+}
+.step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+.step-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background: #111;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+.step-body { flex: 1; min-width: 0; }
+.step-body h4 {
+  font-size: 1em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.step-body p { margin-bottom: 8px; font-size: 0.95em; }
+.step-body pre { margin: 8px 0 0; }
+
+/* 테이블 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.92em;
+}
+th, td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+th {
+  font-weight: 600;
+  color: #333;
+  background: #f9f9f9;
+  border-bottom: 2px solid #ddd;
+  white-space: nowrap;
+}
+td { color: #444; }
+tr:hover td { background: #fcfcfc; }
+
+/* 알림 박스 */
+.box {
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin: 16px 0;
+  font-size: 0.93em;
+  line-height: 1.65;
+}
+.box p { margin-bottom: 8px; }
+.box p:last-child { margin-bottom: 0; }
+.box-warn {
+  background: #fff8e1;
+  border-left: 4px solid #ffc107;
+}
+.box-warn::before {
+  content: '⚠️ 주의';
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #e65100;
+}
+.box-tip {
+  background: #e8f5e9;
+  border-left: 4px solid #4caf50;
+}
+.box-tip::before {
+  content: '💡 팁';
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #2e7d32;
+}
+.box-info {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+}
+.box-info::before {
+  content: 'ℹ️ 참고';
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1565c0;
+}
+.box-danger {
+  background: #fce4ec;
+  border-left: 4px solid #e53935;
+}
+.box-danger::before {
+  content: '🚫 금지';
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #c62828;
+}
+
+/* 비교 카드 */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+.compare-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+.compare-card h4 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.compare-card ul {
+  list-style: none;
+  padding: 0;
+}
+.compare-card li {
+  padding: 4px 0;
+  font-size: 0.9em;
+  color: #444;
+}
+.compare-card li::before {
+  margin-right: 6px;
+}
+.compare-card .pro li::before { content: '✅'; }
+.compare-card .con li::before { content: '⚠️'; }
+.card-a { background: #f3f8ff; }
+.card-b { background: #f8f3ff; }
+
+/* 시나리오 카드 */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+.scenario-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+}
+.scenario-card h4 {
+  font-size: 0.95em;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.scenario-card p {
+  font-size: 0.88em;
+  margin-bottom: 6px;
+}
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.badge-green { background: #e8f5e9; color: #2e7d32; }
+.badge-yellow { background: #fff8e1; color: #e65100; }
+.badge-red { background: #fce4ec; color: #c62828; }
+.badge-blue { background: #e3f2fd; color: #1565c0; }
+
+/* 목록 */
+ul, ol { padding-left: 24px; margin: 12px 0; }
+li { margin-bottom: 6px; color: #444; font-size: 0.95em; }
+
+/* 링크 */
+a { color: #1565c0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* 푸터 */
+.footer {
+  text-align: center;
+  padding: 32px 24px;
+  color: #999;
+  font-size: 0.85em;
+  border-top: 1px solid #eee;
+}
+.footer a { color: #666; }
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .section { padding: 32px 16px; }
+  h1 { font-size: 1.8em; }
+  h2 { font-size: 1.3em; }
+  pre { font-size: 12.5px; padding: 12px 14px; }
+  table { font-size: 0.82em; display: block; overflow-x: auto; }
+  .compare-grid, .scenario-grid { grid-template-columns: 1fr; }
+  .step { flex-direction: column; gap: 10px; }
+  .toc { padding: 8px 12px; }
+  .toc a { font-size: 12px; padding: 5px 10px; }
+  th, td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- 네비게이션 -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#quick">⚡ 간편 설치</a>
+    <a href="#docker">🐳 Docker + Win</a>
+    <a href="#linux">🖥️ Linux 서버</a>
+    <a href="#multi">🔀 멀티 인스턴스</a>
+    <a href="#tips">🎯 실사용 팁</a>
+  </div>
+</nav>
+
+<!-- 1. 타이틀 -->
+<section class="section" id="title">
+  <div class="inner">
+    <span class="hero-emoji">🐾</span>
+    <h1>OpenClaw 설치 가이드</h1>
+    <p class="subtitle">개인 AI 비서를 내 컴퓨터에</p>
+    <p class="date">2026년 2월 21일 · 공식 문서 + 커뮤니티 경험 기반</p>
+
+    <div class="box box-info">
+      <p>OpenClaw은 사용자 소유 디바이스에서 실행되는 개인 AI 어시스턴트입니다. WhatsApp, Telegram, Discord, Slack, iMessage 등 기존 메시징 채널을 통해 대화하고, 웹 브라우저 제어, 파일 관리, 코드 작성 등 실제 작업을 수행합니다.</p>
+      <p><strong>필수 준비물:</strong> Node.js 22.12.0 이상 + AI 모델 인증 (API 키 또는 구독)</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 간편 설치 -->
+<section class="section" id="quick">
+  <div class="inner">
+    <h2>⚡ 간편 설치 (5분)</h2>
+    <p>가장 빠른 경로: 설치 → 온보딩 → 대시보드. 3단계면 첫 대화까지 도달합니다.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>설치 스크립트 실행</h4>
+          <p>Node.js 22가 없으면 자동으로 설치해줍니다.</p>
+          <p><strong>macOS / Linux:</strong></p>
+          <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+          <p><strong>Windows (PowerShell 관리자):</strong></p>
+          <pre><code>iwr -useb https://openclaw.ai/install.ps1 | iex</code></pre>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>온보딩 위자드</h4>
+          <p>AI 모델 인증, Gateway, 채널을 한 번에 설정합니다. QuickStart 모드가 기본.</p>
+          <pre><code>openclaw onboard --install-daemon</code></pre>
+          <p><code>--install-daemon</code>은 OS 서비스를 자동 등록합니다 (macOS: launchd, Linux: systemd).</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>대시보드 열기 → 바로 채팅</h4>
+          <p>채널 연결 없이도 브라우저에서 즉시 대화할 수 있습니다.</p>
+          <pre><code>openclaw dashboard</code></pre>
+          <p>브라우저가 <code>http://127.0.0.1:18789/</code>로 열립니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>설치 방법 비교</h3>
+    <table>
+      <thead>
+        <tr><th>방법</th><th>명령어</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>설치 스크립트 ⭐</strong></td><td><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></td><td>가장 쉬움, Node 자동 설치</td></tr>
+        <tr><td>npm</td><td><code>npm install -g openclaw@latest</code></td><td>Node 22+ 필요</td></tr>
+        <tr><td>pnpm</td><td><code>pnpm add -g openclaw@latest</code></td><td>build scripts 승인 필요</td></tr>
+        <tr><td>소스 빌드</td><td><code>git clone → pnpm install → pnpm build</code></td><td>개발자용</td></tr>
+        <tr><td>Docker</td><td><code>./docker-setup.sh</code></td><td>컨테이너 환경</td></tr>
+        <tr><td>macOS App</td><td>GUI 앱 다운로드</td><td>macOS 전용, 가장 쉬운 GUI</td></tr>
+        <tr><td>Nix</td><td>Home Manager 모듈</td><td>선언형, 즉시 롤백 가능</td></tr>
+        <tr><td>Ansible</td><td><code>curl ... install.sh | bash</code></td><td>서버 자동 프로비저닝</td></tr>
+      </tbody>
+    </table>
+
+    <h3>AI 모델 인증 옵션</h3>
+    <table>
+      <thead>
+        <tr><th>프로바이더</th><th>인증 방식</th><th>비용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Anthropic API ⭐</strong></td><td>API 키</td><td>사용량 과금</td></tr>
+        <tr><td>Claude Pro/Max 구독</td><td>setup-token</td><td>월 $20/$100/$200</td></tr>
+        <tr><td>OpenAI Codex OAuth</td><td>ChatGPT OAuth</td><td>월 $20 (상한)</td></tr>
+        <tr><td>Gemini CLI</td><td>OAuth</td><td>무료 티어 있음</td></tr>
+        <tr><td>AWS Bedrock</td><td>IAM 인증</td><td>사용량 과금</td></tr>
+        <tr><td>Ollama (로컬)</td><td>없음</td><td>무료 (하드웨어만)</td></tr>
+        <tr><td>OpenRouter</td><td>API 키</td><td>모델별 과금</td></tr>
+      </tbody>
+    </table>
+
+    <h3>설치 후 확인 명령어</h3>
+    <pre><code>openclaw doctor          # 설정 문제 진단
+openclaw status          # Gateway 상태 확인
+openclaw gateway status  # 상세 Gateway 상태
+openclaw health          # 건강 검사</code></pre>
+
+    <div class="box box-tip">
+      <p><strong>채널 연결 없이 가장 빠른 채팅:</strong> <code>openclaw dashboard</code>만 실행하면 Control UI 웹 채팅에서 바로 대화할 수 있습니다. 채널 설정은 나중에 해도 됩니다.</p>
+    </div>
+
+    <div class="box box-warn">
+      <p><strong>Windows 사용자:</strong> 네이티브 Windows에서는 <code>git not found</code>, <code>openclaw not recognized</code> 등 문제가 발생할 수 있습니다. <strong>WSL2에서 실행하는 것을 강력히 권장</strong>합니다.</p>
+    </div>
+
+    <div class="box box-tip">
+      <p><strong>재실행해도 안전합니다.</strong> <code>openclaw onboard</code>는 <code>--reset</code>을 명시하지 않으면 기존 설정을 덮어쓰지 않습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Docker + Windows 11 -->
+<section class="section" id="docker">
+  <div class="inner">
+    <h2>🐳 Docker + Windows 11</h2>
+    <p>Windows 11에서 OpenClaw을 Docker로 실행하는 방법입니다. <strong>WSL2가 필수</strong>입니다.</p>
+
+    <h3>사전 요구사항</h3>
+    <table>
+      <thead>
+        <tr><th>항목</th><th>요구사항</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>OS</strong></td><td>Windows 11 (WSL2 지원)</td></tr>
+        <tr><td><strong>WSL2</strong></td><td>활성화 필수</td></tr>
+        <tr><td><strong>Docker Desktop</strong></td><td>WSL2 백엔드 활성화</td></tr>
+        <tr><td><strong>디스크</strong></td><td>20GB 이상 여유 공간</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Step 1: WSL2 + Docker Desktop 설치</h3>
+    <pre><code># PowerShell (관리자 권한)
+wsl --install
+wsl --set-default-version 2</code></pre>
+    <p>Docker Desktop 설치 후 Settings에서:</p>
+    <ul>
+      <li><strong>"Use WSL 2 instead of Hyper-V"</strong> 선택</li>
+      <li>Resources → WSL Integration → 사용할 WSL 배포판 활성화</li>
+    </ul>
+
+    <h3>Step 2: WSL2 메모리 제한 (권장)</h3>
+    <p><code>%UserProfile%\.wslconfig</code> 파일을 생성합니다:</p>
+    <pre><code>[wsl2]
+memory=8GB           # 호스트 RAM의 50% 이하 권장
+swap=4GB
+localhostForwarding=true</code></pre>
+    <p>변경 후 <code>wsl --shutdown</code>으로 WSL 재시작.</p>
+
+    <h3>방법 A: WSL2에서 직접 설치 (가장 빠름, Docker 불필요)</h3>
+    <pre><code># WSL2 터미널에서 — Docker 없이 바로 실행
+curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+
+    <div class="box box-tip">
+      <p>Docker가 꼭 필요한 게 아니라면, WSL2 안에서 직접 설치하는 것이 가장 빠르고 간단합니다.</p>
+    </div>
+
+    <h3>방법 B: Docker Compose로 실행</h3>
+    <pre><code># WSL2 터미널에서
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+./docker-setup.sh</code></pre>
+
+    <p><code>docker-setup.sh</code>가 자동으로 이미지 빌드, 온보딩 위자드 실행, Gateway 시작, 토큰 생성까지 처리합니다.</p>
+
+    <p><strong>수동 방법:</strong></p>
+    <pre><code>docker build -t openclaw:local -f Dockerfile .
+docker compose run --rm openclaw-cli onboard
+docker compose up -d openclaw-gateway</code></pre>
+
+    <h3>주요 포트 및 환경변수</h3>
+    <table>
+      <thead>
+        <tr><th>포트</th><th>용도</th><th>환경변수</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>18789</strong></td><td>Gateway (Control UI, API, WebSocket)</td><td><code>OPENCLAW_GATEWAY_PORT</code></td></tr>
+        <tr><td><strong>18790</strong></td><td>Bridge</td><td><code>OPENCLAW_BRIDGE_PORT</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3>채널 설정 (Docker 환경)</h3>
+    <pre><code># WhatsApp (QR 코드 스캔)
+docker compose run --rm openclaw-cli channels login
+
+# Telegram
+docker compose run --rm openclaw-cli channels add --channel telegram --token "&lt;봇토큰&gt;"
+
+# Discord
+docker compose run --rm openclaw-cli channels add --channel discord --token "&lt;봇토큰&gt;"</code></pre>
+
+    <h3>브라우저 자동화 활성화 (선택)</h3>
+    <p>기본 Docker 이미지에 Chromium은 미포함. 활성화하려면:</p>
+    <pre><code># 빌드 시 포함 (~300MB 추가)
+docker build --build-arg OPENCLAW_INSTALL_BROWSER=1 -t openclaw:local -f Dockerfile .
+
+# 또는 런타임에 설치
+docker compose run --rm openclaw-cli \
+  node /app/node_modules/playwright-core/cli.js install chromium</code></pre>
+
+    <h3>흔한 에러와 해결</h3>
+    <table>
+      <thead>
+        <tr><th>에러</th><th>원인</th><th>해결</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>EACCES</code> permission denied</td>
+          <td>컨테이너 uid 1000과 호스트 소유자 불일치</td>
+          <td><pre><code>sudo chown -R 1000:1000 ~/.openclaw</code></pre></td>
+        </tr>
+        <tr>
+          <td><code>unauthorized</code> 또는 <code>pairing required</code></td>
+          <td>Gateway 토큰 미설정 또는 디바이스 미승인</td>
+          <td><pre><code>docker compose run --rm openclaw-cli dashboard --no-open</code></pre></td>
+        </tr>
+        <tr>
+          <td><code>refusing to bind ... without auth</code></td>
+          <td>loopback 외 바인드 시 인증 미설정</td>
+          <td><code>OPENCLAW_GATEWAY_TOKEN</code> 환경변수 설정</td>
+        </tr>
+        <tr>
+          <td><code>EADDRINUSE</code></td>
+          <td>18789 포트 이미 사용 중</td>
+          <td><code>.env</code>에서 <code>OPENCLAW_GATEWAY_PORT=18791</code></td>
+        </tr>
+        <tr>
+          <td><code>gateway.mode=local</code> 차단</td>
+          <td>Gateway mode 미설정</td>
+          <td><code>openclaw configure</code> 실행</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box box-warn">
+      <p><strong>파일 경로 성능:</strong> WSL2 파일시스템(<code>/home/...</code>) 경로가 Windows 경로(<code>/mnt/c/...</code>)보다 I/O 성능이 <strong>훨씬</strong> 좋습니다. OpenClaw 데이터는 반드시 WSL 내부에 저장하세요.</p>
+    </div>
+
+    <div class="box box-warn">
+      <p><strong>Docker 영속성:</strong> 컨테이너 안에서 런타임에 설치한 패키지(apt-get 등)는 컨테이너 재시작 시 <strong>사라집니다</strong>. 반드시 Dockerfile에서 빌드타임에 설치하세요.</p>
+    </div>
+
+    <h3>업데이트</h3>
+    <pre><code># Docker 환경 업데이트
+cd openclaw
+git pull
+docker compose build
+docker compose down
+docker compose up -d openclaw-gateway
+
+# 또는 docker-setup.sh 다시 실행
+./docker-setup.sh</code></pre>
+  </div>
+</section>
+
+<!-- 4. Linux 서버 (EC2 등) -->
+<section class="section" id="linux">
+  <div class="inner">
+    <h2>🖥️ Linux 서버 (EC2 등)</h2>
+    <p>24/7 상시 운영을 위한 클라우드 서버 설치 가이드입니다.</p>
+
+    <h3>추천 사양</h3>
+    <table>
+      <thead>
+        <tr><th>항목</th><th>최소</th><th>권장</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>OS</strong></td><td>Ubuntu 20.04+</td><td>Ubuntu 22.04/24.04 LTS</td></tr>
+        <tr><td><strong>Node.js</strong></td><td>22.12.0+</td><td>22 LTS</td></tr>
+        <tr><td><strong>RAM</strong></td><td>1 GB (OOM 위험)</td><td><strong>2 GB 이상</strong></td></tr>
+        <tr><td><strong>CPU</strong></td><td>1 vCPU</td><td>2 vCPU</td></tr>
+        <tr><td><strong>디스크</strong></td><td>10 GB</td><td>20 GB (Docker 포함 시)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-warn">
+      <p>공식 문서(Fly.io 가이드)에 따르면: <em>"512MB는 너무 작고, 1GB는 부하 시 OOM이 발생할 수 있다. <strong>2GB를 권장</strong>한다."</em></p>
+    </div>
+
+    <h3>인스턴스 비용 비교</h3>
+    <table>
+      <thead>
+        <tr><th>클라우드</th><th>인스턴스</th><th>vCPU</th><th>RAM</th><th>월 비용 (USD)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>🏆 <strong>Hetzner</strong></td><td>CX22</td><td>2</td><td>4 GB</td><td><strong>~$5</strong></td></tr>
+        <tr><td>Fly.io</td><td>shared-cpu-2x</td><td>2 (shared)</td><td>2 GB</td><td>~$10-15</td></tr>
+        <tr><td>GCP</td><td>e2-small</td><td>2</td><td>2 GB</td><td>~$12</td></tr>
+        <tr><td>DigitalOcean</td><td>Basic</td><td>2</td><td>2 GB</td><td>~$12</td></tr>
+        <tr><td>AWS EC2</td><td>t4g.small (ARM)</td><td>2</td><td>2 GB</td><td>~$12</td></tr>
+        <tr><td>AWS EC2</td><td>t3.small</td><td>2</td><td>2 GB</td><td>~$15</td></tr>
+        <tr><td>AWS EC2</td><td>t3.medium</td><td>2</td><td>4 GB</td><td>~$30</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-tip">
+      <p><strong>비용 절약:</strong> Hetzner CX22가 2vCPU / 4GB에 약 $5/월로 가성비 최고입니다. AWS는 Reserved Instance로 ~$10/월, Spot Instance로 ~$5/월까지 낮출 수 있습니다.</p>
+    </div>
+
+    <h3>Bare Metal vs Docker 비교</h3>
+    <div class="compare-grid">
+      <div class="compare-card card-a">
+        <h4>🔧 Bare Metal (직접 설치)</h4>
+        <ul class="pro">
+          <li>단순한 프로세스 구조</li>
+          <li>systemd로 직접 관리</li>
+          <li>디버깅 용이</li>
+          <li>리소스 오버헤드 적음</li>
+        </ul>
+        <ul class="con">
+          <li>호스트 환경에 직접 의존</li>
+          <li>롤백이 번거로움</li>
+        </ul>
+        <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash
+openclaw onboard --install-daemon</code></pre>
+      </div>
+      <div class="compare-card card-b">
+        <h4>🐳 Docker (컨테이너)</h4>
+        <ul class="pro">
+          <li>격리 + 재현성</li>
+          <li>클린 롤백 가능</li>
+          <li><code>docker compose up -d</code> 한 줄</li>
+          <li>바이너리를 이미지에 베이크</li>
+        </ul>
+        <ul class="con">
+          <li>~200-300MB 추가 RAM</li>
+          <li>이미지 빌드 시간 (~2-3분)</li>
+          <li>uid 1000 퍼미션 매핑 필요</li>
+        </ul>
+        <pre><code>git clone https://github.com/openclaw/openclaw.git
+cd openclaw && ./docker-setup.sh</code></pre>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>상황</th><th>권장 방식</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>빠른 테스트 / 개발</td><td>Bare Metal (install script)</td></tr>
+        <tr><td>프로덕션 VPS 운영</td><td><strong>Docker</strong></td></tr>
+        <tr><td>팀 배포 / 자동화</td><td><strong>Ansible</strong> (bare metal + systemd + sandbox Docker)</td></tr>
+        <tr><td>PaaS (Fly.io)</td><td>Docker (내장)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>EC2 설치 예시 (Docker 방식)</h3>
+    <pre><code># 1. 서버 접속 후 Docker 설치
+ssh -i my-key.pem ubuntu@YOUR_EC2_IP
+sudo apt-get update && sudo apt-get install -y git curl ca-certificates
+curl -fsSL https://get.docker.com | sudo sh
+sudo usermod -aG docker $USER
+exit  # 재접속 필요
+
+# 2. OpenClaw 클론 및 실행
+ssh -i my-key.pem ubuntu@YOUR_EC2_IP
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+./docker-setup.sh
+
+# 3. Control UI 접속 (SSH 터널 — 로컬 PC에서)
+ssh -N -L 18789:127.0.0.1:18789 -i my-key.pem ubuntu@YOUR_EC2_IP
+# → 브라우저에서 http://127.0.0.1:18789/ 열기</code></pre>
+
+    <h3>보안 설정</h3>
+
+    <div class="box box-danger">
+      <p><strong>18789 포트를 공개 인터넷에 직접 노출하지 마세요!</strong> SSH 터널, Tailscale, 또는 Reverse Proxy를 통해 접근하세요.</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>EC2 Security Group 포트</th><th>프로토콜</th><th>소스</th><th>용도</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>22</td><td>TCP</td><td>My IP</td><td>SSH 접속</td></tr>
+        <tr><td>41641</td><td>UDP</td><td>0.0.0.0/0</td><td>Tailscale (선택)</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>원격 접근 방법 (안전한 순서):</strong></p>
+    <ol>
+      <li><strong>SSH 터널</strong> — 가장 단순. SSL 불필요.</li>
+      <li><strong>Tailscale Serve</strong> — 자동 HTTPS, VPN 메시 내 접근.</li>
+      <li><strong>Reverse Proxy</strong> (Caddy/nginx) — 도메인 + SSL 필요 시.</li>
+    </ol>
+
+    <h3>보안 감사</h3>
+    <pre><code>openclaw security audit          # 기본 감사
+openclaw security audit --deep   # Gateway 라이브 프로브 포함
+openclaw security audit --fix    # 자동 수정 가능 항목 수정</code></pre>
+
+    <h3>systemd 서비스 (Bare Metal)</h3>
+    <pre><code># Ansible 설치 시 자동 생성. 수동 생성 시:
+# /etc/systemd/system/openclaw.service
+[Unit]
+Description=OpenClaw Gateway
+After=network.target
+
+[Service]
+Type=simple
+User=openclaw
+WorkingDirectory=/home/openclaw
+ExecStart=/usr/bin/openclaw gateway --port 18789
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+    <pre><code>sudo systemctl daemon-reload
+sudo systemctl enable openclaw
+sudo systemctl start openclaw</code></pre>
+
+    <h3>AWS EC2 월간 비용 추정 (최소 구성)</h3>
+    <table>
+      <thead>
+        <tr><th>항목</th><th>사양</th><th>월 비용 (USD)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EC2 t3.small</td><td>2 vCPU, 2 GB</td><td>~$15.00</td></tr>
+        <tr><td>EBS gp3 20GB</td><td>스토리지</td><td>~$1.60</td></tr>
+        <tr><td>데이터 전송</td><td>~10 GB out</td><td>~$0.90</td></tr>
+        <tr><td colspan="2"><strong>합계</strong></td><td><strong>~$17.50/mo</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-tip">
+      <p><strong>백업은 EBS 스냅샷이 가장 간단합니다.</strong> 정기적인 EBS 스냅샷으로 전체 디스크를 백업할 수 있습니다. 중요 파일: <code>~/.openclaw/openclaw.json</code>, <code>~/.openclaw/credentials/</code>, <code>~/.openclaw/workspace/</code></p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 멀티 인스턴스 -->
+<section class="section" id="multi">
+  <div class="inner">
+    <h2>🔀 멀티 인스턴스 운영</h2>
+    <p>한 서버에서 여러 독립 인스턴스를 운영할 수 있습니다. 신뢰 수준에 따라 아키텍처가 달라집니다.</p>
+
+    <div class="box box-warn">
+      <p><strong>공식 보안 문서 (SECURITY.md):</strong> <em>"상호 비신뢰/적대적 운영자가 하나의 Gateway를 공유하는 것은 <strong>권장하지 않습니다</strong>."</em> → 상호 불신 관계라면 <strong>반드시 별도 Gateway</strong>를 사용하세요.</p>
+    </div>
+
+    <h3>아키텍처 비교</h3>
+    <table>
+      <thead>
+        <tr><th>항목</th><th>🐳 Docker 멀티 컨테이너</th><th>📁 --profile 방식</th><th>👥 싱글 GW + 멀티 Agent</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>격리 수준</strong></td><td>🟢 OS + 컨테이너</td><td>🟡 프로세스</td><td>🔴 논리적</td></tr>
+        <tr><td><strong>설정 복잡도</strong></td><td>중간</td><td>낮음</td><td>낮음</td></tr>
+        <tr><td><strong>리소스 사용</strong></td><td>높음 (N개 컨테이너)</td><td>중간 (N개 프로세스)</td><td>낮음 (단일 프로세스)</td></tr>
+        <tr><td><strong>상호 불신 적합</strong></td><td>✅</td><td>⚠️ 별도 OS유저 필요</td><td>❌</td></tr>
+        <tr><td><strong>장애 격리</strong></td><td>✅ 독립</td><td>✅ 독립</td><td>❌ GW 장애=전체 중단</td></tr>
+        <tr><td><strong>공식 권장</strong></td><td>✅ (불신 관계)</td><td>✅ (불신 관계)</td><td>⚠️ 신뢰 관계만</td></tr>
+      </tbody>
+    </table>
+
+    <h3>시나리오별 추천</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card">
+        <span class="badge badge-green">신뢰 관계</span>
+        <h4>A. 혼자서 업무/개인 분리</h4>
+        <p>싱글 Gateway + 멀티 Agent로 충분. 워크스페이스만 분리.</p>
+      </div>
+      <div class="scenario-card">
+        <span class="badge badge-yellow">가족/팀</span>
+        <h4>B. 가족이나 소규모 팀</h4>
+        <p>--profile 방식 + 별도 OS 유저. 각자 다른 포트.</p>
+      </div>
+      <div class="scenario-card">
+        <span class="badge badge-red">상호 불신</span>
+        <h4>C. 불특정 다수 / 외부인</h4>
+        <p>Docker 컨테이너 완전 격리 필수. 공유 볼륨은 read-only.</p>
+      </div>
+      <div class="scenario-card">
+        <span class="badge badge-blue">공유 채널</span>
+        <h4>D. Discord 서버 멀티봇</h4>
+        <p>각자 별도 봇 계정 + requireMention: true 설정.</p>
+      </div>
+    </div>
+
+    <h3>방법 1: --profile 방식 (프로세스 격리)</h3>
+    <pre><code># 각 프로필 생성 및 온보딩
+openclaw --profile userA onboard
+openclaw --profile userB onboard
+openclaw --profile userC onboard
+openclaw --profile userD onboard
+
+# 각 프로필을 다른 포트로 실행
+openclaw --profile userA gateway --port 18789
+openclaw --profile userB gateway --port 19001
+openclaw --profile userC gateway --port 19201
+openclaw --profile userD gateway --port 19401</code></pre>
+
+    <div class="box box-warn">
+      <p><strong>포트 간격:</strong> 기본 포트 사이에 최소 <strong>20 포트 간격</strong>을 두세요. 브라우저/CDP 파생 포트 충돌을 방지합니다.</p>
+    </div>
+
+    <div class="box box-warn">
+      <p><strong>같은 OS 유저로 여러 프로필을 실행하면 격리가 불완전합니다.</strong> 한 프로세스가 다른 프로필의 STATE_DIR에 접근할 수 있습니다. 별도 OS 유저를 만드세요:</p>
+    </div>
+    <pre><code># 보안 강화: 별도 OS 유저 생성
+for user in ocA ocB ocC ocD; do
+  sudo useradd -m -s /bin/bash $user
+done
+
+# 각 유저로 전환하여 셋업
+sudo -u ocA openclaw --profile userA onboard</code></pre>
+
+    <h3>방법 2: Docker 컨테이너 격리 (가장 강력)</h3>
+    <pre><code># 디렉토리 구조 생성
+for user in A B C D; do
+  mkdir -p /data/user${user}/{config,workspace}
+  chmod 700 /data/user${user}
+done
+
+# 토큰 생성
+for user in A B C D; do
+  echo "TOKEN_${user}=$(openssl rand -hex 32)"
+done > .env</code></pre>
+
+    <p>각 유저별 Docker Compose 서비스 정의:</p>
+    <pre><code># docker-compose.multi.yml (예: User A)
+services:
+  openclaw-userA:
+    image: openclaw/openclaw:latest
+    container_name: openclaw-userA
+    environment:
+      HOME: /home/node
+      OPENCLAW_GATEWAY_TOKEN: ${TOKEN_A}
+    volumes:
+      - /data/userA/config:/home/node/.openclaw
+      - /data/userA/workspace:/home/node/.openclaw/workspace
+      - /srv/shared/knowledge:/home/node/.openclaw/workspace/shared:ro
+    ports:
+      - "18789:18789"
+    init: true
+    restart: unless-stopped
+    read_only: true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp
+      - /run
+    command: ["node", "dist/index.js", "gateway",
+              "--bind", "loopback", "--port", "18789"]</code></pre>
+
+    <h3>공유 공간 설정</h3>
+    <table>
+      <thead>
+        <tr><th>방법</th><th>설명</th><th>보안</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Read-only 볼륨</strong></td><td>공유 knowledge base를 <code>:ro</code>로 마운트</td><td>🟢 안전</td></tr>
+        <tr><td><strong>공유 Discord 채널</strong></td><td>각 봇이 같은 채널에서 <code>requireMention: true</code></td><td>🟢 안전</td></tr>
+        <tr><td><strong>RW 공유 볼륨</strong></td><td>dropbox 스타일 쓰기 가능 공유</td><td>🟡 신뢰 관계만</td></tr>
+      </tbody>
+    </table>
+
+    <h3>보안 강화 설정 템플릿</h3>
+    <pre><code>// ~/.openclaw/openclaw.json (각 인스턴스별)
+{
+  gateway: {
+    mode: "local",
+    bind: "loopback",
+    auth: { mode: "token", token: "LONG_RANDOM_TOKEN" }
+  },
+  tools: {
+    fs: { workspaceOnly: true },
+    exec: { security: "allowlist" },
+    elevated: { enabled: false }
+  },
+  agents: {
+    defaults: {
+      sandbox: {
+        mode: "all",
+        docker: {
+          network: "none",
+          readOnlyRoot: true,
+          capDrop: ["ALL"],
+          memory: "1g",
+          pidsLimit: 256
+        }
+      }
+    }
+  }
+}</code></pre>
+
+    <div class="box box-tip">
+      <p><strong>보안 체크리스트 (필수):</strong></p>
+      <p>☐ 인스턴스별 별도 Docker 컨테이너<br>
+      ☐ <code>chmod 700 ~/.openclaw</code> + <code>chmod 600 openclaw.json</code><br>
+      ☐ Gateway bind: <code>loopback</code><br>
+      ☐ <code>tools.elevated.enabled: false</code><br>
+      ☐ <code>tools.fs.workspaceOnly: true</code><br>
+      ☐ 정기적 <code>openclaw security audit --deep</code></p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 실사용 팁 -->
+<section class="section" id="tips">
+  <div class="inner">
+    <h2>🎯 실사용 팁</h2>
+    <p>공식 문서와 커뮤니티 경험에서 모은 실전 노하우입니다.</p>
+
+    <h3>Simon Willison의 Docker 설치 경험</h3>
+    <div class="box box-info">
+      <p>실사용자 경험에 따르면, Simon Willison은 Docker 설치 시 <strong>"처음 시도에서 두 번 실패하고 세 번째에 성공"</strong>했습니다. 까다로웠던 부분:</p>
+      <p>• 온보딩에서 <code>manual</code> 모드 선택이 안전했음<br>
+      • Tailscale 설정을 초기에 시도했다가 기기를 못 쓰게 됨 → <strong>첫 설정에서는 건너뛰기</strong><br>
+      • OAuth 리다이렉트가 localhost 에러 페이지로 감 → <strong>에러 URL 전체를 복사해서 붙여넣기</strong><br>
+      • Telegram을 채널로 선택 — "least hassle"이라고 평가</p>
+    </div>
+
+    <h3>흔한 함정과 해결</h3>
+    <table>
+      <thead>
+        <tr><th>함정</th><th>해결</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Tailscale 첫 설정에서 기기 사용 불가</td><td>초기에는 Tailscale 건너뛰기</td></tr>
+        <tr><td>OAuth 리다이렉트가 에러 페이지로 감</td><td>에러 URL 전체를 복사해서 OpenClaw에 입력</td></tr>
+        <tr><td>그룹 메시지에 응답 안 함</td><td><code>requireMention</code> 설정 확인 → <code>@openclaw</code> 멘션 필요</td></tr>
+        <tr><td>DM에 응답 안 함</td><td>페어링 승인 필요: <code>openclaw pairing approve</code></td></tr>
+        <tr><td>하트비트가 30분마다 토큰 소비</td><td>quiet-hours 설정 또는 비활성화</td></tr>
+        <tr><td>컨텍스트가 너무 커서 에러</td><td><code>/new</code>로 세션 리셋</td></tr>
+        <tr><td><code>HTTP 429: rate_limit_error</code></td><td>API 속도제한 → 키 로테이션 또는 다른 프로바이더</td></tr>
+        <tr><td>에이전트가 동의 없이 행동</td><td>브라우저 자동화 시 승인(approval) 정책 설정</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-danger">
+      <p><strong>에이전트에 제한 없이 브라우저 접근을 허용하지 마세요.</strong> 실사용자 경험에 따르면, LinkedIn DM을 동의 없이 보낸 사례가 보고되었습니다. 브라우저 자동화 시 반드시 승인 정책을 설정하세요.</p>
+    </div>
+
+    <h3>비용 관리</h3>
+    <table>
+      <thead>
+        <tr><th>전략</th><th>설명</th><th>예상 비용</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>ChatGPT/Codex OAuth</strong></td><td>$20 구독으로 사용, 상한 있음</td><td>$20/월 (고정)</td></tr>
+        <tr><td><strong>Claude Max 구독</strong></td><td>setup-token으로 API 키 없이 사용</td><td>$100-200/월</td></tr>
+        <tr><td><strong>GitHub Copilot</strong></td><td>기존 구독 활용</td><td>$10-19/월</td></tr>
+        <tr><td><strong>Gemini / Qwen OAuth</strong></td><td>무료 티어 존재</td><td>무료~</td></tr>
+        <tr><td><strong>Ollama (로컬)</strong></td><td>완전 무료, 하드웨어만</td><td>$0</td></tr>
+      </tbody>
+    </table>
+
+    <pre><code># 사용량 확인 명령어
+/status              # 세션 토큰 + 예상 비용
+/usage full          # 응답별 상세 사용량
+/usage cost          # 로컬 비용 요약
+openclaw status --usage  # CLI에서 프로바이더별 분석</code></pre>
+
+    <div class="box box-warn">
+      <p><strong>Opus 모델은 특히 비쌉니다.</strong> 코딩이나 복잡한 작업에만 Opus를 쓰고, 캐주얼 대화에는 Sonnet이나 로컬 모델을 사용하세요. 하트비트(~30분마다)도 토큰을 소비하니 quiet-hours를 설정하세요.</p>
+    </div>
+
+    <h3>추천 채널 조합</h3>
+    <table>
+      <thead>
+        <tr><th>순위</th><th>채널</th><th>특징</th><th>설정 난이도</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Telegram</strong></td><td>BotFather로 봇 생성 → 토큰 입력. 가장 간단</td><td>⭐</td></tr>
+        <tr><td>2</td><td><strong>WhatsApp</strong></td><td>QR 코드 스캔. 개인용으로 편리</td><td>⭐⭐</td></tr>
+        <tr><td>3</td><td><strong>Discord</strong></td><td>봇 토큰 + 서버 설정. 팀/커뮤니티용</td><td>⭐⭐</td></tr>
+        <tr><td>4</td><td><strong>iMessage</strong></td><td>macOS 전용. Mac 필요</td><td>⭐⭐⭐</td></tr>
+        <tr><td>5</td><td><strong>Slack/Mattermost</strong></td><td>팀/업무용</td><td>⭐⭐⭐</td></tr>
+      </tbody>
+    </table>
+
+    <h3>추천 실행 환경</h3>
+    <table>
+      <thead>
+        <tr><th>환경</th><th>장점</th><th>단점</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>로컬 Mac</strong></td><td>빠른 개발, iMessage 지원, macOS 스킬</td><td>노트북 닫으면 중단</td></tr>
+        <tr><td><strong>Mac mini (전용)</strong></td><td>24/7, iMessage, 최고의 macOS 경험</td><td>하드웨어 비용</td></tr>
+        <tr><td><strong>VPS (Hetzner 등)</strong></td><td>24/7, 저렴 (~$5/월)</td><td>iMessage 불가, macOS 스킬 불가</td></tr>
+        <tr><td><strong>Raspberry Pi</strong></td><td>초저전력, 집에서 상시 운영</td><td>성능 제한</td></tr>
+      </tbody>
+    </table>
+
+    <h3>필수 진단 루틴</h3>
+    <p>문제가 생겼을 때 순서대로 실행하세요:</p>
+    <pre><code>openclaw doctor              # 1. 설정 문제 진단 (가장 먼저)
+openclaw status --all        # 2. 전체 상태 요약
+openclaw gateway probe       # 3. Gateway 프로브
+openclaw channels status --probe  # 4. 채널 연결 확인
+openclaw logs --follow       # 5. 실시간 로그 확인</code></pre>
+
+    <div class="box box-tip">
+      <p><strong>업그레이드 후 문제가 생겼다면:</strong> 설정 드리프트나 더 엄격해진 기본값이 원인일 수 있습니다.</p>
+      <p><code>openclaw gateway install --force && openclaw gateway restart</code>로 서비스를 재설치하세요.</p>
+    </div>
+
+    <div class="box box-tip">
+      <p><strong>OpenClaw에게 자기 업데이트를 요청할 수 있습니다.</strong> 대화창에서 "업데이트해줘"라고 말하면 에이전트가 직접 업데이트를 수행합니다. 또는:</p>
+      <p><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></p>
+    </div>
+
+    <h3>유용한 리소스</h3>
+    <table>
+      <thead>
+        <tr><th>리소스</th><th>URL</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>공식 문서</td><td><a href="https://docs.openclaw.ai">docs.openclaw.ai</a></td></tr>
+        <tr><td>FAQ (매우 방대)</td><td><a href="https://docs.openclaw.ai/help/faq">docs.openclaw.ai/help/faq</a></td></tr>
+        <tr><td>트러블슈팅</td><td><a href="https://docs.openclaw.ai/help/troubleshooting">docs.openclaw.ai/help/troubleshooting</a></td></tr>
+        <tr><td>Discord 커뮤니티</td><td><a href="https://discord.gg/clawd">discord.gg/clawd</a></td></tr>
+        <tr><td>GitHub</td><td><a href="https://github.com/openclaw/openclaw">github.com/openclaw/openclaw</a></td></tr>
+        <tr><td>스킬 허브</td><td><a href="https://clawhub.ai">clawhub.ai</a></td></tr>
+        <tr><td>VelvetShark 셋업 영상 (28분)</td><td><a href="https://www.youtube.com/watch?v=SaWSPZoPX34">YouTube</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer class="footer">
+  <p>이 가이드는 <a href="https://docs.openclaw.ai">docs.openclaw.ai</a> 공식 문서와 커뮤니티 경험을 기반으로 작성되었습니다.</p>
+  <p>명령어와 설정은 공식 문서에서 확인된 것만 사용했습니다. 커뮤니티 경험은 별도 표기했습니다.</p>
+  <p style="margin-top:8px">2026-02-21 · 공식 문서 우선 원칙 적용</p>
+</footer>
+
+</body>
+</html>

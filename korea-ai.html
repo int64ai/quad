@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국 AI 생태계 — 2023~2026</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #fff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  section {
+    padding: 48px 24px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── Title ── */
+  .hero {
+    padding: 80px 24px 56px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #111;
+  }
+  .hero .subtitle {
+    margin-top: 8px;
+    font-size: 1.15rem;
+    color: #666;
+    font-weight: 400;
+  }
+  .hero .date {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: #999;
+  }
+  .hero .stat-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .hero .stat {
+    text-align: center;
+  }
+  .hero .stat .num {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #2563eb;
+  }
+  .hero .stat .label {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  /* ── Section Headers ── */
+  .sec-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111;
+    letter-spacing: -0.02em;
+  }
+  .sec-desc {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 32px;
+  }
+
+  /* ── Timeline ── */
+  .tl-year {
+    margin-bottom: 40px;
+  }
+  .tl-year-label {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    background: #2563eb;
+    border-radius: 20px;
+    padding: 4px 18px;
+    margin-bottom: 16px;
+  }
+  .tl-year-label.y2024 { background: #7c3aed; }
+  .tl-year-label.y2025 { background: #059669; }
+  .tl-year-label.y2026 { background: #dc2626; }
+
+  .tl-list {
+    position: relative;
+    padding-left: 28px;
+    border-left: 2px solid #e5e7eb;
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 20px 20px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #d1d5db;
+    border: 2px solid #fff;
+  }
+  .tl-item.highlight::before {
+    background: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+  }
+  .tl-item .tl-date {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #888;
+    margin-bottom: 2px;
+  }
+  .tl-item .tl-text {
+    font-size: 0.92rem;
+    color: #333;
+  }
+  .tl-item.highlight .tl-text {
+    font-weight: 600;
+    color: #111;
+  }
+
+  /* ── Service Map ── */
+  .cat-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 36px 0 14px;
+    color: #222;
+  }
+  .cat-label:first-child { margin-top: 0; }
+  .cat-label .icon {
+    font-size: 1.2rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: box-shadow 0.15s;
+  }
+  .card:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .card .card-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111;
+  }
+  .card .card-company {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 1px;
+  }
+  .card .card-desc {
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    letter-spacing: 0.01em;
+  }
+  .badge.rapid { background: #dbeafe; color: #1d4ed8; }
+  .badge.growing { background: #d1fae5; color: #065f46; }
+  .badge.stagnant { background: #fef3c7; color: #92400e; }
+  .badge.pivot { background: #fce7f3; color: #9d174d; }
+  .badge.early { background: #f3e8ff; color: #6b21a8; }
+
+  /* ── Policy ── */
+  .policy-tl {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 24px;
+    border-left: 3px solid #2563eb;
+    margin-bottom: 32px;
+  }
+  .policy-item {
+    padding: 10px 0 10px 18px;
+    position: relative;
+  }
+  .policy-item::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 16px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #2563eb;
+  }
+  .policy-item.active::before {
+    background: #2563eb;
+  }
+  .policy-date {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2563eb;
+  }
+  .policy-text {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 2px;
+  }
+
+  .policy-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .policy-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .policy-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1e293b;
+  }
+  .policy-card p, .policy-card ul {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  .policy-card ul {
+    padding-left: 18px;
+    margin-top: 6px;
+  }
+  .policy-card ul li {
+    margin-bottom: 3px;
+  }
+
+  /* ── Insight ── */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .insight-card {
+    border-radius: 14px;
+    padding: 24px;
+    color: #fff;
+  }
+  .insight-card.c1 { background: linear-gradient(135deg, #1e3a8a, #3b82f6); }
+  .insight-card.c2 { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+  .insight-card.c3 { background: linear-gradient(135deg, #059669, #34d399); }
+  .insight-card.c4 { background: linear-gradient(135deg, #dc2626, #f87171); }
+  .insight-card .ic-icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .insight-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .insight-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    opacity: 0.92;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 0.78rem;
+    color: #aaa;
+  }
+
+  /* ── Table scroll ── */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 16px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+  }
+  th {
+    font-weight: 700;
+    color: #555;
+    background: #f8f9fa;
+    white-space: nowrap;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero .subtitle { font-size: 1rem; }
+    .hero .stat-row { gap: 20px; }
+    .hero .stat .num { font-size: 1.4rem; }
+    section { padding: 32px 16px; }
+    .card-grid, .insight-grid, .policy-card-grid {
+      grid-template-columns: 1fr;
+    }
+    .sec-title { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 1. TITLE ============ -->
+<section class="hero">
+  <div class="inner">
+    <h1>한국 AI 생태계</h1>
+    <p class="subtitle">2023~2026, 3년의 기록</p>
+    <p class="date">2026년 2월 21일 기준</p>
+    <div class="stat-row">
+      <div class="stat"><div class="num">30+</div><div class="label">AI 서비스·제품</div></div>
+      <div class="stat"><div class="num">5</div><div class="label">대기업 LLM</div></div>
+      <div class="stat"><div class="num">세계 3위</div><div class="label">AI 국가 평가</div></div>
+      <div class="stat"><div class="num">2026.01</div><div class="label">AI 기본법 시행</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. TIMELINE ============ -->
+<section>
+  <div class="inner">
+    <h2 class="sec-title">연도별 타임라인</h2>
+    <p class="sec-desc">ChatGPT 충격부터 AI 기본법 시행까지 — 한국 AI 생태계의 핵심 사건들</p>
+
+    <!-- 2023 -->
+    <div class="tl-year">
+      <span class="tl-year-label">2023</span>
+      <div class="tl-list">
+        <div class="tl-item"><div class="tl-date">01월</div><div class="tl-text">DeepL, 한국어 지원 추가 — 번역 시장 진입</div></div>
+        <div class="tl-item highlight"><div class="tl-date">03월</div><div class="tl-text">네이버, HyperCLOVA X 개발 발표</div></div>
+        <div class="tl-item"><div class="tl-date">06월</div><div class="tl-text">SKT, AI 비서 '에이닷(A.)' LLM 통합 업데이트</div></div>
+        <div class="tl-item highlight"><div class="tl-date">08월</div><div class="tl-text">네이버, CLOVA X 베타 공개 — 한국 첫 자체 LLM 챗봇</div></div>
+        <div class="tl-item highlight"><div class="tl-date">09월</div><div class="tl-text">뤼튼, GPT 기반 무료 AI 서비스로 급성장 — '한국판 ChatGPT' 포지셔닝</div></div>
+        <div class="tl-item"><div class="tl-date">10월</div><div class="tl-text">LG AI Research, EXAONE 1.0 모델 공개</div></div>
+        <div class="tl-item"><div class="tl-date">11월</div><div class="tl-text">Lunit, KOSDAQ IPO 후 글로벌 확장 가속</div></div>
+        <div class="tl-item highlight"><div class="tl-date">12월</div><div class="tl-text">업스테이지, Solar 10.7B 소형 언어모델 공개</div></div>
+        <div class="tl-item"><div class="tl-date">12월</div><div class="tl-text">카카오, 자체 LLM 'Kanana' 개발 착수</div></div>
+      </div>
+    </div>
+
+    <!-- 2024 -->
+    <div class="tl-year">
+      <span class="tl-year-label y2024">2024</span>
+      <div class="tl-list">
+        <div class="tl-item highlight"><div class="tl-date">01월</div><div class="tl-text">삼성, Galaxy S24와 함께 Galaxy AI 공식 출시 — 실시간 통번역, AI 사진편집</div></div>
+        <div class="tl-item"><div class="tl-date">01월</div><div class="tl-text">리벨리온, Series B $1.24억 투자 유치 (KT 리드)</div></div>
+        <div class="tl-item"><div class="tl-date">02월</div><div class="tl-text">네이버, CLOVA X 정식 서비스 오픈</div></div>
+        <div class="tl-item"><div class="tl-date">03월</div><div class="tl-text">카카오, Kanana 1.0 모델 내부 공개 — KakaoTalk 연동</div></div>
+        <div class="tl-item"><div class="tl-date">04월</div><div class="tl-text">업스테이지, Series B 1000억원 투자 유치</div></div>
+        <div class="tl-item"><div class="tl-date">06월</div><div class="tl-text">과기부, '독자 AI 파운데이션 모델 프로젝트' 공모 시작</div></div>
+        <div class="tl-item"><div class="tl-date">08월</div><div class="tl-text">LG AI Research, EXAONE 2.0 공개 — 멀티모달 지원</div></div>
+        <div class="tl-item highlight"><div class="tl-date">10월</div><div class="tl-text">뤼튼, 월간 사용자 수백만 돌파 — 한국 AI 플랫폼 1위 스타트업</div></div>
+        <div class="tl-item highlight"><div class="tl-date">12월</div><div class="tl-text">AI 기본법 국회 통과 — 세계 두 번째 AI 기본법 제정</div></div>
+        <div class="tl-item highlight"><div class="tl-date">12월</div><div class="tl-text">리벨리온-사페온 합병 — 한국 최초 AI 칩 유니콘 탄생</div></div>
+      </div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="tl-year">
+      <span class="tl-year-label y2025">2025</span>
+      <div class="tl-list">
+        <div class="tl-item highlight"><div class="tl-date">01월</div><div class="tl-text">삼성 Galaxy S25 — Bixby 대신 Google Gemini가 기본 음성비서로 전환</div></div>
+        <div class="tl-item"><div class="tl-date">01월</div><div class="tl-text">국가대표 AI 1차 평가: LG AI연구원·SKT·업스테이지 통과, 네이버·NC 탈락</div></div>
+        <div class="tl-item highlight"><div class="tl-date">07월</div><div class="tl-text">업스테이지, Solar Pro 2 출시 — 한국 최초 프런티어급 LLM (GPT-4.1 능가)</div></div>
+        <div class="tl-item"><div class="tl-date">하반기</div><div class="tl-text">Lunit, Microsoft 파트너십 · EU MDR CE마크 획득 · NCI 협력</div></div>
+        <div class="tl-item"><div class="tl-date">하반기</div><div class="tl-text">LG AI연구원, EXAONE 3.0 시리즈 공개 — 언어/물리/바이오 인텔리전스</div></div>
+        <div class="tl-item"><div class="tl-date">연중</div><div class="tl-text">트릴리온랩스 Trida-7B, 모티프테크놀로지스 Motif-2-12.7B 공개</div></div>
+      </div>
+    </div>
+
+    <!-- 2026 -->
+    <div class="tl-year">
+      <span class="tl-year-label y2026">2026</span>
+      <div class="tl-list">
+        <div class="tl-item highlight"><div class="tl-date">01.22</div><div class="tl-text">AI 기본법 전면 시행 — 1년 계도기간, AI 투명성 가이드라인 공개</div></div>
+        <div class="tl-item"><div class="tl-date">01.30</div><div class="tl-text">국방부, 국방 공개데이터 AI 개발팀 제공 발표</div></div>
+        <div class="tl-item highlight"><div class="tl-date">02.02</div><div class="tl-text">한국 AI 7개사, 사우디 아람코 'AI 풀스택' 협력 MOU</div></div>
+        <div class="tl-item"><div class="tl-date">02.03</div><div class="tl-text">'AI 서울 2026' 컨퍼런스 — 3,190명 참석</div></div>
+        <div class="tl-item"><div class="tl-date">02.09</div><div class="tl-text">딥페이크 영상 이용 허위사실 공표죄 최초 고발</div></div>
+        <div class="tl-item"><div class="tl-date">02.12</div><div class="tl-text">국가대표 AI 추가 공모 — 모티프·트릴리온랩스 접수</div></div>
+        <div class="tl-item"><div class="tl-date">02.19</div><div class="tl-text">AX대학원 10개 신규 선정 (연간 30억 지원)</div></div>
+        <div class="tl-item"><div class="tl-date">02월</div><div class="tl-text">업스테이지, Solar Pro 3 출시 (최신 모델)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. SERVICE MAP ============ -->
+<section>
+  <div class="inner">
+    <h2 class="sec-title">서비스 맵</h2>
+    <p class="sec-desc">분야별 한국 AI 서비스·제품 총정리</p>
+
+    <!-- LLM -->
+    <div class="cat-label"><span class="icon">🧠</span> LLM / 파운데이션 모델</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-name">HyperCLOVA X / CLOVA X</div>
+        <div class="card-company">네이버</div>
+        <div class="card-desc">한국어 특화 LLM 기반 대화형 AI. 네이버 검색 등 수천만 사용자 풀과 연계.</div>
+        <span class="badge growing">성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">Solar Pro 2 / 3</div>
+        <div class="card-company">업스테이지</div>
+        <div class="card-desc">한국 최초 프런티어급 LLM. GPT-4.1·DeepSeek V3 벤치마크 능가. FT 보도.</div>
+        <span class="badge rapid">급성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">EXAONE 3.0</div>
+        <div class="card-company">LG AI Research</div>
+        <div class="card-desc">멀티모달 LLM — 언어·물리·바이오 인텔리전스. 국내 AI 분석 지표 1위.</div>
+        <span class="badge growing">성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">Kanana</div>
+        <div class="card-company">카카오</div>
+        <div class="card-desc">카카오톡 통합 AI 비서용 자체 LLM. 5,000만+ 카카오톡 사용자 잠재력.</div>
+        <span class="badge growing">성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">에이닷 AI (A.)</div>
+        <div class="card-company">SK텔레콤</div>
+        <div class="card-desc">AI 비서 — 통화·일정·쇼핑 자동화. SKT 가입자 2,300만+ 연계.</div>
+        <span class="badge growing">성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">Trida-7B / gWorld-32B</div>
+        <div class="card-company">트릴리온랩스</div>
+        <div class="card-desc">확산 기반 LLM(dLLM). 세계 최초 웹코드 기반 모바일 월드모델.</div>
+        <span class="badge early">초기</span>
+      </div>
+      <div class="card">
+        <div class="card-name">Motif-2-12.7B</div>
+        <div class="card-company">모티프테크놀로지스</div>
+        <div class="card-desc">중형 LLM. Artificial Analysis Index 국내 3위. 국가대표AI 공모 참여.</div>
+        <span class="badge early">초기</span>
+      </div>
+    </div>
+
+    <!-- AI 플랫폼 -->
+    <div class="cat-label"><span class="icon">💬</span> AI 플랫폼 / 비서 / 에이전트</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-name">뤼튼 (Wrtn)</div>
+        <div class="card-company">뤼튼테크놀로지스</div>
+        <div class="card-desc">한국판 종합 AI 포털 — 무료 챗봇·검색·이미지생성·운세. 월간 수백만 사용자.</div>
+        <span class="badge rapid">급성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">Galaxy AI</div>
+        <div class="card-company">삼성전자</div>
+        <div class="card-desc">온디바이스+클라우드 AI. 실시간 통번역, AI 사진편집, Circle to Search.</div>
+        <span class="badge rapid">급성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">Bixby</div>
+        <div class="card-company">삼성전자</div>
+        <div class="card-desc">삼성 음성 AI 비서. Galaxy S25부터 기본 비서 지위를 Gemini에 넘김.</div>
+        <span class="badge pivot">피봇</span>
+      </div>
+      <div class="card">
+        <div class="card-name">CLOVA 플랫폼</div>
+        <div class="card-company">네이버</div>
+        <div class="card-desc">AI 플랫폼 — OCR, 음성합성, 더빙, 스마트홈. HyperCLOVA X로 진화.</div>
+        <span class="badge growing">성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">파파고 (Papago)</div>
+        <div class="card-company">네이버</div>
+        <div class="card-desc">AI 기반 다국어 번역 — 16개 언어. 한국 번역 시장 1위.</div>
+        <span class="badge growing">성장</span>
+      </div>
+    </div>
+
+    <!-- AI 의료 -->
+    <div class="cat-label"><span class="icon">🏥</span> AI 의료</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-name">Lunit INSIGHT / SCOPE</div>
+        <div class="card-company">루닛 (Lunit)</div>
+        <div class="card-desc">AI 암 진단 — 흉부X선·유방·병리. 70+ 국가 1만+ 의료기관 도입. WHO 권고.</div>
+        <span class="badge rapid">급성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">VUNO Med</div>
+        <div class="card-company">뷰노 (VUNO)</div>
+        <div class="card-desc">AI 의료 영상 분석 — 흉부·골밀도·심전도. 국내 종합병원 다수 도입.</div>
+        <span class="badge growing">성장</span>
+      </div>
+    </div>
+
+    <!-- AI 반도체 -->
+    <div class="cat-label"><span class="icon">🖥️</span> AI 반도체</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-name">ATOM / Rebel</div>
+        <div class="card-company">리벨리온 (Rebellions)</div>
+        <div class="card-desc">AI 추론 전용 NPU. 사페온 합병 → 한국 최초 AI칩 유니콘. IPO 검토 중.</div>
+        <span class="badge rapid">급성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">RNGD</div>
+        <div class="card-company">퓨리오사AI (FuriosaAI)</div>
+        <div class="card-desc">AI 추론 가속기 — 데이터센터용. NVIDIA 대안 칩 개발. 사우디 MOU 참여.</div>
+        <span class="badge growing">성장</span>
+      </div>
+    </div>
+
+    <!-- AI 교육 -->
+    <div class="cat-label"><span class="icon">📚</span> AI 교육</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-name">Riiid (Santa)</div>
+        <div class="card-company">뤼이드</div>
+        <div class="card-desc">AI 기반 적응형 학습. B2C 토익 앱에서 B2B 기업교육 솔루션으로 전환.</div>
+        <span class="badge pivot">피봇</span>
+      </div>
+      <div class="card">
+        <div class="card-name">QANDA (콴다)</div>
+        <div class="card-company">매스프레소</div>
+        <div class="card-desc">AI 수학 풀이 — 사진 촬영→문제 인식→풀이. 글로벌 1억+ 다운로드.</div>
+        <span class="badge growing">성장</span>
+      </div>
+    </div>
+
+    <!-- 기타 -->
+    <div class="cat-label"><span class="icon">⚡</span> 법률 · 코딩 · 크리에이티브</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-name">인텔리콘 (Intellicon)</div>
+        <div class="card-company">인텔리콘</div>
+        <div class="card-desc">AI 법률 리서치, 판례 분석, 계약서 검토. 한국 리걸테크 대표.</div>
+        <span class="badge growing">성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">LawTalk</div>
+        <div class="card-company">로앤컴퍼니</div>
+        <div class="card-desc">변호사 매칭 플랫폼 + AI 법률 상담. 국내 법률 플랫폼 1위.</div>
+        <span class="badge growing">성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">VARCO / CLOVA Code</div>
+        <div class="card-company">엔씨소프트 · 네이버</div>
+        <div class="card-desc">자체 코딩 AI 모델. 아직 글로벌(Copilot·Cursor) 대비 초기 단계.</div>
+        <span class="badge early">초기</span>
+      </div>
+      <div class="card">
+        <div class="card-name">SNOW / B612 AI</div>
+        <div class="card-company">SNOW (네이버 자회사)</div>
+        <div class="card-desc">AI 프로필사진·아바타·뷰티 필터. 2023년 AI 프로필 사진 대유행 선도.</div>
+        <span class="badge growing">성장</span>
+      </div>
+      <div class="card">
+        <div class="card-name">Karlo</div>
+        <div class="card-company">카카오브레인</div>
+        <div class="card-desc">AI 이미지 생성 (한국어 지원). 카카오 조직 재편 과정에서 지위 불투명.</div>
+        <span class="badge stagnant">정체</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. POLICY ============ -->
+<section>
+  <div class="inner">
+    <h2 class="sec-title">정책 흐름</h2>
+    <p class="sec-desc">AI 기본법 제정부터 사우디 MOU까지 — 정부 주도의 AI 생태계 설계</p>
+
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:#333;">📜 AI 기본법 타임라인</h3>
+    <div class="policy-tl">
+      <div class="policy-item">
+        <div class="policy-date">2024.12</div>
+        <div class="policy-text">AI 기본법 국회 통과 — EU AI Act에 이은 세계 두 번째</div>
+      </div>
+      <div class="policy-item">
+        <div class="policy-date">2025.01~</div>
+        <div class="policy-text">하위법령 정비단 운영 (민간 전문가 80명, 70여 차례 의견수렴)</div>
+      </div>
+      <div class="policy-item">
+        <div class="policy-date">2025.09</div>
+        <div class="policy-text">국가AI전략위원회 출범 · 시행령 초안 공개</div>
+      </div>
+      <div class="policy-item">
+        <div class="policy-date">2025.11</div>
+        <div class="policy-text">입법예고</div>
+      </div>
+      <div class="policy-item active">
+        <div class="policy-date">2026.01.22</div>
+        <div class="policy-text"><strong>AI 기본법 전면 시행</strong> — 1년 계도기간 · AI 투명성 가이드라인</div>
+      </div>
+    </div>
+
+    <div class="policy-card-grid">
+      <div class="policy-card">
+        <h4>🏛️ AI 기본법 핵심 내용</h4>
+        <ul>
+          <li>국가AI전략위원회 — 대통령 위원장, 법정위 격상</li>
+          <li>필요최소 규제 원칙 — 기업 의무·제재 최소화</li>
+          <li>AI 투명성 — 생성물 워터마크 의무 (딥페이크 방지)</li>
+          <li>1년 계도기간 — 인명사고·인권훼손 시에만 사실조사</li>
+          <li>AI 기본법 지원데스크 — 기업 컨설팅 (익명 가능)</li>
+        </ul>
+      </div>
+      <div class="policy-card">
+        <h4>🚀 국가대표 AI 프로젝트</h4>
+        <ul>
+          <li>목표: 글로벌 AI 모델 대비 95% 이상 성능</li>
+          <li>1차 통과: LG AI연구원, SKT, 업스테이지</li>
+          <li>1차 탈락: 네이버클라우드, NC AI (재도전 포기)</li>
+          <li>자원: 엔비디아 B200 768장, 데이터 공동 구매</li>
+          <li>2차 평가: 2026.08 (벤치마크+전문가+글로벌 리더보드)</li>
+        </ul>
+      </div>
+      <div class="policy-card">
+        <h4>🇸🇦 사우디 아람코 MOU</h4>
+        <p>2026.02.02 — 한국 AI 기업 7개사가 사우디 아람코와 'AI 풀스택' 협력 MOU 체결.</p>
+        <ul>
+          <li>리벨리온, 퓨리오사AI (AI 반도체)</li>
+          <li>NC AI, 업스테이지, LG AI연구원 (LLM)</li>
+          <li>유라클, 메가존클라우드 (인프라)</li>
+        </ul>
+      </div>
+      <div class="policy-card">
+        <h4>📊 과기부 주요 AI 정책</h4>
+        <ul>
+          <li>AX대학원 확대 — 10개 신규, 연간 30억 지원</li>
+          <li>한국형 국제 사업 — 1,441억원 전주기 지원</li>
+          <li>국방 AX 가속화 — 공개데이터 개발팀 제공</li>
+          <li>AI 안전 생태계 마스터플랜</li>
+          <li>피지컬 AI 실증 사업</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. INSIGHTS ============ -->
+<section>
+  <div class="inner">
+    <h2 class="sec-title">핵심 인사이트</h2>
+    <p class="sec-desc">한국 AI 생태계를 관통하는 4가지 특징</p>
+
+    <div class="insight-grid">
+      <div class="insight-card c1">
+        <div class="ic-icon">🏢</div>
+        <h3>대기업 vs 스타트업</h3>
+        <p>삼성·네이버·카카오·SK·LG 5대 기업이 각자 LLM을 개발하며 AI 인프라를 주도한다. 하지만 프런티어급 LLM(Solar Pro 2)을 최초로 만든 건 스타트업 업스테이지였다. 뤼튼은 무료 전략으로 대기업이 못 잡은 10~20대를 석권했다.</p>
+      </div>
+      <div class="insight-card c2">
+        <div class="ic-icon">🌏</div>
+        <h3>글로벌 vs 한국 특화</h3>
+        <p>한국어·한국문화 특화가 핵심 차별점. HyperCLOVA X는 한국어 이해도에서 GPT를 앞서고, 뤼튼은 운세·일상검색 등 로컬 니즈를 공략했다. 반면 코딩 AI는 글로벌 도구(Copilot, Cursor)에 완전 의존 — 한국 자체 코딩 AI는 사실상 없다.</p>
+      </div>
+      <div class="insight-card c3">
+        <div class="ic-icon">🔧</div>
+        <h3>하드웨어(반도체) 강점</h3>
+        <p>리벨리온은 사페온 합병으로 한국 최초 AI칩 유니콘이 됐고 IPO를 검토 중이다. 퓨리오사AI와 함께 NVIDIA 대안 칩을 개발하며, 사우디 아람코 MOU에도 참여했다. 삼성 파운드리 협업으로 반도체 제조 역량까지 갖춘 구조.</p>
+      </div>
+      <div class="insight-card c4">
+        <div class="ic-icon">🏛️</div>
+        <h3>정책 주도형 생태계</h3>
+        <p>AI 기본법(세계 2번째), 국가대표 AI 프로젝트(엔비디아 B200 768장 지원), AX대학원 확대, 1,441억원 국제사업 등 — 정부가 직접 'K-AI 기업'을 지정하고 자원을 배분하는 톱다운 구조. 강점이자 리스크.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="inner">
+    <p>데이터 출처: 공개 보도, Wikipedia, AI타임스, Financial Times, 각 기업 공식 사이트 등 30개 출처 기반</p>
+    <p style="margin-top:4px;">2026-02-21 기준 · 일부 정보는 최신 상황과 다를 수 있음</p>
+  </div>
+</footer>
+
+</body>
+</html>

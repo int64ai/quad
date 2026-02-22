@@ -109,6 +109,7 @@
 
   .tag.live { background: #e8f5e9; color: #16a34a; }
   .tag.research { background: #e8eaf6; color: #6366f1; }
+  .tag.guide { background: #e0f2f1; color: #00897b; }
   .tag.data { background: #fff8e1; color: #d97706; }
 
   .size {
@@ -194,7 +195,26 @@ const pages = [
     tagLabel: "증거 기반",
     size: "86개 제품"
   },
-  // removed
+  {
+    title: "OpenClaw 설치 가이드",
+    desc: "간편 설치부터 Docker+Windows, Linux/EC2 서버, 멀티 인스턴스 격리까지. 6개 에이전트 크로스체크.",
+    url: "openclaw-guide.html",
+    emoji: "🔧",
+    bg: "linear-gradient(135deg, #e0f2f1, #e8f5e9)",
+    tag: "guide",
+    tagLabel: "가이드",
+    size: "40KB"
+  },
+  {
+    title: "한국 AI 생태계",
+    desc: "2023~2026, 33개 서비스 3년의 기록. LLM 경쟁, AI 반도체, 정책 흐름까지.",
+    url: "korea-ai.html",
+    emoji: "🇰🇷",
+    bg: "linear-gradient(135deg, #e3f2fd, #e8eaf6)",
+    tag: "research",
+    tagLabel: "리서치",
+    size: "33개 서비스"
+  },
 ];
 
 const grid = document.getElementById('cards');
