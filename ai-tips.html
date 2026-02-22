@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 도구 사용 팁 2026</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:#1a1a1a;line-height:1.7;font-size:16px}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+
+/* Header */
+.header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:60px 24px 40px;text-align:center}
+.header h1{font-size:2.4rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.5px}
+.header .tools-list{font-size:1rem;color:#94a3b8;margin-bottom:12px}
+.header .date{font-size:0.85rem;color:#64748b}
+
+/* Tab Navigation */
+.tab-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #e2e8f0;padding:0;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}
+.tab-nav-inner{max-width:900px;margin:0 auto;display:flex;gap:0;padding:0 24px}
+.tab-btn{padding:14px 18px;border:none;background:transparent;cursor:pointer;font-size:0.9rem;font-weight:600;color:#64748b;border-bottom:3px solid transparent;transition:all .2s;font-family:inherit;white-space:nowrap;flex-shrink:0}
+.tab-btn:hover{color:#1e293b;background:#f8fafc}
+.tab-btn.active{color:#2563eb;border-bottom-color:#2563eb}
+
+/* Sections */
+.tab-content{display:none;padding:40px 24px}
+.tab-content.active{display:block}
+section{margin-bottom:48px}
+h2{font-size:1.6rem;font-weight:800;margin-bottom:20px;color:#0f172a;padding-bottom:12px;border-bottom:2px solid #e2e8f0}
+h3{font-size:1.2rem;font-weight:700;margin:28px 0 14px;color:#1e293b}
+h4{font-size:1.05rem;font-weight:700;margin:20px 0 10px;color:#334155}
+p{margin-bottom:12px}
+
+/* Tip Cards */
+.tip{border-left:4px solid #22c55e;background:#f8fafc;padding:16px 20px;margin:12px 0;border-radius:0 8px 8px 0}
+.tip.beginner{border-left-color:#22c55e}
+.tip.intermediate{border-left-color:#f59e0b}
+.tip.advanced{border-left-color:#ef4444}
+.tip.caution{border-left-color:#9ca3af}
+.tip strong{display:block;margin-bottom:4px;font-size:0.95rem}
+.tip p,.tip ul{margin:0;font-size:0.93rem;color:#374151}
+.tip ul{padding-left:20px;margin-top:6px}
+.tip li{margin-bottom:4px}
+
+/* Badge */
+.badge{display:inline-block;font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:10px;margin-right:6px;vertical-align:middle}
+.badge.green{background:#dcfce7;color:#166534}
+.badge.amber{background:#fef3c7;color:#92400e}
+.badge.red{background:#fee2e2;color:#991b1b}
+.badge.gray{background:#f1f5f9;color:#475569}
+
+/* Code Block */
+pre{background:#f8f9fa;border:1px solid #e2e8f0;border-radius:8px;padding:16px;overflow-x:auto;font-family:'JetBrains Mono','Fira Code',Consolas,monospace;font-size:0.85rem;line-height:1.6;margin:12px 0;position:relative;-webkit-user-select:all;user-select:all}
+code{font-family:'JetBrains Mono','Fira Code',Consolas,monospace;font-size:0.85rem;background:#f1f5f9;padding:2px 6px;border-radius:4px}
+pre code{background:transparent;padding:0}
+
+/* Table */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9rem}
+th{background:#f1f5f9;font-weight:700;text-align:left;padding:10px 14px;border-bottom:2px solid #e2e8f0}
+td{padding:10px 14px;border-bottom:1px solid #e2e8f0}
+tr:hover{background:#f8fafc}
+
+/* Video Card */
+.video-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:12px 0}
+.video-card .title{font-weight:700;font-size:1rem;color:#1e293b;margin-bottom:4px}
+.video-card .meta{font-size:0.82rem;color:#64748b;margin-bottom:6px}
+.video-card .summary{font-size:0.9rem;color:#374151}
+.video-card a{color:#2563eb;text-decoration:none;font-size:0.85rem}
+.video-card a:hover{text-decoration:underline}
+
+/* Leaderboard */
+.rank-1{font-weight:800;color:#f59e0b}
+.rank-2{font-weight:700;color:#94a3b8}
+.rank-3{font-weight:700;color:#cd7f32}
+
+/* Footer */
+.footer{background:#f8fafc;border-top:2px solid #e2e8f0;padding:40px 24px}
+.footer h2{border-bottom:none}
+.footer a{color:#2563eb;text-decoration:none;word-break:break-all}
+.footer a:hover{text-decoration:underline}
+.footer ul{list-style:none;padding:0}
+.footer li{margin-bottom:8px;font-size:0.9rem;padding-left:16px;position:relative}
+.footer li::before{content:'→';position:absolute;left:0;color:#94a3b8}
+
+/* Stack Card */
+.stack-card{display:grid;grid-template-columns:140px 1fr;gap:8px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin:16px 0}
+.stack-card dt{font-weight:700;color:#475569;font-size:0.9rem}
+.stack-card dd{font-size:0.9rem;color:#1e293b}
+
+/* Insight Box */
+.insight-box{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:16px 20px;margin:12px 0}
+.insight-box strong{color:#92400e}
+.insight-box p{font-size:0.93rem;margin:0}
+
+/* Quote */
+.quote{border-left:4px solid #2563eb;padding:12px 20px;margin:16px 0;background:#eff6ff;border-radius:0 8px 8px 0;font-style:italic;font-size:0.93rem;color:#1e40af}
+.quote .author{font-style:normal;font-weight:700;color:#1e293b;display:block;margin-top:6px;font-size:0.85rem}
+
+/* Comparison */
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:16px 0}
+.compare-card{border:1px solid #e2e8f0;border-radius:12px;padding:18px;background:#f8fafc}
+.compare-card h4{margin:0 0 10px;font-size:1rem;color:#1e293b}
+.compare-card ul{padding-left:18px;font-size:0.88rem}
+.compare-card li{margin-bottom:4px}
+
+/* Responsive */
+@media(max-width:640px){
+  .header h1{font-size:1.6rem}
+  .tab-btn{padding:10px 12px;font-size:0.82rem}
+  .stack-card{grid-template-columns:1fr}
+  .compare-grid{grid-template-columns:1fr}
+  table{font-size:0.8rem}
+  th,td{padding:8px 10px}
+  h2{font-size:1.3rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="container">
+    <h1>🦞 AI 도구 사용 팁 2026</h1>
+    <div class="tools-list">OpenClaw · Claude Code · Cursor · Codex · Devin</div>
+    <div class="date">2026년 2월 22일 기준 · 5개 소스 크로스체크</div>
+  </div>
+</div>
+
+<!-- TAB NAVIGATION -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" data-tab="all">전체</button>
+    <button class="tab-btn" data-tab="openclaw">OpenClaw</button>
+    <button class="tab-btn" data-tab="claude-code">Claude Code</button>
+    <button class="tab-btn" data-tab="cursor">Cursor</button>
+    <button class="tab-btn" data-tab="codex">Codex</button>
+    <button class="tab-btn" data-tab="devin">Devin</button>
+    <button class="tab-btn" data-tab="vibe">바이브 코딩</button>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- ALL TAB -->
+<!-- ============================================================ -->
+<div class="tab-content active" id="tab-all">
+<div class="container">
+
+<section>
+<h2>📖 이 가이드에 대해</h2>
+<p>2026년 2월 기준, AI 코딩/에이전트 도구의 <strong>실전 팁</strong>을 5개 소스(유튜브, 공식 문서, 블로그, 커뮤니티)에서 수집하고 크로스체크했습니다. 같은 정보가 다르게 나오면 <strong>공식 문서 우선</strong>, 날짜/수치는 <strong>가장 최신 자료</strong> 기준입니다.</p>
+
+<div class="quote">
+  "AI 에이전트 시대에 부족한 것은 '인재'가 아니라 무엇을 요청해야 하는지 아는 것이다. 관리 기술 = AI 시대의 핵심 역량."
+  <span class="author">— Ethan Mollick, 2026-01-27</span>
+</div>
+</section>
+
+<section>
+<h2>🏆 한눈에 보기: 도구별 핵심 강점</h2>
+<table>
+<tr><th>도구</th><th>최적 사용처</th><th>2026 하이라이트</th></tr>
+<tr><td><strong>OpenClaw</strong></td><td>24/7 자율 에이전트, 멀티채널 자동화</td><td>196K GitHub ⭐, 독립 재단 전환</td></tr>
+<tr><td><strong>Claude Code</strong></td><td>터미널 기반 깊은 코드베이스 탐색</td><td>Agent Teams, Skills, Hooks, Sonnet 4.6</td></tr>
+<tr><td><strong>Cursor</strong></td><td>에디터 내 에이전트 코딩, 대형 코드베이스</td><td>Composer 1.5, Self-Driving Codebases</td></tr>
+<tr><td><strong>Codex CLI</strong></td><td>Terminal-Bench 1위, 오픈소스</td><td>GPT-5.3-Codex 75.1%</td></tr>
+<tr><td><strong>Devin</strong></td><td>대규모 마이그레이션, 병렬 소규모 작업</td><td>Nubank 사례: 8-12x 효율, 20x 비용 절감</td></tr>
+</table>
+</section>
+
+<section>
+<h2>💡 모든 도구 공통: 10가지 황금 규칙</h2>
+
+<div class="tip beginner">
+<strong><span class="badge green">공통</span> 1. 구체적으로 요청하라</strong>
+<p>"버그 고쳐"(❌) → "세션 타임아웃 후 src/auth/의 토큰 리프레시 실패. 재현 테스트 작성 후 수정"(✅)</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">공통</span> 2. 검증 수단을 항상 포함하라</strong>
+<p>테스트 케이스, 스크린샷, 예상 출력. AI가 자체 검증할 수 있으면 퀄리티가 극적으로 향상됩니다.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">공통</span> 3. 탐색 → 계획 → 구현 → 커밋</strong>
+<p>바로 코딩하지 말고 먼저 코드베이스를 탐색하고 계획을 세우세요.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">공통</span> 4. 컨텍스트 윈도우를 관리하라</strong>
+<p>실사용자에 따르면, "모델이 아니라 컨텍스트 윈도우가 문제다." 작업 단위를 분리하고 관련 없는 내용은 정리하세요.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">공통</span> 5. 설정 파일(Rules/CLAUDE.md)은 짧게</strong>
+<p>500줄 이하. AI가 이미 아는 것은 빼고, 반복 실수할 때만 규칙 추가. 너무 길면 무시됩니다.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">공통</span> 6. 제약 &gt; 지시</strong>
+<p>"TODO 금지, 부분 구현 금지, 외부 의존성 금지"가 "완성해"보다 효과적입니다. (Cursor Self-Driving 연구)</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">공통</span> 7. 서브에이전트로 비용 최적화</strong>
+<p>탐색/검색은 저렴한 모델(Haiku/Sonnet), 구현은 비싼 모델(Opus). 비용 5-20배 절감.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">공통</span> 8. 병렬 에이전트로 속도 최적화</strong>
+<p>여러 접근을 동시에 시도하고 가장 좋은 결과 채택. Stripe는 이 워크플로우를 팀 내 전파.</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 9. AI 생성 코드를 반드시 리뷰하라</strong>
+<p>"프로그래머들이 보지도 이해하지도 못한 코드를 배포하고 있다" — Chris Ashworth (QLab CEO)</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 10. 자율 에이전트에는 승인 게이트 필수</strong>
+<p>LinkedIn DM 무단 전송, 공격 블로그 글 자동 작성 등 실제 사고 발생. 반자율 모드 권장.</p>
+</div>
+</section>
+
+<section>
+<h2>💰 비용 비교표</h2>
+<table>
+<tr><th>도구</th><th>가격</th><th>실사용 비용</th></tr>
+<tr><td><strong>OpenClaw</strong></td><td>무료 (오픈소스) + API 비용</td><td>$40~수천$/월 (사용량에 따라)</td></tr>
+<tr><td><strong>Claude Code</strong></td><td>Claude Pro $20/월 또는 API</td><td>평균 하루 ~$6, 월 $100-200</td></tr>
+<tr><td><strong>Cursor</strong></td><td>Hobby 무료 / Pro+ $60/월</td><td>Pro+ $60 + 추가 사용량</td></tr>
+<tr><td><strong>Codex CLI</strong></td><td>ChatGPT 구독 포함 (Plus $20/월)</td><td>Plus 포함 또는 API 별도</td></tr>
+<tr><td><strong>Devin</strong></td><td>Teams 플랜 (별도 문의)</td><td>Nubank: 인건비 대비 20x 절감</td></tr>
+<tr><td><strong>Copilot Agent HQ</strong></td><td>Pro+ $39/월</td><td>에이전트 통합 허브</td></tr>
+</table>
+</section>
+
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- OPENCLAW TAB -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-openclaw">
+<div class="container">
+
+<section>
+<h2>📺 유튜브 추천 영상 TOP 5</h2>
+
+<div class="video-card">
+<div class="title">1. "OpenClaw Creator: Why 80% Of Apps Will Disappear" — Y Combinator</div>
+<div class="meta">Raphael Schaad × Peter Steinberger · 2026-02-07 · 👀 664,295회</div>
+<div class="summary">OpenClaw 비전의 근본 이해. 창시자 Peter Steinberger의 "아하 모먼트", "God AI"→ Swarm Intelligence 전환, 에이전트에 개성 부여하기.</div>
+<a href="https://www.youtube.com/watch?v=4uzGDAoNOZc" target="_blank">▶ 시청하기</a>
+</div>
+
+<div class="video-card">
+<div class="title">2. "OpenClaw Full Tutorial for Beginners" — freeCodeCamp.org</div>
+<div class="meta">Kian · 2026-02-04 · 👀 259,401회</div>
+<div class="summary">가장 체계적인 입문 강좌. Local 설치→모델 연결→메모리→스킬 순서의 학습 경로.</div>
+<a href="https://www.youtube.com/watch?v=n1sfrc-RjyM" target="_blank">▶ 시청하기</a>
+</div>
+
+<div class="video-card">
+<div class="title">3. "100 hours of OpenClaw lessons in 35 minutes" — Alex Finn</div>
+<div class="meta">Alex Finn · 2026-02-15 · 👀 137,652회</div>
+<div class="summary">100시간 실사용 경험 압축. Morning Brief, Brains vs Muscles, 에이전트를 "직원"처럼 대하는 마인드셋.</div>
+<a href="https://www.youtube.com/watch?v=_kZCoW-Qxnc" target="_blank">▶ 시청하기</a>
+</div>
+
+<div class="video-card">
+<div class="title">4. "Ultimate Clawdbot Tutorial" — AI Master</div>
+<div class="meta">AI Master · 2026-02-09 · 👀 105,402회</div>
+<div class="summary">흔한 미신 깨기 + 하드웨어 비교 + 비용 분석 + 6가지 실용 사례.</div>
+<a href="https://www.youtube.com/watch?v=NA8C8jIQNeM" target="_blank">▶ 시청하기</a>
+</div>
+
+<div class="video-card">
+<div class="title">5. "OpenClaw Full Course: Setup, Skills, Voice, Memory & More" — Tech With Tim</div>
+<div class="meta">Tech With Tim · 2026년 2월</div>
+<div class="summary">모델 비용 최적화, 음성 통합, 스킬 시스템, 마크다운 파일 역할, 크론잡까지 종합 코스.</div>
+<a href="https://www.youtube.com/watch?v=vte-fDoZczE" target="_blank">▶ 시청하기</a>
+</div>
+</section>
+
+<section>
+<h2>🟢 초보자 팁 (7개)</h2>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 1. VPS + Docker로 시작하라</strong>
+<p>개인 컴퓨터 대신 Hostinger VPS (~$6/월)에 Docker로 설치. Simon Willison도 "내 Mac에서 직접 실행할 용기가 없다"고 했습니다.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 2. Onboarding Wizard 사용</strong>
+<pre><code>openclaw onboard --install-daemon</code></pre>
+<p>설정 가이드를 따라가면 실수 없이 완료됩니다.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 3. Telegram부터 연결하라</strong>
+<p>가장 쉬운 채널. @BotFather로 봇 생성 → 토큰 입력 → 페어링 승인만 하면 됩니다.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 4. Gateway Token 반드시 저장</strong>
+<p>설치 시 나오는 토큰을 따로 저장하세요. 잃으면 재설정이 번거롭습니다.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 5. 비용 상한 설정</strong>
+<p>ChatGPT OAuth 연동으로 월 $20 상한 설정 가능. 실험 단계에서는 필수!</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 6. openclaw doctor로 진단</strong>
+<pre><code>openclaw doctor</code></pre>
+<p>문제 발생 시 워크스페이스, 파일 권한, 인증 문제를 자동 감지합니다.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 7. 필수 마크다운 파일 이해하기</strong>
+<ul>
+<li><code>SOUL.md</code> — 에이전트 성격/행동 정의</li>
+<li><code>USER.md</code> — 사용자 프로필/선호도</li>
+<li><code>AGENTS.md</code> — 작업 공간 규칙</li>
+<li><code>MEMORY.md</code> — 장기 기억 (큐레이션)</li>
+<li><code>HEARTBEAT.md</code> — 주기적 체크리스트</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>🟡 중급 팁 (8개)</h2>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 1. Morning Brief 크론잡</strong>
+<pre><code>Please schedule a morning brief for me every day at 8am.
+Send it to my Telegram. Include:
+1. Weather
+2. Top AI news
+3. Tasks from my todo list
+4. Tasks you can complete for me today</code></pre>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 2. SOUL.md에 실질적 성격 부여</strong>
+<p>공식 문서: "Be genuinely helpful, not performatively helpful." "Great question!" 같은 빈말 금지. 의견을 가진 에이전트가 더 유용합니다.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 3. HEARTBEAT.md로 능동적 에이전트</strong>
+<p>주기적 체크리스트: 이메일/캘린더/SNS 확인. 빈 HEARTBEAT.md는 하트비트 자체를 스킵하여 API 비용 절약!</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 4. Brains &amp; Muscles 전략</strong>
+<p>복잡한 작업은 Opus (두뇌), 단순 반복은 Sonnet 또는 MiniMax 2.5 (근육). 비용 20배 차이 가능.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 5. 메모리 이중 구조</strong>
+<p><code>memory/YYYY-MM-DD.md</code> (일일 로그) + <code>MEMORY.md</code> (큐레이션). 주기적으로 일일 로그에서 핵심을 MEMORY.md에 반영.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 6. 캐시 워밍으로 비용 절약 (공식 문서)</strong>
+<p>Anthropic 캐시 TTL이 1시간이면 하트비트를 55분으로 설정 → 캐시 재작성 비용 방지.</p>
+<pre><code>heartbeat:
+  every: "55m"</code></pre>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 7. 인바운드 디바운스 설정</strong>
+<p>빠른 연속 메시지를 하나의 턴으로 배칭 (기본 WhatsApp 5000ms).</p>
+<pre><code>messages:
+  inbound:
+    debounceMs: 2000
+    byChannel:
+      whatsapp: 5000</code></pre>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 8. 크로스채널 세션 공유 (identityLinks)</strong>
+<p>여러 채널에서 같은 사람의 DM을 하나의 세션으로 병합:</p>
+<pre><code>session:
+  identityLinks:
+    alice:
+      - "telegram:123456789"
+      - "discord:987654321012345678"</code></pre>
+</div>
+</section>
+
+<section>
+<h2>🔴 고급 팁 (10개)</h2>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 1. 멀티에이전트 생성 &amp; 바인딩</strong>
+<pre><code>openclaw agents add ops
+openclaw configure</code></pre>
+<p>에이전트별 모델/채널 분리: WhatsApp→빠른 모델, Telegram→깊은 분석 모델.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 2. 오케스트레이터 패턴</strong>
+<p>"관리자" 에이전트가 전문화된 워커를 조율. <code>maxSpawnDepth: 2</code>로 중첩: 메인→오케스트레이터→워커들.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 3. 자동 메모리 플러시 (공식 문서)</strong>
+<p>세션이 컴팩션에 가까워지면 자동으로 사일런트 턴 실행하여 중요 내용을 memory/에 저장:</p>
+<pre><code>compaction:
+  memoryFlush:
+    enabled: true
+    softThresholdTokens: 4000</code></pre>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 4. 시맨틱 메모리 검색 + 시간 감쇠</strong>
+<p>BM25 + 벡터 하이브리드 검색. 30일 반감기로 최신 정보 우선:</p>
+<pre><code>memorySearch:
+  query:
+    hybrid: { enabled: true, vectorWeight: 0.7 }
+  temporalDecay: { enabled: true, halfLifeDays: 30 }</code></pre>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 5. 콘텐츠 팩토리 자동화</strong>
+<p>실사용자에 따르면, Dubibubii가 에이전트 콘텐츠 파이프라인으로 1주 300,000+ 조회수 달성. 리서치→작성→게시 전 과정 자동화.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 6. Cloudflare Workers 배포</strong>
+<p>VPS 대신 서버리스 환경에서 안전하게 실행. 보안 최우선 사용자를 위한 대안.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 7. 가족 에이전트 (제한된 도구)</strong>
+<pre><code>{ id: "family",
+  tools: {
+    allow: ["read", "sessions_list"],
+    deny: ["write", "exec", "browser", "cron"]
+  }
+}</code></pre>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 8. Lobster 워크플로우 런타임</strong>
+<p>공식 문서의 숨겨진 기능: 결정론적 파이프라인 + 승인 게이트. <code>needs_approval</code> → <code>resumeToken</code>으로 재개.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 9. 안드로이드 원격 제어</strong>
+<p>ADB + Tailscale로 폰 원격 조작 (android-use 스킬). TikTok 스크롤, 앱 실행 등.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 10. 1M 컨텍스트 베타</strong>
+<pre><code>agents:
+  defaults:
+    models:
+      "anthropic/claude-opus-4-6":
+        params: { context1m: true }</code></pre>
+<p>100만 토큰 컨텍스트 윈도우 활성화 (공식 문서 베타 기능).</p>
+</div>
+</section>
+
+<section>
+<h2>⚠️ 함정/주의사항 (10개)</h2>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 1. 보안 최우선 — Docker/VPS 격리 필수</strong>
+<p>개인 컴퓨터에 직접 설치 금지. "lethal trifecta" (비밀 데이터 + 외부 도구 + 비신뢰 입력) 경고.</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 2. 스킬 신뢰 문제</strong>
+<p>clawhub.ai 스킬 중 악성코드 존재. 암호화폐 탈취 사례 보고됨 (opensourcemalware.com).</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 3. "fetch and follow" 패턴 위험</strong>
+<p>외부 URL의 지시를 주기적으로 따르는 것은 보안 구멍. Moltbook 스킬 자동 설치 포함.</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 4. 자율 에이전트 과실 사례</strong>
+<p>잘못된 이메일 전송, 무단 LinkedIn DM, 공격적 블로그 글 자동 작성 (matplotlib 사건).</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 5. 비용 폭주 — 상한 필수</strong>
+<p>실사용자: "둠 루프에 빠져서 크레딧을 여러 서비스에서 먹어치우는 걸 멈출 수 없었다." 비용 알림 + 자동 정지 임계값 설정.</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 6. 에이전트 감독 필수</strong>
+<p>완전 자율 모드보다 반자율 모드 권장. 외부 메시징에는 명시적 승인 게이트 필수.</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 7. mDNS 정보 노출</strong>
+<p>기본으로 <code>_openclaw-gw._tcp</code> 브로드캐스트. <code>discovery.mdns.mode: "off"</code>로 비활성화 권장.</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 8. OAuth 토큰 충돌</strong>
+<p>Claude Code와 OpenClaw가 같은 토큰 사용 시 서로 로그아웃. 별도 에이전트 프로필 사용 권장.</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 9. 공개 프로젝트에 에이전트 금지</strong>
+<p>에이전트를 오픈소스에 풀어놓으면 스팸/공격 문제 발생. 반드시 인간 감독하에 기여.</p>
+</div>
+
+<div class="tip caution">
+<strong><span class="badge gray">주의</span> 10. AI가 만든 가짜 콘텐츠 주의</strong>
+<p>실사용자에 따르면, Claude Code에 "스타트업 만들어라" 시켰더니 가짜 리뷰가 포함된 사이트 생성. 결과물 윤리 검토 필수.</p>
+</div>
+</section>
+
+<section>
+<h2>🛠️ 추천 설정 스택</h2>
+<dl class="stack-card">
+<dt>호스팅</dt><dd>Hostinger VPS (KVM2, ~$6/월) 또는 Mac Mini M4</dd>
+<dt>모델 (두뇌)</dt><dd>Claude Opus 4.6 또는 GPT-5.2</dd>
+<dt>모델 (근육)</dt><dd>Claude Sonnet 4.6 또는 MiniMax 2.5 (20배 저렴)</dd>
+<dt>채널</dt><dd>Telegram (가장 쉬움) → WhatsApp/Discord 확장</dd>
+<dt>보안</dt><dd>Docker 격리 + Tailscale VPN + security audit</dd>
+<dt>자동화</dt><dd>Morning Brief 크론 + HEARTBEAT.md + 이메일 모니터링</dd>
+</dl>
+</section>
+
+<section>
+<h2>⌨️ 핵심 CLI 명령어</h2>
+<pre><code>openclaw onboard --install-daemon     # 초기 설정 위저드
+openclaw gateway start|stop|restart   # 게이트웨이 관리
+openclaw agents add [NAME]            # 에이전트 추가
+openclaw configure                    # 설정 변경
+openclaw doctor                       # 진단 및 건강 체크
+openclaw channels login               # 채널 연결
+openclaw dashboard --no-open          # 대시보드 URL 확인
+openclaw security audit --deep        # 보안 감사 (라이브 프로브 포함)
+openclaw cron add --name "작업" ...   # 크론 잡 추가</code></pre>
+</section>
+
+<section>
+<h2>💎 "이건 몰랐다" 인사이트 (10개)</h2>
+
+<div class="insight-box">
+<p><strong>1.</strong> OpenClaw의 첫 커밋은 2025-11-25 — 3개월 만에 <strong>196,000 GitHub 스타</strong> 달성.</p>
+</div>
+<div class="insight-box">
+<p><strong>2.</strong> "Claw"가 에이전트 카테고리의 통칭으로 정착 중 (Andrej Karpathy 명명).</p>
+</div>
+<div class="insight-box">
+<p><strong>3.</strong> 빈 HEARTBEAT.md = 하트비트 실행 자체 스킵 → API 비용 완전 차단 (공식 문서).</p>
+</div>
+<div class="insight-box">
+<p><strong>4.</strong> 에이전트가 자동차 구매 협상으로 <strong>$4,200 절약</strong> (실제 딜러 입찰 전쟁).</p>
+</div>
+<div class="insight-box">
+<p><strong>5.</strong> <code>/context list</code>로 시스템 프롬프트, 스킬, 도구 스키마의 <strong>실제 토큰 크기</strong> 확인 가능.</p>
+</div>
+<div class="insight-box">
+<p><strong>6.</strong> 서브에이전트는 AGENTS.md + TOOLS.md<strong>만</strong> 주입 (SOUL.md, USER.md 없음).</p>
+</div>
+<div class="insight-box">
+<p><strong>7.</strong> 멀티 게이트웨이 지원: 메인 봇 다운 시 디버깅용 <strong>레스큐 봇</strong> 운영 가능.</p>
+</div>
+<div class="insight-box">
+<p><strong>8.</strong> <code>bootstrapMaxChars</code>로 큰 TOOLS.md가 잘리는 문제 해결 (기본 20,000자).</p>
+</div>
+<div class="insight-box">
+<p><strong>9.</strong> QMD 백엔드 (실험적): BM25 + 벡터 + 리랭킹이 완전 로컬로 실행. 세션 트랜스크립트까지 검색.</p>
+</div>
+<div class="insight-box">
+<p><strong>10.</strong> 스킬의 <code>disable-model-invocation: true</code>로 슬래시 커맨드 전용 도구 생성 → 토큰 절약.</p>
+</div>
+</section>
+
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CLAUDE CODE TAB -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-claude-code">
+<div class="container">
+
+<section>
+<h2>🟢 초보자 팁</h2>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 1. 설치 한 줄</strong>
+<pre><code># macOS/Linux/WSL
+curl -fsSL https://claude.ai/install.sh | bash
+# Windows PowerShell
+irm https://claude.ai/install.ps1 | iex
+# 프로젝트에서 바로 시작
+cd your-project && claude</code></pre>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 2. /init으로 CLAUDE.md 자동 생성</strong>
+<p>프로젝트 루트에서 <code>/init</code> 실행하면 빌드 시스템, 테스트 프레임워크, 코드 패턴을 자동 감지합니다.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 3. 컨텍스트 윈도우 = 가장 중요한 리소스</strong>
+<p>대화 전체, 읽은 파일, 명령어 출력 모두 컨텍스트에 포함. <code>/cost</code>로 토큰 확인.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 4. @ 파일 참조</strong>
+<pre><code>&gt; Explain the logic in @src/utils/auth.js
+&gt; What's the structure of @src/components?</code></pre>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 5. 이미지 붙여넣기 지원</strong>
+<p>드래그 앤 드롭, Ctrl+V로 스크린샷/UI 디자인/다이어그램 분석.</p>
+</div>
+</section>
+
+<section>
+<h2>🟡 중급 팁</h2>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 1. Plan Mode (Shift+Tab)</strong>
+<p>Shift+Tab 두 번으로 Plan Mode 진입. 읽기 전용으로 탐색/계획 후 Normal Mode에서 구현.</p>
+<p>⚠️ 간단한 작업(오타, 변수명)은 Plan Mode 오버헤드가 비효율적.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 2. 검증 가능한 프롬프트 (가장 중요한 팁!)</strong>
+<table>
+<tr><th>❌ 나쁜 예</th><th>✅ 좋은 예</th></tr>
+<tr><td>"이메일 유효성 검사"</td><td>"validateEmail 작성. user@example.com→true, invalid→false. 테스트 실행"</td></tr>
+<tr><td>"빌드 실패"</td><td>"이 에러로 실패: [붙여넣기]. 수정 후 빌드 성공 확인. 에러 무시 금지"</td></tr>
+</table>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 3. Claude에게 인터뷰받기</strong>
+<pre><code>I want to build [설명]. Interview me in detail.
+Ask about technical implementation, UI/UX, edge cases.
+Don't ask obvious questions. Keep until covered everything.
+Then write a complete spec to SPEC.md.</code></pre>
+<p>→ 스펙 완성 후 <strong>새 세션에서 구현</strong> (깨끗한 컨텍스트).</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 4. 세션 관리 핵심</strong>
+<ul>
+<li><strong>Esc</strong>: 중단 (컨텍스트 유지)</li>
+<li><strong>/clear</strong>: 관련 없는 작업 전환 시 필수</li>
+<li><strong>/rewind</strong>: 체크포인트 복원</li>
+<li><strong>/rename</strong>: 세션 이름 지정 ("oauth-migration")</li>
+<li>💡 같은 이슈 2번 이상 수정했으면 → <code>/clear</code> 후 더 나은 프롬프트로 재시작</li>
+</ul>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 5. 서브에이전트로 조사 위임</strong>
+<pre><code>Use subagents to investigate how our auth system
+handles token refresh, and whether we have existing
+OAuth utilities I should reuse.</code></pre>
+<p>별도 컨텍스트에서 실행 → 메인 대화 깔끔 유지.</p>
+</div>
+</section>
+
+<section>
+<h2>🔴 고급 팁</h2>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 1. Agent Teams (실험적)</strong>
+<pre><code>// settings.json
+{ "env": { "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1" } }</code></pre>
+<p>표준 세션 대비 ~7x 토큰. 독립적 병렬 작업에만 사용. 같은 파일 편집 금지.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 2. 커스텀 서브에이전트 정의</strong>
+<pre><code># .claude/agents/security-reviewer.md
+---
+name: security-reviewer
+model: opus
+permissionMode: plan
+---
+You are a senior security engineer.
+Review for injection, auth flaws, secrets in code.</code></pre>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 3. Skills (온디맨드 지식)</strong>
+<pre><code># .claude/skills/fix-issue/SKILL.md
+---
+name: fix-issue
+disable-model-invocation: true
+---
+/fix-issue 1234 로 실행
+1. gh issue view로 상세 확인
+2. 코드베이스 검색 → 수정 → 테스트 → PR</code></pre>
+<p>CLAUDE.md는 매 세션 로드 (토큰 소모), Skills는 필요할 때만 로드.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 4. Hooks (자동 실행)</strong>
+<pre><code>// .claude/settings.json
+{ "hooks": {
+  "PostToolUse": [{
+    "matcher": "Edit|Write",
+    "hooks": [{ "type": "command",
+      "command": "npx eslint --fix $FILE_PATH" }]
+  }]
+}}</code></pre>
+<p>Hooks는 결정론적 — CLAUDE.md 지시보다 확실합니다.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 5. Headless Mode (CI/CD)</strong>
+<pre><code># 일회성 쿼리
+claude -p "Explain this project" --output-format json
+# 파이프
+cat build-error.txt | claude -p 'root cause' > output.txt
+# CI 린터
+git diff main | claude -p "review for security issues"</code></pre>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 6. Git Worktrees로 병렬 세션</strong>
+<pre><code>claude --worktree feature-auth
+claude --worktree bugfix-123</code></pre>
+<p>각 세션이 독립된 파일과 브랜치 보유.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 7. Writer/Reviewer 패턴</strong>
+<p>Session A (Writer): 코드 작성 → Session B (Reviewer): <code>git diff main</code>으로 편향 없는 리뷰.</p>
+</div>
+</section>
+
+<section>
+<h2>📝 CLAUDE.md 작성법</h2>
+
+<h4>✅ 포함할 것</h4>
+<ul>
+<li>Claude가 추측할 수 없는 Bash 명령어</li>
+<li>기본값과 다른 코드 스타일 규칙</li>
+<li>테스트 방법과 선호 테스트 러너</li>
+<li>브랜치 네이밍, PR 규약</li>
+<li>개발 환경 quirk (필요 환경변수)</li>
+</ul>
+
+<h4>❌ 제외할 것</h4>
+<ul>
+<li>코드를 읽으면 알 수 있는 것</li>
+<li>언어의 표준 관례</li>
+<li>긴 튜토리얼이나 API 문서</li>
+<li>"깨끗한 코드 작성" 같은 자명한 것</li>
+</ul>
+
+<h4>강조 표현</h4>
+<p>"IMPORTANT", "YOU MUST" 같은 표현으로 중요도 높이기. <strong>~500줄 이하</strong> 유지, 나머지는 Skills로.</p>
+
+<h4>@import 구문</h4>
+<pre><code>See @README.md for project overview.
+# Additional Instructions
+- Git workflow: @docs/git-instructions.md</code></pre>
+
+<h4>위치별 CLAUDE.md</h4>
+<table>
+<tr><th>위치</th><th>적용 범위</th></tr>
+<tr><td><code>~/.claude/CLAUDE.md</code></td><td>모든 세션 (글로벌)</td></tr>
+<tr><td><code>./CLAUDE.md</code></td><td>프로젝트 루트 (git 커밋)</td></tr>
+<tr><td><code>./CLAUDE.local.md</code></td><td>개인 설정 (.gitignore)</td></tr>
+<tr><td><code>frontend/CLAUDE.md</code></td><td>모노레포 디렉토리별</td></tr>
+</table>
+</section>
+
+<section>
+<h2>🔧 내장 명령어 정리</h2>
+<table>
+<tr><th>명령어</th><th>설명</th></tr>
+<tr><td><code>/init</code></td><td>CLAUDE.md 자동 생성</td></tr>
+<tr><td><code>/clear</code></td><td>컨텍스트 초기화</td></tr>
+<tr><td><code>/compact [지시]</code></td><td>컨텍스트 압축</td></tr>
+<tr><td><code>/cost</code></td><td>토큰 사용량 (API)</td></tr>
+<tr><td><code>/model</code></td><td>모델 전환 + effort 조절</td></tr>
+<tr><td><code>/fast</code></td><td>Fast Mode 토글 (6x 비용!)</td></tr>
+<tr><td><code>/permissions</code></td><td>권한 화이트리스트</td></tr>
+<tr><td><code>/agents</code></td><td>서브에이전트 관리</td></tr>
+<tr><td><code>/rename</code></td><td>세션 이름 지정</td></tr>
+<tr><td><code>/rewind</code></td><td>체크포인트 복원</td></tr>
+<tr><td><code>/commit-push-pr</code></td><td>커밋+푸시+PR 한 번에</td></tr>
+<tr><td><code>Shift+Tab</code></td><td>Normal ↔ Auto-Accept ↔ Plan</td></tr>
+<tr><td><code>Ctrl+G</code></td><td>계획을 에디터에서 편집</td></tr>
+<tr><td><code>Esc</code></td><td>중단 (컨텍스트 유지)</td></tr>
+</table>
+</section>
+
+<section>
+<h2>💰 비용 관리</h2>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">비용</span> 모델별 가격 (2026-02)</strong>
+<table>
+<tr><th>모델</th><th>Input</th><th>Output</th></tr>
+<tr><td>Opus 4.6</td><td>$5/M</td><td>$25/M</td></tr>
+<tr><td>Sonnet 4.6</td><td>$3/M</td><td>$15/M</td></tr>
+<tr><td>Fast Mode (Opus)</td><td>$30/M</td><td>$150/M (6x!)</td></tr>
+</table>
+<p>평균: 개발자당 하루 ~$6, 90%가 하루 $12 이하.</p>
+</div>
+
+<h4>토큰 절약 전략</h4>
+<ol>
+<li><code>/clear</code> 자주 사용 — 작업 전환 시 필수</li>
+<li>커스텀 컴팩션: <code>/compact Focus on API usage</code></li>
+<li>대부분 작업은 Sonnet, 복잡한 건 Opus, 간단한 서브에이전트는 Haiku</li>
+<li>CLI 도구(<code>gh</code>, <code>aws</code>) 선호 — MCP보다 컨텍스트 효율적</li>
+<li>CLAUDE.md → Skills로 이동 (필요할 때만 로드)</li>
+<li>Hooks로 전처리 (10,000줄 로그를 grep 필터링 후 전달)</li>
+<li><code>MAX_THINKING_TOKENS=8000</code>으로 Extended Thinking 제한</li>
+</ol>
+</section>
+
+<section>
+<h2>⚠️ 안티패턴</h2>
+
+<div class="tip caution">
+<strong><span class="badge gray">금지</span> 1. 긴 세션에서 관련 없는 작업 계속하기</strong>
+<p>→ <code>/clear</code> 후 새 프롬프트로 재시작.</p>
+</div>
+<div class="tip caution">
+<strong><span class="badge gray">금지</span> 2. CLAUDE.md에 모든 것 넣기</strong>
+<p>→ ~500줄 이하, 나머지는 Skills로.</p>
+</div>
+<div class="tip caution">
+<strong><span class="badge gray">금지</span> 3. 검증 없는 구현 요청</strong>
+<p>→ 항상 테스트/스크린샷/기대 출력 제공.</p>
+</div>
+<div class="tip caution">
+<strong><span class="badge gray">금지</span> 4. /fast 모드 남용</strong>
+<p>→ 6x 비용! 레이턴시가 중요한 경우만.</p>
+</div>
+<div class="tip caution">
+<strong><span class="badge gray">금지</span> 5. 병렬 에이전트 사이코시스</strong>
+<p>→ 체계적 이름/브랜치 규약 필수. 세션 로그: <code>~/.claude/projects/</code>에서 복구 가능.</p>
+</div>
+<div class="tip caution">
+<strong><span class="badge gray">금지</span> 6. --dangerously-skip-permissions</strong>
+<p>→ 인터넷 없는 샌드박스에서만. 외부 접근 시 프롬프트 인젝션으로 파일 유출 가능.</p>
+</div>
+</section>
+
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CURSOR TAB -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-cursor">
+<div class="container">
+
+<section>
+<h2>🆕 2026년 신기능 표</h2>
+<table>
+<tr><th>날짜</th><th>기능</th><th>요약</th></tr>
+<tr><td>Feb 18</td><td><strong>Agent Sandboxing</strong></td><td>macOS/Linux/Windows 네이티브 샌드박스. 승인 중단 40% 감소</td></tr>
+<tr><td>Feb 17</td><td><strong>Marketplace</strong></td><td>Figma, Stripe, Linear, AWS 등 파트너 플러그인</td></tr>
+<tr><td>Feb 17</td><td><strong>Stripe 사례</strong></td><td>3,000명 엔지니어, 신입도 첫날 PR 가능</td></tr>
+<tr><td>Feb 13</td><td><strong>Box 사례</strong></td><td>85%+ 엔지니어 매일 사용, 마이그레이션 80-90% 감소</td></tr>
+<tr><td>Feb 12</td><td><strong>Long-Running Agents</strong></td><td>36시간 채팅 플랫폼, 30시간 모바일 포팅</td></tr>
+<tr><td>Feb 9</td><td><strong>Composer 1.5</strong></td><td>RL 20x 스케일링, Self-summarization</td></tr>
+<tr><td>Feb 6</td><td><strong>NVIDIA 사례</strong></td><td>30,000명, 커밋 코드량 3x 증가</td></tr>
+<tr><td>Feb 5</td><td><strong>Self-Driving Codebases</strong></td><td>다중 에이전트, 1,000 커밋/시간</td></tr>
+<tr><td>Jan 27</td><td><strong>Secure Indexing</strong></td><td>Merkle tree, 4시간→21초</td></tr>
+</table>
+</section>
+
+<section>
+<h2>💡 핵심 팁 10개</h2>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 1. Rules는 짧고 명확하게</strong>
+<p>500줄 이하. AI가 이미 아는 것은 적지 말 것. 반복 실수할 때만 규칙 추가.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 2. Marketplace 플러그인 활용</strong>
+<p>Stripe(결제), Figma(디자인→코드), Linear(이슈), AWS/Vercel(배포) — 에디터 안에서 전체 SDLC.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">초보</span> 3. Sandbox 활성화</strong>
+<p>에이전트 자동 승인 시 보안 위험 줄임. 네트워크 접근 시에만 승인 요청.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 4. Long-Running Agents로 큰 작업 위임</strong>
+<p>밤새 돌리고 아침에 PR 확인. "가능한지 모르겠는데 궁금" 류의 탐색에 최적.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 5. Composer 1.5 적극 활용</strong>
+<p>Auto+Composer 풀로 사용량 대폭 증가. Terminal-Bench에서 Sonnet 4.5보다 높은 점수.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">중급</span> 6. 병렬 에이전트 실행</strong>
+<p>여러 에이전트를 동시에 돌려 다른 접근법 비교. Stripe는 이 패턴을 팀 내 전파.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 7. 경험 많은 개발자일수록 더 효과적</strong>
+<p>Stripe 사례: 오래 근속한 엔지니어가 가장 높은 생산성 향상 (코드베이스 맥락을 이미 아니까).</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 8. LLM 기반 코드 리뷰</strong>
+<p>AI 생성 코드량이 많아지므로, 복잡한 메서드/위험 파일 자동 플래그.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 9. Secure Indexing</strong>
+<p>Merkle tree 기반 팀원 인덱스 재사용. 99th percentile: 4시간→21초.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> 10. NVIDIA 스타일: SDLC 전체 자동화</strong>
+<p>커스텀 Rules로 git flow(브랜치→커밋→CI→이슈) 완전 자동화.</p>
+</div>
+</section>
+
+<section>
+<h2>📝 .cursorrules 작성법</h2>
+
+<p><code>.cursorrules</code>는 레거시 — <strong><code>.cursor/rules/</code>로 마이그레이션</strong> 또는 <code>AGENTS.md</code> 사용 권장.</p>
+
+<h4>Project Rules 예시</h4>
+<pre><code># .cursor/rules/react-patterns.mdc
+---
+description: "React 컴포넌트 표준"
+globs: "src/components/**/*.tsx"
+alwaysApply: false
+---
+
+- Tailwind으로 스타일링
+- Framer Motion으로 애니메이션
+- 컴포넌트 네이밍: PascalCase
+- Props 인터페이스를 파일 상단에</code></pre>
+
+<h4>규칙 유형 4가지</h4>
+<table>
+<tr><th>유형</th><th>동작</th></tr>
+<tr><td><code>Always Apply</code></td><td>모든 채팅 세션에 적용</td></tr>
+<tr><td><code>Apply Intelligently</code></td><td>description 기반 관련성 판단</td></tr>
+<tr><td><code>Apply to Specific Files</code></td><td>glob 패턴 매치 시 적용</td></tr>
+<tr><td><code>Apply Manually</code></td><td><code>@my-rule</code>로 수동 호출</td></tr>
+</table>
+</section>
+
+<section>
+<h2>🤖 Self-Driving Codebases</h2>
+<p>Cursor의 다중 에이전트 연구 프리뷰 (2026-02-05). 1주간 ~1,000 커밋/시간, 1,000만+ 도구 호출.</p>
+
+<h4>최종 아키텍처</h4>
+<ul>
+<li><strong>Root Planner</strong>: 전체 범위 소유, 직접 코딩 안 함, 작업 분배</li>
+<li><strong>Subplanners</strong>: 재귀적 분할, 좁은 범위 완전 소유</li>
+<li><strong>Workers</strong>: 할당 작업만 수행, 자체 repo 복사본</li>
+<li><strong>Handoff</strong>: 결과 + 우려사항을 상위 Planner에게 전달</li>
+</ul>
+
+<h4>핵심 학습</h4>
+<div class="tip advanced">
+<strong>100% 정확도 강요 → 처리량 급감</strong>
+<p>일정 오류율을 허용하고 다른 에이전트가 수정하도록 신뢰하는 것이 효율적.</p>
+</div>
+<div class="tip advanced">
+<strong>명확한 수량 지시</strong>
+<p>"많은 태스크 생성" → 3개만 나옴. "20-100개 태스크 생성"으로 명시.</p>
+</div>
+<div class="tip advanced">
+<strong>에이전트 = "코드를 잘 아는 신입"</strong>
+<p>일반 엔지니어링은 알지만, 당신의 코드베이스/프로세스는 모름. 도메인/프로세스만 알려주면 됩니다.</p>
+</div>
+</section>
+
+<section>
+<h2>🛒 Marketplace 활용</h2>
+<p>2026-02-17 출시. Skills, Subagents, MCP servers, Hooks, Rules를 번들로 설치.</p>
+<table>
+<tr><th>플러그인</th><th>기능</th></tr>
+<tr><td>Stripe</td><td>결제 시스템 구현/디버깅</td></tr>
+<tr><td>Figma</td><td>디자인 → 코드 변환</td></tr>
+<tr><td>Linear</td><td>이슈 트래킹 연동</td></tr>
+<tr><td>AWS</td><td>인프라 관리/배포</td></tr>
+<tr><td>Vercel</td><td>프론트엔드 배포</td></tr>
+<tr><td>Amplitude</td><td>분석 데이터 조회</td></tr>
+</table>
+</section>
+
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- CODEX TAB -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-codex">
+<div class="container">
+
+<section>
+<h2>🚀 OpenAI Codex CLI</h2>
+
+<div class="tip beginner">
+<strong><span class="badge green">설치</span></strong>
+<pre><code>npm i -g @openai/codex
+# 또는
+brew install --cask codex</code></pre>
+<p>ChatGPT Plus/Pro/Business/Edu/Enterprise 구독에 포함 (별도 비용 없음).</p>
+</div>
+
+<h4>핵심 팁</h4>
+<div class="tip advanced">
+<strong><span class="badge red">1위</span> GPT-5.3-Codex = Terminal-Bench 1위 (75.1%)</strong>
+<p>Simple Codex + GPT-5.3-Codex 조합이 현재 벤치마크 최강.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">팁</span> AGENTS.md 지원</strong>
+<p>프로젝트 루트에 AGENTS.md를 배치하면 Codex가 자동으로 읽습니다.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">팁</span> 3단계 Approval Mode</strong>
+<ul>
+<li><code>suggest</code>: 보기만 (가장 안전)</li>
+<li><code>auto-edit</code>: 파일 편집 자동, 명령어는 승인</li>
+<li><code>full-auto</code>: 모두 자동 (위험!)</li>
+</ul>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">고급</span> GPT-5.2가 장기 자율 작업에 탁월</strong>
+<p>Cursor Self-Driving 연구에서 확인: 지시 따르기, 집중 유지, 드리프트 방지에서 Opus 4.5보다 우수.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">팁</span> Codex Cloud Task</strong>
+<p>터미널에서 클라우드 태스크 시작, 결과 diff 적용. <code>codex exec</code>로 반복 워크플로우 자동화.</p>
+</div>
+</section>
+
+<section>
+<h2>🎯 Devin (Cognition)</h2>
+
+<h4>최적 사용처</h4>
+<div class="compare-grid">
+<div class="compare-card">
+<h4>✅ 강점</h4>
+<ul>
+<li>병렬 소규모 작업 대량 처리</li>
+<li>JS→TS, Angular 16→18 마이그레이션</li>
+<li>PR 리뷰, 버그 재현, 유닛 테스트</li>
+<li>Slack/Teams에서 직접 태그</li>
+</ul>
+</div>
+<div class="compare-card">
+<h4>⚠️ 제한</h4>
+<ul>
+<li>큰 단일 작업은 성능 저하</li>
+<li>UI 미학/디자인 감각 부족</li>
+<li>모바일 테스트 불가</li>
+<li>세션은 짧게 (XS, S, M)</li>
+</ul>
+</div>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">사례</span> Nubank — 6백만 줄 모놀리스 ETL 마이그레이션</strong>
+<p>엔지니어링 시간 <strong>8-12x 효율 향상</strong>, 비용 <strong>20x 절감</strong>. 파인튜닝 후 작업 완료율 2배, 속도 4배 개선 (40분→10분/서브태스크).</p>
+</div>
+
+<h4>핵심 팁</h4>
+<ol>
+<li>주니어 엔지니어 수준 작업 할당 — 판단 명확, CI 통과로 검증</li>
+<li>Ask Devin으로 사전 범위 설정 — 대화형 프롬프트 구성</li>
+<li>Knowledge 기능: 이전 세션 학습 승인으로 지식 누적</li>
+<li>파인튜닝 효과: 회사 특화 예제 제공 → 완료율/속도 대폭 향상</li>
+</ol>
+</section>
+
+<section>
+<h2>🏅 Terminal-Bench 2.0 리더보드 (상위 10)</h2>
+<p>2026-02-22 기준, 105개 에이전트 중 상위 10개.</p>
+<table>
+<tr><th>#</th><th>에이전트</th><th>모델</th><th>조직</th><th>정확도</th></tr>
+<tr><td class="rank-1">1</td><td><strong>Simple Codex</strong></td><td>GPT-5.3-Codex</td><td>OpenAI</td><td><strong>75.1%</strong></td></tr>
+<tr><td class="rank-2">2</td><td>Terminus-KIRA</td><td>Claude Opus 4.6</td><td>KRAFTON AI</td><td>74.7%</td></tr>
+<tr><td class="rank-3">3</td><td>Judy</td><td>Claude Opus 4.6</td><td>Bigai</td><td>71.9%</td></tr>
+<tr><td>4</td><td>CodeBrain-1</td><td>GPT-5.3-Codex</td><td>Feeling AI</td><td>70.3%</td></tr>
+<tr><td>5</td><td>Droid</td><td>Claude Opus 4.6</td><td>Factory</td><td>69.9%</td></tr>
+<tr><td>6</td><td>Mux</td><td>GPT-5.3-Codex</td><td>Coder</td><td>68.5%</td></tr>
+<tr><td>7</td><td>Mux</td><td>Claude Opus 4.6</td><td>Coder</td><td>66.5%</td></tr>
+<tr><td>8</td><td>Deep Agents</td><td>GPT-5.2-Codex</td><td>LangChain</td><td>66.5%</td></tr>
+<tr><td>9</td><td>Droid</td><td>GPT-5.2</td><td>Factory</td><td>64.9%</td></tr>
+<tr><td>10</td><td>Terminus 2</td><td>GPT-5.3-Codex</td><td>Terminal Bench</td><td>64.7%</td></tr>
+</table>
+
+<div class="insight-box">
+<p><strong>핵심 인사이트:</strong> <strong>하니스(에이전트 프레임워크)가 모델만큼 중요</strong> — 같은 모델이라도 하니스에 따라 10%p 이상 차이. 서드파티 하니스가 공식 CLI보다 높은 점수를 기록하는 경우가 많습니다.</p>
+</div>
+</section>
+
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- DEVIN TAB (redirects to Codex tab content) -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-devin">
+<div class="container">
+
+<section>
+<h2>🎯 Devin 심화 가이드</h2>
+
+<h3>Devin이 잘하는 4가지 영역</h3>
+<div class="compare-grid">
+<div class="compare-card">
+<h4>1. 병렬 소규모 작업</h4>
+<ul>
+<li>리팩토링, 프론트엔드 버그</li>
+<li>테스트 커버리지 확장</li>
+<li>CI 실패 수정</li>
+<li>CVE 대응</li>
+</ul>
+</div>
+<div class="compare-card">
+<h4>2. 코드 마이그레이션</h4>
+<ul>
+<li>JS→TS 전환</li>
+<li>Angular 16→18</li>
+<li>모노레포→서브모듈</li>
+<li>피처 플래그 제거</li>
+</ul>
+</div>
+<div class="compare-card">
+<h4>3. 반복 엔지니어링</h4>
+<ul>
+<li>PR 리뷰</li>
+<li>코드베이스 Q&A</li>
+<li>버그 재현</li>
+<li>문서 유지</li>
+</ul>
+</div>
+<div class="compare-card">
+<h4>4. 고객 엔지니어링</h4>
+<ul>
+<li>새 API 통합</li>
+<li>데모 구축</li>
+<li>프로토타이핑</li>
+<li>내부 도구</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<h2>📋 Nubank 사례 상세</h2>
+
+<div class="tip advanced">
+<strong><span class="badge red">사례</span> 6백만 줄 모놀리스 ETL 마이그레이션</strong>
+<ul>
+<li>엔지니어링 시간: <strong>8-12x 효율 향상</strong></li>
+<li>비용: <strong>20x 절감</strong></li>
+<li>파인튜닝 후: 완료율 2배, 속도 4배 (40분→10분/서브태스크)</li>
+<li>Devin이 자체 도구/스크립트를 만들어 반복 단계 최적화</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>💡 Devin 사용 팁 6가지</h2>
+
+<div class="tip beginner">
+<strong><span class="badge green">1</span> 주니어 엔지니어 수준 작업을 할당하라</strong>
+<p>판단이 명확하고, 검증이 쉬운(CI 통과 확인) 작업이 최적.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">2</span> Ask Devin으로 사전 범위 설정</strong>
+<p>상세 스펙 대신 대화형으로 프롬프트 구성.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">3</span> 세션은 짧게 유지 (XS, S, M)</strong>
+<p>길고 큰 세션은 성능 저하. 큰 프로젝트는 여러 세션으로 분할.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">4</span> Slack/Teams에서 직접 태그</strong>
+<p>&lt;30분짜리 작업을 백로그에 쌓지 말고 바로 위임.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">5</span> Knowledge 기능으로 학습 누적</strong>
+<p>이전 세션에서 배운 것을 승인하면 다음 세션에 자동 적용.</p>
+</div>
+
+<div class="tip advanced">
+<strong><span class="badge red">6</span> 파인튜닝으로 완료율 2배</strong>
+<p>회사 특화 태스크에 예제를 제공하면 극적인 성능 향상.</p>
+</div>
+</section>
+
+<section>
+<h2>🔗 GitHub Copilot Agent HQ</h2>
+<p>2026-02-04 출시. Claude, Codex를 GitHub/VS Code 내에서 직접 실행.</p>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">핵심</span> 멀티에이전트 비교</strong>
+<p>같은 이슈에 Copilot/Claude/Codex를 동시 할당, 아키텍처/구현 관점 비교.</p>
+</div>
+
+<div class="tip beginner">
+<strong><span class="badge green">핵심</span> 이슈 → PR 자동화</strong>
+<p>이슈를 Copilot에 할당하면 환경 셋업→코드 수정→테스트→PR까지 자동.</p>
+</div>
+
+<div class="tip intermediate">
+<strong><span class="badge amber">핵심</span> Draft PR 기반 워크플로</strong>
+<p>에이전트 결과를 팀원 PR처럼 리뷰. 기존 프로세스 그대로 유지.</p>
+</div>
+</section>
+
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- VIBE CODING TAB -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-vibe">
+<div class="container">
+
+<section>
+<h2>🎵 바이브 코딩이란?</h2>
+<p>자연어로 의도를 설명하면 AI가 구현하는 개발 방식. 코드를 직접 작성하기보다 AI와 대화하며 방향을 잡는 것.</p>
+
+<div class="quote">
+"과거에 $25,000을 줘야 할 웹사이트 리빌드를 Claude $200/월 플랜으로 해결. 친구의 데이터셋 정리는 과거 견적 $350,000짜리."
+<span class="author">— Paul Ford, NYT 기고 (2026-02-18)</span>
+</div>
+</section>
+
+<section>
+<h2>📜 바이브 코딩 10대 원칙</h2>
+
+<div class="tip beginner">
+<strong>1. 구체적으로 요청</strong>
+<p>"로그인 버그 수정"(❌) → "세션 타임아웃 후 src/auth/ 토큰 리프레시 실패. 재현 테스트 작성 후 수정"(✅)</p>
+</div>
+
+<div class="tip beginner">
+<strong>2. 검증 수단 항상 제공</strong>
+<p>테스트 케이스, 스크린샷, 예상 출력. AI가 자체 검증할 수 있으면 퀄리티 극적 향상.</p>
+</div>
+
+<div class="tip beginner">
+<strong>3. 탐색 → 계획 → 구현 → 커밋</strong>
+<p>바로 코딩하지 말고 먼저 코드베이스를 파악하고 계획을 세우세요.</p>
+</div>
+
+<div class="tip intermediate">
+<strong>4. 작은 단위로 쪼개기</strong>
+<p>큰 작업을 10-100개의 구체적 서브태스크로 분해.</p>
+</div>
+
+<div class="tip intermediate">
+<strong>5. 기존 패턴 참조</strong>
+<p>"HotDogWidget.php 패턴을 따라 캘린더 위젯 구현해"</p>
+</div>
+
+<div class="tip intermediate">
+<strong>6. 제약으로 안내</strong>
+<p>"TODO 금지, 부분 구현 금지, 외부 의존성 금지"가 "완성해"보다 효과적.</p>
+</div>
+
+<div class="tip intermediate">
+<strong>7. 구체적 수량 제시</strong>
+<p>"많이 생성"은 3개만 나옴. "20-100개 생성"으로 명시.</p>
+</div>
+
+<div class="tip advanced">
+<strong>8. 에이전트 = "코드를 잘 아는 신입"</strong>
+<p>일반 엔지니어링은 알지만, 당신의 코드베이스/프로세스는 모름. (Cursor Self-Driving 연구)</p>
+</div>
+
+<div class="tip advanced">
+<strong>9. 병렬 에이전트로 속도 최적화</strong>
+<p>여러 접근을 동시에 시도, 가장 좋은 결과 채택.</p>
+</div>
+
+<div class="tip caution">
+<strong>10. 결과를 항상 리뷰</strong>
+<p>AI 생성 코드도 사람 PR처럼 리뷰. LLM 기반 리뷰어 병행 추천.</p>
+</div>
+</section>
+
+<section>
+<h2>🧭 도구 선택 가이드</h2>
+<table>
+<tr><th>상황</th><th>추천 도구</th></tr>
+<tr><td>에디터에서 빠른 반복 작업</td><td><strong>Cursor</strong> (Composer 1.5)</td></tr>
+<tr><td>터미널에서 깊은 디버깅/탐색</td><td><strong>Claude Code</strong> 또는 <strong>Codex CLI</strong></td></tr>
+<tr><td>밤새 큰 PR 만들기</td><td><strong>Cursor</strong> Long-Running Agents</td></tr>
+<tr><td>백로그 소규모 작업 대량 처리</td><td><strong>Devin</strong> (병렬 세션)</td></tr>
+<tr><td>PR 리뷰/이슈 자동화</td><td><strong>GitHub Agent HQ</strong> + Devin</td></tr>
+<tr><td>벤치마크 최고 성능</td><td><strong>Codex CLI</strong> + GPT-5.3-Codex</td></tr>
+<tr><td>팀 전체 거버넌스</td><td><strong>GitHub Agent HQ</strong> + Cursor Enterprise</td></tr>
+<tr><td>24/7 자율 비즈니스 자동화</td><td><strong>OpenClaw</strong></td></tr>
+</table>
+</section>
+
+<section>
+<h2>💰 비용 비교표 (상세)</h2>
+<table>
+<tr><th>도구</th><th>무료</th><th>개인</th><th>팀</th><th>실사용 월비용</th></tr>
+<tr><td><strong>Cursor</strong></td><td>Hobby (제한적)</td><td>$60/월 (Pro+)</td><td>$40/유저/월</td><td>$60 + 사용량</td></tr>
+<tr><td><strong>Claude Code</strong></td><td>—</td><td>Pro $20/월</td><td>$30/유저/월</td><td>$100-200/월</td></tr>
+<tr><td><strong>Codex CLI</strong></td><td>Plus 포함</td><td>Plus $20/월</td><td>Business 별도</td><td>Plus 포함</td></tr>
+<tr><td><strong>Devin</strong></td><td>—</td><td>—</td><td>별도 문의</td><td>인건비 20x 절감</td></tr>
+<tr><td><strong>Copilot</strong></td><td>Free (제한)</td><td>Pro+ $39/월</td><td>$21/유저/월</td><td>$39/월</td></tr>
+<tr><td><strong>OpenClaw</strong></td><td>무료 (OSS)</td><td>API 비용만</td><td>API 비용만</td><td>$40~수천$</td></tr>
+</table>
+</section>
+
+<section>
+<h2>🔄 추천 실전 워크플로우</h2>
+<pre><code>🌅 아침: TODO 리스트 분류
+  ├─ 작은 것 (30분 이하) → Devin에 Slack으로 위임
+  ├─ 중간 (1-4시간) → Cursor Agent로 직접 작업
+  └─ 큰 것 (하루+) → Cursor Long-Running Agent
+
+🖥️ 에디터에서:
+  1. Plan Mode → 탐색/계획
+  2. Normal Mode → 구현
+  3. 테스트 실행 확인
+
+🔍 리뷰:
+  1차: AI (Copilot/Codex)
+  2차: 인간 리뷰어
+
+🌙 저녁:
+  └─ Long-Running 결과 확인
+  └─ 다음날 작업 Devin에 미리 위임</code></pre>
+</section>
+
+<section>
+<h2>💬 커뮤니티 실전 경험</h2>
+
+<div class="quote">
+"$150,000 제안서를 월요일에 보냈다. 에이전트가 과거 수백 건 학습 기반으로 자동 생성."
+<span class="author">— r/openclaw 비즈니스 자동화 유저</span>
+</div>
+
+<div class="quote">
+"3일 만에 100개 이상 구직 지원, 6개 면접, 2개 오퍼. 월급 $2,500 → $5,000."
+<span class="author">— 브라질 개발자, r/openclaw</span>
+</div>
+
+<div class="quote">
+"에이전트를 파이프라인처럼 취급하라 — 격리된 스테이지, 검증 게이트, 단계마다 새 컨텍스트."
+<span class="author">— DevOps 엔지니어, 5개월 Claude Code 사용</span>
+</div>
+
+<div class="quote">
+"펜실베이니아대 MBA 학생들이 4일 만에 스타트업 프로토타입 완성."
+<span class="author">— Ethan Mollick, 2026-01-27</span>
+</div>
+</section>
+
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<div class="footer">
+<div class="container">
+<h2>📚 출처 목록</h2>
+
+<h3>공식 문서</h3>
+<ul>
+<li><a href="https://docs.openclaw.ai/" target="_blank">OpenClaw 공식 문서</a></li>
+<li><a href="https://code.claude.com/docs/en/overview" target="_blank">Claude Code 공식 문서</a></li>
+<li><a href="https://code.claude.com/docs/en/best-practices" target="_blank">Claude Code Best Practices</a></li>
+<li><a href="https://cursor.com/blog" target="_blank">Cursor 블로그</a></li>
+<li><a href="https://cursor.com/docs/context/rules" target="_blank">Cursor Rules 문서</a></li>
+<li><a href="https://developers.openai.com/codex" target="_blank">OpenAI Codex 문서</a></li>
+<li><a href="https://github.com/openai/codex" target="_blank">Codex CLI GitHub (오픈소스)</a></li>
+<li><a href="https://docs.devin.ai" target="_blank">Devin 공식 문서</a></li>
+</ul>
+
+<h3>유튜브</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=4uzGDAoNOZc" target="_blank">Y Combinator — OpenClaw Creator: Why 80% Of Apps Will Disappear (664K views)</a></li>
+<li><a href="https://www.youtube.com/watch?v=n1sfrc-RjyM" target="_blank">freeCodeCamp — OpenClaw Full Tutorial (259K views)</a></li>
+<li><a href="https://www.youtube.com/watch?v=_kZCoW-Qxnc" target="_blank">Alex Finn — 100 hours of OpenClaw lessons (137K views)</a></li>
+<li><a href="https://www.youtube.com/watch?v=NA8C8jIQNeM" target="_blank">AI Master — Ultimate Clawdbot Tutorial (105K views)</a></li>
+<li><a href="https://www.youtube.com/watch?v=vte-fDoZczE" target="_blank">Tech With Tim — OpenClaw Full Course</a></li>
+</ul>
+
+<h3>블로그</h3>
+<ul>
+<li><a href="https://simonwillison.net/tags/openclaw/" target="_blank">Simon Willison — OpenClaw 태그</a></li>
+<li><a href="https://simonwillison.net/tags/claude-code/" target="_blank">Simon Willison — Claude Code 태그</a></li>
+<li><a href="https://www.oneusefulthing.org/" target="_blank">Ethan Mollick — One Useful Thing</a></li>
+<li><a href="https://til.simonwillison.net/llms/openclaw-docker" target="_blank">Simon Willison — Running OpenClaw in Docker</a></li>
+<li><a href="https://aaronstuyvenberg.com/posts/clawd-bought-a-car" target="_blank">AJ Stuyvenberg — Clawdbot bought me a car</a></li>
+</ul>
+
+<h3>커뮤니티</h3>
+<ul>
+<li><a href="https://www.reddit.com/r/openclaw/" target="_blank">r/openclaw</a></li>
+<li><a href="https://www.reddit.com/r/ClaudeAI/" target="_blank">r/ClaudeAI</a></li>
+<li><a href="https://www.reddit.com/r/ChatGPTCoding/" target="_blank">r/ChatGPTCoding</a></li>
+<li><a href="https://www.reddit.com/r/cursor/" target="_blank">r/cursor</a></li>
+</ul>
+
+<h3>벤치마크 / 리더보드</h3>
+<ul>
+<li><a href="https://www.tbench.ai/leaderboard/terminal-bench/2.0" target="_blank">Terminal-Bench 2.0 리더보드</a></li>
+</ul>
+
+<h3>GitHub / 도구</h3>
+<ul>
+<li><a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw GitHub (196K+ ⭐)</a></li>
+<li><a href="https://www.clawhub.ai/" target="_blank">ClawHub — 커뮤니티 스킬 마켓플레이스</a></li>
+<li><a href="https://github.com/shanraisshan/claude-code-best-practice" target="_blank">Claude Code Best Practice (커뮤니티)</a></li>
+<li><a href="https://github.com/PatrickJS/awesome-cursorrules" target="_blank">awesome-cursorrules</a></li>
+</ul>
+
+<p style="margin-top:32px;text-align:center;color:#94a3b8;font-size:0.85rem">
+  이 문서는 2026-02-22 기준으로 5개 소스를 크로스체크하여 자동 생성되었습니다.<br>
+  AI 도구는 빠르게 변화합니다. 최신 공식 문서를 항상 확인하세요. 🦞
+</p>
+</div>
+</div>
+
+<!-- TAB SWITCHING JS -->
+<script>
+(function(){
+  const btns=document.querySelectorAll('.tab-btn');
+  const tabs=document.querySelectorAll('.tab-content');
+  btns.forEach(b=>{
+    b.addEventListener('click',()=>{
+      btns.forEach(x=>x.classList.remove('active'));
+      tabs.forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      document.getElementById('tab-'+b.dataset.tab).classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
