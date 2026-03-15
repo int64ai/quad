@@ -1009,7 +1009,7 @@ h1{font-size:1.8rem;font-weight:800;text-align:center;margin:24px 0 8px;letter-s
       <div class="level2">
         <div class="level2-inner">
         <p>OpenClaw 생태계에서 &#x27;클로&#x27;는 에이전트 인스턴스를 가리키는 비공식 별칭이다. OpenClaw라는 이름 자체가 &#x27;열린 발톱&#x27; — AI가 도구를 잡고 행동하는 이미지를 담고 있다. 기술적으로는 에이전트 설정(SOUL.md + 도구 + 채널 바인딩)의 실행 단위다.</p>
-        <p>한 게이트웨이에서 여러 클로를 운영할 수 있다. 각 클로는 독립된 워크스페이스, 독립된 인격(SOUL.md), 독립된 채널을 가진다. 예를 들어 아르카나(리서치 담당), K.(소설 담당), Sophia(웹 디자인 담당)처럼 역할을 분리한다.</p>
+        <p>한 게이트웨이에서 여러 클로를 운영할 수 있다. 각 클로는 독립된 워크스페이스, 독립된 인격(SOUL.md), 독립된 채널을 가진다. 예를 들어 리서치 봇, 번역 봇, 디자인 봇처럼 역할을 분리할 수 있다.</p>
         <p>클로의 독특한 점은 &#x27;에이전트가 자기 인격 파일을 직접 수정할 수 있다&#x27;는 것이다. SOUL.md를 에이전트가 스스로 업데이트하고, MEMORY.md에 경험을 기록한다. 이건 대부분의 AI 시스템에서 허용하지 않는 패턴인데, OpenClaw는 에이전트의 자율성을 높이는 방향으로 설계됐다.</p>
         <p>2025년 11월에 공개되어 2026년 초 폭발적으로 성장했다. GitHub 별 213K+, 월간 릴리스 23개. 창립자가 추천하는 모델은 Claude Opus 4.6 — long-context 성능과 prompt-injection 저항성이 이유다. Docker 기반으로 WSL2, Linux, EC2 등에서 실행 가능하다.</p>
         </div>
@@ -1602,9 +1602,9 @@ h1{font-size:1.8rem;font-weight:800;text-align:center;margin:24px 0 8px;letter-s
       <button class="toggle-btn" onclick="toggleDeep(this)">🔬 깊이 보기</button>
       <div class="level2">
         <div class="level2-inner">
-        <p>워크스페이스는 에이전트가 파일을 읽고 쓰고 작업하는 전용 디렉토리다. OpenClaw에서 각 에이전트는 자기만의 워크스페이스를 가진다. 메인 에이전트는 /workspace, Sophia는 /workspace-sophia 처럼. 에이전트의 &#x27;방&#x27;이라고 생각하면 된다.</p>
+        <p>워크스페이스는 에이전트가 파일을 읽고 쓰고 작업하는 전용 디렉토리다. OpenClaw에서 각 에이전트는 자기만의 워크스페이스를 가진다. 에이전트별로 /workspace-a, /workspace-b처럼 분리된다. 에이전트의 &#x27;방&#x27;이라고 생각하면 된다.</p>
         <p>워크스페이스에 포함되는 것들: SOUL.md(인격), AGENTS.md(규칙), USER.md(사용자 정보), MEMORY.md(장기 기억), TOOLS.md(도구 설정), memory/(일일 기록), knowledge/(지식 베이스), canvas/(웹 콘텐츠), skills/(커스텀 스킬). 이 파일들이 에이전트의 &#x27;세계&#x27;를 구성한다.</p>
-        <p>중요한 설계 원칙: 워크스페이스는 에이전트 간에 격리되어야 한다. 아르카나의 메모리에 Sophia가 접근하면 안 된다(보안), 반대도 마찬가지다. 하지만 공유가 필요한 리소스(스킬, 공통 도구)는 심링크로 공유할 수 있다.</p>
+        <p>중요한 설계 원칙: 워크스페이스는 에이전트 간에 격리되어야 한다. 에이전트 A의 메모리에 에이전트 B가 접근하면 안 된다(보안), 반대도 마찬가지다. 하지만 공유가 필요한 리소스(스킬, 공통 도구)는 심링크로 공유할 수 있다.</p>
         <p>로컬 퍼스트 철학이 여기서 드러난다. 모든 데이터가 로컬 파일시스템에 있으므로, (1) 오프라인에서도 열람 가능, (2) git으로 버전 관리 가능, (3) 다른 에이전트 시스템으로 이전 가능, (4) 백업이 단순(폴더 복사). 클라우드 종속이 없다.</p>
         </div>
       </div>
@@ -1630,7 +1630,7 @@ h1{font-size:1.8rem;font-weight:800;text-align:center;margin:24px 0 8px;letter-s
       <div class="level2">
         <div class="level2-inner">
         <p>채널은 사용자와 에이전트 사이의 통신 경로다. OpenClaw는 Discord, Telegram, Signal, WhatsApp, Slack, IRC, iMessage, Google Chat 등 다양한 채널을 지원한다. 하나의 에이전트에 여러 채널을 연결할 수 있고, 하나의 채널에 특정 에이전트를 바인딩할 수 있다.</p>
-        <p>채널 바인딩의 구조: openclaw.json의 bindings 배열에서 &#x27;이 Discord 채널의 메시지는 이 에이전트에게 보내라&#x27;를 정의한다. 바인딩이 없는 메시지는 기본 에이전트(main)에게 간다. 이렇게 하면 #arcana에서는 아르카나가, #sophia에서는 Sophia가 응답하는 구조가 만들어진다.</p>
+        <p>채널 바인딩의 구조: openclaw.json의 bindings 배열에서 &#x27;이 Discord 채널의 메시지는 이 에이전트에게 보내라&#x27;를 정의한다. 바인딩이 없는 메시지는 기본 에이전트(main)에게 간다. 이렇게 하면 #research에서는 리서치 봇이, #design에서는 디자인 봇이 응답하는 구조가 만들어진다.</p>
         <p>채널별 특성 차이가 있다. Discord는 인라인 버튼, 리액션, 임베드를 지원하고, Telegram은 마크다운과 인라인 키보드를 지원한다. 에이전트는 이 차이를 알고 있어야 한다 — Discord에서 표 대신 불릿 리스트를 쓰는 식의 포맷 적응이 필요하다.</p>
         <p>DM(다이렉트 메시지)과 그룹 채팅의 행동 차이도 중요하다. DM에서는 모든 메시지에 응답하지만, 그룹에서는 멘션되거나 관련 있을 때만 응답해야 한다. 안 그러면 모든 대화에 끼어들어서 불쾌감을 준다. OpenClaw의 groupPolicy, requireMention 설정이 이걸 관리한다.</p>
         </div>
